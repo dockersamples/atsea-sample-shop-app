@@ -50,6 +50,27 @@ It was recommended that the client site should be similar to https://www.kingand
 
 GET /api/products
 
+Host: localhost:8080
+Auth: basic username:password
+Content-type: application/json
+Accept: application/json
+{
+    ["productId" = 12345,
+    "name" = "Moby",
+    "description" = "Our mascot",
+    "price" = "1000000.00",
+    "image" = "image in 64bit encoded string"],
+     ["productId" = 12346,
+    "name" = "Gordon",
+    "description" = "Turtle",
+    "price" = "1000000.00",
+    "image" = "image in 64bit encoded string"],
+
+    ...
+
+}
+
+
 ```
 
 ### Get single product (product detail)
@@ -73,7 +94,7 @@ Accept: application/json
 ```
 
 ### Create new cart
-
+```
 /api/customer/{id}/cart?cartId={id}
 
 POST /api/customer/{id}/cart?cartId={id}
@@ -89,6 +110,7 @@ Accept: application/json
 HTTP/1.1 201 Created
 Date:
 Content-Type: application/json
+```
 
 ### Add to cart
 
@@ -111,12 +133,54 @@ Date:
 Content-Type: application/json
 ```
 
-### Get cart contents
+### Remove single item from cart
 
 ```
-/customer/{id}/cart/{id}
+/api/customer/{1d}/cart/{id}/remove?productId={productId}&quantity=1
 
-GET /customer/{id}/cart/{id}
+POST /api/customer/{1d}/cart/{id}/remove
+Host: localhost:8080
+Auth: basic username:password
+Content-type: application/json
+Accept: application/json
+
+{
+    "productId" : 12345,
+    "quantity" : 1
+}
+
+HTTP/1.1 201 Created
+Date:
+Content-Type: application/json
+```
+
+### Empty cart
+
+```
+/api/customer/{1d}/cart/{id}/removeAll
+
+POST /api/customer/{1d}/cart/{id}/removeAll
+Host: localhost:8080
+Auth: basic username:password
+Content-type: application/json
+Accept: application/json
+
+{
+    "productId" : 12345,
+    "quantity" : 1
+}
+
+HTTP/1.1 201 Created
+Date:
+Content-Type: application/json
+```
+
+### Get cart contents / order
+
+```
+/api/customer/{id}/cart/{id}
+
+GET /api/customer/{id}/cart/{id}
 Host: localhost:8080
 Auth: basic username:password
 Content-type: application/json
@@ -134,10 +198,51 @@ Accept: application/json
 }
 
 HTTP/1.1 201 Created
-Date:
+Date: {current date}
 Content-Type: application/json
-Location: /customer/{id}/cart/{id}
 
 ```
 
+### Submit order
 
+```
+/api/customer/{id}/cart/{id}/order?orderId={id}
+
+POST /api/customer/{id}/cart/{id}/order?orderId={id}
+Host: localhost:8080
+Auth: basic username:password
+Content-type: application/json
+Accept: application/json
+
+{
+    "orderId" = 12345,
+    "orderDate = {current date},
+    "orderNum" = 12345,
+    "customerId" = "54321"
+}
+
+```
+
+### Create customer
+
+```
+/api/customer?new={customerId}}&password={password}&username={username}
+
+POST /api/customer?new={customerId}&password={password}&username={username}
+
+Host: localhost:8080
+Auth: basic username:password
+Content-type: application/json
+Accept: application/json
+
+{
+    "customerId" = 54321,
+    "name" = "Sally Vallery",
+    "address" = "address as single string",
+    "email" = "sally@example.com".
+    "phone" = "phone as string"
+    "username" = "sallyv",
+    "password" = "sallypassword"
+}
+
+```

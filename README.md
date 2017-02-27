@@ -229,7 +229,6 @@ Accept: application/json
 /api/customer?new={customerId}}&password={password}&username={username}
 
 POST /api/customer?new={customerId}&password={password}&username={username}
-
 Host: localhost:8080
 Auth: basic username:password
 Content-type: application/json
@@ -245,4 +244,26 @@ Accept: application/json
     "password" = "sallypassword"
 }
 
+```
+
+### Get customer
+```
+/api/customer/{id}
+
+GET /api/customer/{id}
+
+Host: localhost:8080
+Auth: basic username:password
+Content-type: application/json
+Accept: application/json
+
+{
+    "customerId" = 54321,
+    "name" = "Sally Vallery",
+    "address" = "address as single string",
+    "email" = "sally@example.com".
+    "phone" = "phone as string"
+    "username" = "sallyv",
+    "password" = "sallypassword"
+}
 ```

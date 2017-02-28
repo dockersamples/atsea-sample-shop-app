@@ -20,7 +20,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "orders", uniqueConstraints = { @UniqueConstraint(columnNames = "orderid") })
-public class Order implements Serializable{
+public class Order implements Serializable {
 
 	private static final long serialVersionUID = 8367647197454666804L;
 	
@@ -66,7 +66,7 @@ public class Order implements Serializable{
     public void setOrderNum(int orderNum) {
         this.orderNum = orderNum;
     }
-    
+   
     public Customer getCustomerId() {
     	return customerId;
     }
@@ -74,5 +74,4 @@ public class Order implements Serializable{
     public void setCustomerId(Customer customerId) {
         this.customerId = customerId;
     }
-
 }

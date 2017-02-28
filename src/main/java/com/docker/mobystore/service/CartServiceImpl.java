@@ -15,7 +15,7 @@ public class CartServiceImpl implements CartService {
 	@Autowired
 	private CartRepository cartRepository;
 	
-	public Cart findById(Long cartId) {
+	public Cart findOne(Long cartId) {
 		return cartRepository.findOne(cartId);
 	}
 

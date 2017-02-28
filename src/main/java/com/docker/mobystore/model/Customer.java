@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "customers", uniqueConstraints = { @UniqueConstraint(columnNames = "customerid")})
+@Table(name = "customer", uniqueConstraints = { @UniqueConstraint(columnNames = "customerid")})
 
 public class Customer implements Serializable {
 	
@@ -43,7 +43,16 @@ public class Customer implements Serializable {
 	@NotEmpty
 	@Column(name = "phone", length = 32, nullable = false)
     private String phone;
-    
+	
+	@NotEmpty
+	@Column(name = "username", length = 255, nullable = false)
+    private String username;
+	
+	@NotEmpty
+	@Column(name = "password", length = 255, nullable = false)
+    private String password;
+	
+	
     public long customerId() {
     	return customerId;
     }
@@ -83,5 +92,21 @@ public class Customer implements Serializable {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    	
+    
+    public String getUsername() {
+        return username;
+    }
+ 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
+    public String getPassword() {
+        return password;
+    }
+ 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
 }

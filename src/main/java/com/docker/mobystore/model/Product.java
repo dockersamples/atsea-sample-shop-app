@@ -17,17 +17,14 @@ import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="products")
+@Table(name="product", uniqueConstraints = { @UniqueConstraint(columnNames = "productid")})
 
 public class Product implements Serializable {
 
 	private static final long serialVersionUID = 3222530297013481114L;
-	
-    // For sort.
-    private Date createDate;
- 
+	 
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long productId;
     
     @NotEmpty
@@ -84,14 +81,6 @@ public class Product implements Serializable {
  
     public void setImage(byte[] image) {
         this.image = image;
-    }
-
-	public Date getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}	
+    }	
 	
 }

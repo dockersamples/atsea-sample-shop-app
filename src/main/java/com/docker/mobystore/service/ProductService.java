@@ -4,12 +4,13 @@ import com.docker.mobystore.model.Product;
 import java.util.List;
 
 public interface ProductService {
+	Product findOne(Long productId);
 	
-	Product findById(Long productId);
-	
-	//Product findByName(String name);
+	Product findByName(String name);
 		
 	List<Product> findAllProducts();
+
+	Product findById(Long productId);
 	
 
 }

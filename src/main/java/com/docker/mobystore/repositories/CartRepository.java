@@ -5,6 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface CartRepository extends CrudRepository<Cart, Long> {
 		
-	Cart findById(Long cartId);
-	Cart findByName(String name);
+	Cart findOne(Long cartId);
 }

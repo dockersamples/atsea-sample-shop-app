@@ -5,7 +5,7 @@ import com.docker.mobystore.model.Product;
 
 public interface CartService {
 
-	Cart findById(Long cartId);
+	Cart findOne(Long cartId);
 	
 	void saveCart(Cart cart);
 	

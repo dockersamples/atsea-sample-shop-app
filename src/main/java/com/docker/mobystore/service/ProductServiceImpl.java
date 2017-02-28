@@ -14,17 +14,26 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ProductRepository productRepository;
-	
+
+	public List<Product> findAllProducts() {
+		return productRepository.findAll();
+	}
+
+	@Override
+	public Product findByName(String name) {
+		// TODO Auto-generated method stub
+		return productRepository.findByName(name);
+	}
+
+	@Override
 	public Product findById(Long productId) {
 		return productRepository.findOne(productId);
 	}
 
-	//public Product findByName(Long name) {
-	//	return productRepository.findOne(name);
-	//}
-
-	public List<Product> findAllProducts() {
-		return productRepository.findAll();
+	@Override
+	public Product findOne(Long productId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

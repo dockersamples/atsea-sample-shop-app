@@ -44,12 +44,12 @@ public class RestApiController {
 	// -------------------Retrieve Single Product By Id------------------------------------------
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/product/{productId}", method = RequestMethod.GET)
 	public ResponseEntity<?> getProduct(@PathVariable("productId") long productId) {
-		logger.info("Fetching User with id {}", productId);
+		logger.info("Fetching Product with id {}", productId);
 		Product product = productService.findById(productId);
 		if (product == null) {
-			logger.error("User with id {} not found.", productId);
+			logger.error("Product with id {} not found.", productId);
 			return new ResponseEntity(new CustomErrorType("Product with id " + productId 
 					+ " not found"), HttpStatus.NOT_FOUND);
 		}

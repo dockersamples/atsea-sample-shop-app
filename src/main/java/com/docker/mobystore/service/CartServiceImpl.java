@@ -15,7 +15,8 @@ public class CartServiceImpl implements CartService {
 	@Autowired
 	private CartRepository cartRepository;
 	
-	public Cart findOne(Long cartId) {
+	
+	public Cart findById(Long cartId) {
 		return cartRepository.findOne(cartId);
 	}
 
@@ -34,5 +35,10 @@ public class CartServiceImpl implements CartService {
 	public void deleteAllItems() {
 		cartRepository.deleteAll();
 	}
-	
+
+	public boolean cartExists(Cart cart) {
+		return findById(cart.getCartId()) != null;
+	}
+
+
 }

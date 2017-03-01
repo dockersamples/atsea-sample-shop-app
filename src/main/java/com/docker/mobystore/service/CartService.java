@@ -5,7 +5,7 @@ import com.docker.mobystore.model.Product;
 
 public interface CartService {
 
-	Cart findOne(Long cartId);
+	Cart findById(Long cartId);
 	
 	void saveCart(Cart cart);
 	
@@ -14,5 +14,7 @@ public interface CartService {
 	void deleteItemById(Long productId);
 	
 	void deleteAllItems();
+
+	boolean cartExists(Cart cart);
 	
 }

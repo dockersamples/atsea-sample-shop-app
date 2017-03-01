@@ -56,7 +56,7 @@ public class Cart implements Serializable {
 		return getProductId();
 	}
 	
-	public void setProduct(Product productId) {
+	public void setProductId(Product productId) {
 		this.productId = productId;
 	}
 	
@@ -68,12 +68,12 @@ public class Cart implements Serializable {
 		this.quantity = quantity;
 	}
 
-	public double setPrice() {
-		return price;
+	public void setPrice(double price) {
+		this.price = price;
 	}
 	
-	public void getPrice(double price) {
-		this.price = price;
+	public double getPrice() {
+		return price;
 	}
 
 	public Date getOrderDate() {

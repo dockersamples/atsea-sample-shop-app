@@ -20,10 +20,6 @@ public class Customer implements Serializable {
 	
 	private static final long serialVersionUID = -8697455919895226841L;
 
-
-	public Customer() {
-    }
-
 	@Id
 	@GeneratedValue(strategy =  GenerationType.IDENTITY)
     private long customerId;

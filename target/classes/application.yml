@@ -23,7 +23,7 @@ spring:
   profiles: prod
 datasource:
   mobystore:
-    url: jdbc:postgresql://localhost:5432/mobystore
+    url: jdbc:postgresql://172.19.0.2:5432/mobystore
     username: gordonuser
     password: gordonpassword
     driverClassName: org.postgresql.Driver

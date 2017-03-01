@@ -19,21 +19,11 @@ public class ProductServiceImpl implements ProductService {
 		return productRepository.findAll();
 	}
 
-	@Override
 	public Product findByName(String name) {
-		// TODO Auto-generated method stub
 		return productRepository.findByName(name);
 	}
 
-	@Override
 	public Product findById(Long productId) {
 		return productRepository.findOne(productId);
 	}
-
-	@Override
-	public Product findOne(Long productId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

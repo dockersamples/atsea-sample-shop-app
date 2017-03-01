@@ -46,9 +46,9 @@ It was recommended that the client site should be similar to https://www.kingand
 ### Get all products
 
 ```
-/api/products
+/MobyStore/api/product/
 
-GET /api/products
+GET /MobyStore/api/product/
 
 Host: localhost:8080
 Auth: basic username:password
@@ -76,9 +76,9 @@ Accept: application/json
 ### Get single product (product detail)
 
 ```
-/api/products/{id}
+/MobyStore/api/product/{id}
 
-GET /api/product/{id}
+GET /MobyStore/api/product/{id}
 Host: localhost:8080
 Auth: basic username:password
 Content-type: application/json

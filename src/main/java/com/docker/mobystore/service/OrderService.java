@@ -1,8 +1,6 @@
 package com.docker.mobystore.service;
 
-
 import com.docker.mobystore.model.Order;
-import com.docker.mobystore.model.Product;
 
 public interface OrderService {
 

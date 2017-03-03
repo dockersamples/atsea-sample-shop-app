@@ -20,6 +20,6 @@ public interface CustomerService {
 
 	List<Customer> findAllCustomers();
 
-	boolean customerExist(Long customerId);
+	boolean customerExist(Customer customer);
 
 }

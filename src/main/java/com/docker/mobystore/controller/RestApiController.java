@@ -21,6 +21,7 @@ import com.docker.mobystore.model.Cart;
 import com.docker.mobystore.service.CartService;
 import com.docker.mobystore.model.Order;
 import com.docker.mobystore.service.OrderService;
+
 import com.docker.mobystore.model.Customer;
 import com.docker.mobystore.service.CustomerService;
 import com.docker.mobystore.util.CustomErrorType;
@@ -34,8 +35,11 @@ public class RestApiController {
 
 	@Autowired
 	ProductService productService; //Service which will do all data retrieval/manipulation work
+	@Autowired
 	CartService cartService;
+	@Autowired
 	OrderService orderService;
+	@Autowired
 	CustomerService customerService;
 
 	// -------------------Retrieve All Products---------------------------------------------
@@ -97,7 +101,7 @@ public class RestApiController {
 		orderService.saveOrder(order);
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("/api/cart/{cartId}").buildAndExpand(order.getOrderId()).toUri());
+		headers.setLocation(ucBuilder.path("/api/order/{orderId}").buildAndExpand(order.getOrderId()).toUri());
 		return new ResponseEntity<String>(headers, HttpStatus.CREATED);
 	}
 
@@ -151,4 +155,109 @@ public class RestApiController {
 		cartService.deleteAllItems();
 		return new ResponseEntity<Cart>(HttpStatus.NO_CONTENT);
 	}
+	
+	// -------------------------------------------------------------------
+	//                   Customer methods
+	//--------------------------------------------------------------------
+	
+	// -------------------Retrieve All Customer---------------------------------------------
+
+	@RequestMapping(value = "/customer/", method = RequestMethod.GET)
+	public ResponseEntity<List<Customer>> listAllUsers() {
+		List<Customer> customer = customerService.findAllCustomers();
+		if (customer.isEmpty()) {
+			return new ResponseEntity(HttpStatus.NO_CONTENT);
+			// You many decide to return HttpStatus.NOT_FOUND
+		}
+		return new ResponseEntity<List<Customer>>(customer, HttpStatus.OK);
+	}
+
+	// -------------------Retrieve Single Customer------------------------------------------
+
+	@RequestMapping(value = "/customer/{customerId}", method = RequestMethod.GET)
+	public ResponseEntity<?> getCustomer(@PathVariable("customerId") long customerId) {
+		logger.info("Fetching Cistp,er with id {}", customerId);
+		Customer customer = customerService.findById(customerId);
+		if (customer == null) {
+			logger.error("Customer with id {} not found.", customerId);
+			return new ResponseEntity(new CustomErrorType("Customer with id " + customerId 
+					+ " not found"), HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Customer>(customer, HttpStatus.OK);
+	}
+
+	// -------------------Create a Customer-------------------------------------------
+
+	@RequestMapping(value = "/customer/", method = RequestMethod.POST)
+	public ResponseEntity<?> createUser(@RequestBody Customer customer, UriComponentsBuilder ucBuilder) {
+		logger.info("Creating Customer : {}", customer);
+
+/**		if (customerService.customerExist(customer)) {
+			logger.error("Unable to create a customer with name {} already exist", customer.getName());
+			return new ResponseEntity(new CustomErrorType("Unable to create. A customer with name " + 
+			customer.getName() + " already exists."),HttpStatus.CONFLICT);
+		} */
+		
+		if(customer != null) {
+			System.out.println(customer);
+		}
+		
+		customerService.saveCustomer(customer);
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setLocation(ucBuilder.path("/api/customer/{id}").buildAndExpand(customer.customerId()).toUri());
+		return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+	}
+
+	// ------------------- Update a Customer ------------------------------------------------
+
+	@RequestMapping(value = "/customer/{customerId}", method = RequestMethod.PUT)
+	public ResponseEntity<?> updateCustomer(@PathVariable("customerId") long customerId, @RequestBody Customer customer) {
+		logger.info("Updating customer with id {}", customerId);
+
+		Customer currentCustomer = customerService.findById(customerId);
+
+		if (currentCustomer == null) {
+			logger.error("Unable to update. Customer with id {} not found.", customerId);
+			return new ResponseEntity(new CustomErrorType("Unable to upate. Customer with id " + customerId + " not found."),
+					HttpStatus.NOT_FOUND);
+		}
+
+		currentCustomer.setName(customer.getName());
+		currentCustomer.setUsername(customer.getUsername());
+		currentCustomer.setAddress(customer.getAddress());
+		currentCustomer.setPhone(customer.getPhone());
+		currentCustomer.setEmail(customer.getEmail());
+		currentCustomer.setPassword(customer.getPassword());
+
+		customerService.updateCustomer(currentCustomer);
+		return new ResponseEntity<Customer>(currentCustomer, HttpStatus.OK);
+	}
+
+	// ------------------- Delete a Customer-----------------------------------------
+
+	@RequestMapping(value = "/customer/{customerId}", method = RequestMethod.DELETE)
+	public ResponseEntity<?> deleteCustomer(@PathVariable("customerId") long customerId) {
+		logger.info("Fetching & Deleting customer with id {}", customerId);
+
+		Customer customer = customerService.findById(customerId);
+		if (customer == null) {
+			logger.error("Unable to delete. User with customer {} not found.", customerId);
+			return new ResponseEntity(new CustomErrorType("Unable to delete. Customer with id " + customerId + " not found."),
+					HttpStatus.NOT_FOUND);
+		}
+		customerService.deleteCustomerById(customerId);
+		return new ResponseEntity<Customer>(HttpStatus.NO_CONTENT);
+	}
+
+	// ------------------- Delete All Customers-----------------------------
+
+	@RequestMapping(value = "/customer/", method = RequestMethod.DELETE)
+	public ResponseEntity<Customer> deleteAllCustomers() {
+		logger.info("Deleting All Customers");
+
+		customerService.deleteAllCustomers();
+		return new ResponseEntity<Customer>(HttpStatus.NO_CONTENT);
+	}
+	
 }

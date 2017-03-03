@@ -1,8 +1,11 @@
 package com.docker.mobystore.model;
 
+import com.docker.mobystore.model.Customer;
+
 import java.io.Serializable;
 import java.util.Date;
- 
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,34 +18,52 @@ import javax.persistence.UniqueConstraint;
 import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "orders", uniqueConstraints = { @UniqueConstraint(columnNames = "orderid") })
 public class Order implements Serializable {
-
 	private static final long serialVersionUID = 8367647197454666804L;
-	
+
 	@Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
-    private long orderId;
+    private Long orderId;
 	
-    @NotEmpty
+	//private Long orderCustomerId;
+	
+	@OneToOne(optional=false, cascade = CascadeType.ALL)
+	@JoinColumn(name = "ordercustomerid", nullable = false )
+	private Customer customer;
+	
+    @CreationTimestamp
     @Temporal(TemporalType.DATE)
     @Column(name = "orderdate" )
     private Date orderDate;
-    
-    @NotEmpty
+        
     @Column(name = "ordernum", nullable=false)
-    private int orderNum;
+    private Integer orderNum;
+  
+	public Order(){
+		
+	}
+
+    public Order(Long orderId, Integer orderNum, Date orderDate) {
+    	this.orderId = orderId;
+    	this.orderNum = orderNum;
+    	this.orderDate = orderDate;
+    };
+
+    public Long getCustomer() {
+    	return customer.customerId();
+    }
     
-    @NotEmpty
-    @ManyToOne(optional=false)
-    @JoinColumn(name = "customerid", nullable = false )
-    private Customer customerId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
     
-	
     public long getOrderId() {
     	return orderId;
     }
@@ -59,19 +80,18 @@ public class Order implements Serializable {
         this.orderDate = orderDate;
     }
     
-    public long getOrderNum() {
+    public Integer getOrderNum() {
     	return orderNum;
     }
     
     public void setOrderNum(int orderNum) {
         this.orderNum = orderNum;
     }
-   
-    public Customer getCustomerId() {
-    	return customerId;
-    }
     
-    public void setCustomerId(Customer customerId) {
-        this.customerId = customerId;
-    }
+
+	@Override
+	public String toString() {
+		return String.format("Order[customer=%d, orderDate=%s, orderId=%d, orderNum=%s]",
+				customer, orderDate, orderId, orderNum);
+	}
 }

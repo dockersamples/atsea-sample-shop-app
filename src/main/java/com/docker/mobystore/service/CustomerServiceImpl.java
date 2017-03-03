@@ -1,10 +1,10 @@
 package com.docker.mobystore.service;
 
-import com.docker.mobystore.model.Customer;
-import com.docker.mobystore.repositories.CustomerRepository;
 
 import java.util.List;
 
+import com.docker.mobystore.model.Customer;
+import com.docker.mobystore.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,11 +41,11 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	public List<Customer> findAllCustomers() {
-		return customerRepository.findAll();
+		return (List<Customer>) customerRepository.findAll();
 	}
 
-	public boolean customerExist(Long customerId) {
-		return customerRepository.findOne(customerId) != null;
+	public boolean customerExist(Customer customer) {
+		return customerRepository.findOne(customer.customerId()) != null;
 	}
 
 }

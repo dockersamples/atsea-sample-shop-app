@@ -13,10 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class OrderServiceImpl implements OrderService {
 
+	@Autowired
 	private OrderRepository orderRepository;
 	
 	public Order findById(Long orderId) {
-		return orderRepository.findOne(orderId);
+		return orderRepository.findOne(orderId) ;
 	}
 
 	public void saveOrder(Order order) {

@@ -10,7 +10,7 @@ COPY postgresql.conf /usr/share/postgresql/9.6/
 ADD  docker-entrypoint-initdb.d/ /docker-entrypoint-initdb.d/
 
 # Default values for passwords and database name. Can be overridden on docker run
-# ENV MYSQL_ROOT_PASSWORD=my-secret-pw # Not defaulted for security reasons!
+
 ENV POSTGRES_USER gordonuser
 ENV POSTGRES_PASSWORD gordonpassword
 ENV POSTGRES_DB mobystore

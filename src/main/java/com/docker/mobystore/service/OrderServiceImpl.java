@@ -45,8 +45,14 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public List<Order> findByOrderNum(int orderNum) {
-		return (List<Order>) orderRepository.findByOrderNum(orderNum);
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+//	@Override
+//	public List<Order> findByOrderNum(int orderNum) {
+//		return (List<Order>) orderRepository.findByOrderNum(orderNum);
+//	}
 	
 	
 

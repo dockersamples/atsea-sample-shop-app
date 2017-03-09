@@ -1,21 +1,19 @@
 version: "3"
 
 services:
-
   database:
     build: 
        context: ./database
     image: mobystore_db
-    # set default mysql root password, change as needed
     environment:
       POSTGRES_USER: gordonuser
       POSTGRES_PASSWORD: gordonpassword
       POSTGRES_DB: mobystore
-    # Expose port 3306 to host. Not for the application but
-    # handy to inspect the database from the host machine.
     ports:
       - "5432:5432" 
-    restart: always
+    networks:
+      - back-tier
+    #restart: always
 
   appserver:
     build:
@@ -27,5 +25,11 @@ services:
     # open ports for tomcat and remote debugging
     ports:
       - "8080:8080" 
-    restart: always
+    networks:
+      - front-tier
+      - back-tier
+    #restart: always
 
+networks:
+  front-tier:
+  back-tier:

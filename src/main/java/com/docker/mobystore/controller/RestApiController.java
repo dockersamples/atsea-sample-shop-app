@@ -17,11 +17,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.docker.mobystore.model.Product;
 import com.docker.mobystore.service.ProductService;
-import com.docker.mobystore.model.Cart;
-import com.docker.mobystore.service.CartService;
 import com.docker.mobystore.model.Order;
 import com.docker.mobystore.service.OrderService;
-
 import com.docker.mobystore.model.Customer;
 import com.docker.mobystore.service.CustomerService;
 import com.docker.mobystore.util.CustomErrorType;
@@ -36,11 +33,14 @@ public class RestApiController {
 	@Autowired
 	ProductService productService; //Service which will do all data retrieval/manipulation work
 	@Autowired
-	CartService cartService;
-	@Autowired
 	OrderService orderService;
 	@Autowired
 	CustomerService customerService;
+	
+	// -------------------------------------------------------------------
+	//                   Product methods
+	//--------------------------------------------------------------------
+
 
 	// -------------------Retrieve All Products---------------------------------------------
 
@@ -70,23 +70,12 @@ public class RestApiController {
 		return new ResponseEntity<Product>(product, HttpStatus.OK);
 	}
 	
-/*	// -------------------Retrieve Single Product By Name------------------------------------------
+	// -------------------------------------------------------------------
+	//                   Order methods
+	//--------------------------------------------------------------------
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@RequestMapping(value = "/product/{name}", method = RequestMethod.GET)
-	public ResponseEntity<?> getProduct(@PathVariable("name") String name) {
-		logger.info("Fetching User with name {}", name);
-		Product product = productService.findByName(name);
-		if (product == null) {
-			logger.error("User with name {} not found.", name);
-			return new ResponseEntity(new CustomErrorType("Product with name " + name 
-					+ " not found"), HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<Product>(product, HttpStatus.OK);
-	}*/
-	
 
-	// -------------------Create an order-------------------------------------------
+	// -------------------Add Item to an Order-------------------------------------------
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value = "/order/", method = RequestMethod.POST)
 	public ResponseEntity<?> createOrder(@RequestBody Order order, UriComponentsBuilder ucBuilder) {
@@ -101,59 +90,79 @@ public class RestApiController {
 		orderService.saveOrder(order);
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("/api/order/{orderId}").buildAndExpand(order.getOrderId()).toUri());
+		headers.setLocation(ucBuilder.path("/api/order/").buildAndExpand(order.getOrderId()).toUri());
 		return new ResponseEntity<String>(headers, HttpStatus.CREATED);
 	}
 
-	// ------------------- Update a Cart ------------------------------------------------
 
-	@RequestMapping(value = "/cart/{cartId}", method = RequestMethod.PUT)
-	public ResponseEntity<?> updateCart(@PathVariable("cartId") long cartId, @RequestBody Cart cart) {
-		logger.info("Updating Cart with id {}", cartId);
+	// ------------------- Delete an Item in Order-----------------------------------------
 
-		Cart currentCart = cartService.findById(cartId);
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@RequestMapping(value = "/order/{orderId}", method = RequestMethod.DELETE)
+	public ResponseEntity<?> deleteItemById(@PathVariable("orderId") long orderId) {
+		logger.info("Fetching & Deleting Item with id {}", orderId);
 
-		if (currentCart == null) {
-			logger.error("Unable to update. Cart with id {} not found.", cartId);
-			return new ResponseEntity(new CustomErrorType("Unable to upate. Cart with id " + cartId + " not found."),
+		Order order = orderService.findById(orderId);
+		if (order == null) {
+			logger.error("Unable to delete item with orderid {} not found.", orderId);
+			return new ResponseEntity(new CustomErrorType("Unable to delet item in order with id " + orderId + " not found."),
 					HttpStatus.NOT_FOUND);
 		}
-
-		currentCart.setCustomer(cart.getCustomer());
-		currentCart.setProductId(cart.getProductId());
-		currentCart.setPrice(cart.getPrice());
-		currentCart.setQuantity(cart.getQuantity());
-		currentCart.setOrderDate(cart.getOrderDate());
-		currentCart.setOrderNum(cart.getOrderNum());
-
-		cartService.updateCart(currentCart);
-		return new ResponseEntity<Cart>(currentCart, HttpStatus.OK);
+		orderService.deleteOrderById(orderId);
+		return new ResponseEntity<Order>(HttpStatus.NO_CONTENT);
 	}
 
-	// ------------------- Delete a cart item-----------------------------------------
+	// ------------------- Delete All Items in Order-----------------------------
 
-	@RequestMapping(value = "/cart/{cartId}", method = RequestMethod.DELETE)
-	public ResponseEntity<?> deleteItemById(@PathVariable("cartId") long cartId) {
-		logger.info("Fetching & Deleting Item with id {}", cartId);
+	@RequestMapping(value = "/order/", method = RequestMethod.DELETE)
+	public ResponseEntity<Order> deleteAllItems() {
+		logger.info("Deleting All Items in Order");
 
-		Cart cart = cartService.findById(cartId);
-		if (cart == null) {
-			logger.error("Unable to delete item with cartid {} not found.", cartId);
-			return new ResponseEntity(new CustomErrorType("Unable to item in cart with id " + cartId + " not found."),
-					HttpStatus.NOT_FOUND);
+		orderService.findAllOrders();
+		return new ResponseEntity<Order>(HttpStatus.NO_CONTENT);
+	}
+	
+	// ------------------- Get All Orders-----------------------------
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = "/order/", method = RequestMethod.GET)
+	public ResponseEntity<List<Order>> listAllOrderss() {
+		List<Order> order = orderService.findAllOrders();
+		if (order.isEmpty()) {
+			return new ResponseEntity(HttpStatus.NO_CONTENT);
+			// You many decide to return HttpStatus.NOT_FOUND
 		}
-		cartService.deleteItemById(cartId);
-		return new ResponseEntity<Cart>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<List<Order>>(order, HttpStatus.OK);
 	}
+	
+	// -------------------Retrieve Single Order By Id------------------------------------------
 
-	// ------------------- Delete All Users-----------------------------
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@RequestMapping(value = "/order/{orderId}", method = RequestMethod.GET)
+	public ResponseEntity<?> getOrder(@PathVariable("orderId") long orderId) {
+		logger.info("Fetching Order with id {}", orderId);
+		Order order = orderService.findById(orderId);
+		if (order == null) {
+			logger.error("Order with id {} not found.", orderId);
+			return new ResponseEntity(new CustomErrorType("Order with id " + orderId 
+					+ " not found"), HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Order>(order, HttpStatus.OK);
+	}
+	
+	// -------------------Retrieve All Items By orderNum------------------------------------------
 
-	@RequestMapping(value = "/cart/", method = RequestMethod.DELETE)
-	public ResponseEntity<Cart> deleteAllItems() {
-		logger.info("Deleting All Items");
-
-		cartService.deleteAllItems();
-		return new ResponseEntity<Cart>(HttpStatus.NO_CONTENT);
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@RequestMapping(value = "/order/orderItems={orderNum}", method = RequestMethod.GET)
+	public ResponseEntity<?> getItemsInOrder(@PathVariable("orderNum") int orderNum) {
+		logger.info("Fetching Items in Order with orderNum {}", orderNum);
+		List<Order> order = orderService.findByOrderNum(orderNum);
+		if (order == null) {
+			logger.error("Order with id {} not found.", orderNum);
+			return new ResponseEntity(new CustomErrorType("Order with id " + orderNum 
+					+ " not found"), HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<Order>>(order, HttpStatus.OK);
 	}
 	
 	// -------------------------------------------------------------------
@@ -162,6 +171,7 @@ public class RestApiController {
 	
 	// -------------------Retrieve All Customer---------------------------------------------
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/customer/", method = RequestMethod.GET)
 	public ResponseEntity<List<Customer>> listAllUsers() {
 		List<Customer> customer = customerService.findAllCustomers();
@@ -174,6 +184,7 @@ public class RestApiController {
 
 	// -------------------Retrieve Single Customer------------------------------------------
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value = "/customer/{customerId}", method = RequestMethod.GET)
 	public ResponseEntity<?> getCustomer(@PathVariable("customerId") long customerId) {
 		logger.info("Fetching Cistp,er with id {}", customerId);
@@ -188,15 +199,16 @@ public class RestApiController {
 
 	// -------------------Create a Customer-------------------------------------------
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value = "/customer/", method = RequestMethod.POST)
 	public ResponseEntity<?> createUser(@RequestBody Customer customer, UriComponentsBuilder ucBuilder) {
 		logger.info("Creating Customer : {}", customer);
 
-/**		if (customerService.customerExist(customer)) {
+		if (customerService.customerExist(customer)) {
 			logger.error("Unable to create a customer with name {} already exist", customer.getName());
 			return new ResponseEntity(new CustomErrorType("Unable to create. A customer with name " + 
 			customer.getName() + " already exists."),HttpStatus.CONFLICT);
-		} */
+		}
 		
 		if(customer != null) {
 			System.out.println(customer);
@@ -211,6 +223,7 @@ public class RestApiController {
 
 	// ------------------- Update a Customer ------------------------------------------------
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/customer/{customerId}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateCustomer(@PathVariable("customerId") long customerId, @RequestBody Customer customer) {
 		logger.info("Updating customer with id {}", customerId);
@@ -236,6 +249,7 @@ public class RestApiController {
 
 	// ------------------- Delete a Customer-----------------------------------------
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value = "/customer/{customerId}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deleteCustomer(@PathVariable("customerId") long customerId) {
 		logger.info("Fetching & Deleting customer with id {}", customerId);

@@ -2,23 +2,15 @@ package com.docker.mobystore.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import java.io.Serializable;
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
+import java.io.Serializable;
+import javax.persistence.*;
 
 @Entity
 @Table(name="product", uniqueConstraints = { @UniqueConstraint(columnNames = "productid")})
-
+@JsonInclude(Include.NON_NULL)
 public class Product implements Serializable {
 
 	private static final long serialVersionUID = 3222530297013481114L;
@@ -35,14 +27,25 @@ public class Product implements Serializable {
     @Column(name = "price", nullable = false)
     private double price;
     
-    
     @Column(name = "description", length=10485760, nullable = false)
     private String description;
         
     @Lob
     @Column(name = "image", length = Integer.MAX_VALUE, nullable = true)
     private byte[] image; 
-    
+          
+//	public Product() {
+//		
+//	}
+//	
+//	public Product(Long productId, Long orderId, String name, String description, double price, byte[] image) {
+//		this.productId = productId;
+//		this.name = name;
+//		this.description = description;
+//		this.price = price;
+//		this.image = image;
+//	}
+
     public long getProductId() {
     	return productId;
     }
@@ -81,6 +84,15 @@ public class Product implements Serializable {
  
     public void setImage(byte[] image) {
         this.image = image;
-    }	
+    }
+    
+//	@Override
+//	public String toString() {
+//		return "Product [productId=" + productId +
+//				         ", name=" + name +
+//				         ", price=" + price +
+//				         ", description=" + description +
+//				         ", image=" + image + "]";
+//	}
 	
 }

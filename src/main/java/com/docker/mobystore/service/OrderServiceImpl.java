@@ -3,7 +3,6 @@ package com.docker.mobystore.service;
 import java.util.List;
 
 import com.docker.mobystore.model.Order;
-import com.docker.mobystore.model.Product;
 import com.docker.mobystore.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +37,15 @@ public class OrderServiceImpl implements OrderService {
 
 	public boolean orderExists(Order order) {
 		return findById(order.getOrderId()) != null;
+	}
+
+	public List<Order> findAllOrders() {
+		return (List<Order>) orderRepository.findAll();
+	}
+
+	@Override
+	public List<Order> findByOrderNum(int orderNum) {
+		return (List<Order>) orderRepository.findByOrderNum(orderNum);
 	}
 	
 	

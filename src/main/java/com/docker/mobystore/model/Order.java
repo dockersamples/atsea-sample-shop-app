@@ -1,42 +1,26 @@
 package com.docker.mobystore.model;
 
-import com.docker.mobystore.model.Customer;
-
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
-import javax.persistence.ForeignKey;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-
+import javax.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.validator.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Entity
-@Table(name = "orders", uniqueConstraints = { @UniqueConstraint(columnNames = "orderid") })
+@NamedNativeQuery(name= "Order.findByOrderNum", query = "SELECT * FROM orders WHERE ordernum = 'orderNum'")
+@Table(name = "orders")
+@JsonInclude(Include.NON_NULL)
 public class Order implements Serializable {
 	private static final long serialVersionUID = 8367647197454666804L;
 
 	@Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long orderId;
-	
-	//private Long orderCustomerId;
-	
-	@OneToOne(optional=false, cascade = CascadeType.ALL)
-	@JoinColumn(name = "ordercustomerid", nullable = false )
-	private Customer customer;
 	
     @CreationTimestamp
     @Temporal(TemporalType.DATE)
@@ -45,23 +29,38 @@ public class Order implements Serializable {
         
     @Column(name = "ordernum", nullable=false)
     private Integer orderNum;
-  
-	public Order(){
+
+    @JoinColumn(name = "customerId")
+    private Long customerId;
+
+    @Column(name = "productId")
+    private Long productId;
+    
+    public Order(){
 		
 	}
-
-    public Order(Long orderId, Integer orderNum, Date orderDate) {
+	
+	public Order(Long orderId, Integer orderNum, Date orderDate, Long productId) {
     	this.orderId = orderId;
     	this.orderNum = orderNum;
     	this.orderDate = orderDate;
+    	this.productId = productId;
+	}
+
+    public Order(Long orderId, Integer orderNum, Date orderDate, Long customerId, Long productId) { 
+    	this.orderId = orderId;
+    	this.orderNum = orderNum;
+    	this.orderDate = orderDate;
+    	this.productId = productId;
+    	this.customerId = customerId;
     };
 
-    public Long getCustomer() {
-    	return customer.customerId();
-    }
-    
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+	public Long getCustomerId() {
+		return customerId;
+	}
+	
+    public void setCustomer(Long customerId) {
+        this.customerId = customerId;
     }
     
     public long getOrderId() {
@@ -88,10 +87,20 @@ public class Order implements Serializable {
         this.orderNum = orderNum;
     }
     
-
+    public void setProduct(Long productId) {
+        this.productId = productId;
+    }
+    
+    public long getProductId() {
+    	return productId;
+    }
+	
 	@Override
 	public String toString() {
-		return String.format("Order[customer=%d, orderDate=%s, orderId=%d, orderNum=%s]",
-				customer, orderDate, orderId, orderNum);
+		return String.format("Order[customerId = " + customerId + 
+				                    "orderDate= " +orderDate + 
+				                    "orderId = "+ orderId + 
+				                    "orderNum = " + orderNum +
+				                    "productId = " + productId);
 	}
 }

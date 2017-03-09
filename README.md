@@ -43,7 +43,9 @@ It was recommended that the client site should be similar to https://www.kingand
 
 ## REST requests
 
-### Get all products
+### Products
+
+#### Get all products
 
 ```
 /MobyStore/api/product/
@@ -55,25 +57,23 @@ Auth: basic username:password
 Content-type: application/json
 Accept: application/json
 {
-    ["productId" = 12345,
-    "name" = "Moby",
-    "description" = "Our mascot",
-    "price" = "1000000.00",
-    "image" = "image in 64bit encoded string"],
-     ["productId" = 12346,
-    "name" = "Gordon",
-    "description" = "Turtle",
-    "price" = "1000000.00",
-    "image" = "image in 64bit encoded string"],
+    ["productId" : 12345,
+    "name" : "Moby",
+    "description" : "Our mascot",
+    "price" : "1000000.00",
+    "image" : "image in 64bit encoded string"],
+     ["productId" : 12346,
+    "name" : "Gordon",
+    "description" : "Turtle",
+    "price" : "1000000.00",
+    "image" : "image in 64bit encoded string"],
 
     ...
 
 }
-
-
 ```
 
-### Get single product (product detail)
+#### Get single product (product detail)
 
 ```
 /MobyStore/api/product/{id}
@@ -84,169 +84,41 @@ Auth: basic username:password
 Content-type: application/json
 Accept: application/json
 {
-    "productId" = 12345,
-    "name" = "Moby",
-    "description" = "Our mascot",
-    "price" = "1000000.00",
-    "image" = "image in 64bit encoded string"
-}
-
-```
-
-### Create new cart
-```
-/api/customer/{id}/cart?cartId={id}
-
-POST /api/customer/{id}/cart?cartId={id}
-Host: localhost:8080
-Auth: basic username:password
-Content-type: application/json
-Accept: application/json
-
-{
-    "cartId" = 98765
-}
-
-HTTP/1.1 201 Created
-Date:
-Content-Type: application/json
-```
-
-### Add to cart
-
-```
-/api/customer/{1d}/cart/{id}/add?productId={productId}&quantity=1
-
-POST /api/customer/{1d}/cart/{id}/add
-Host: localhost:8080
-Auth: basic username:password
-Content-type: application/json
-Accept: application/json
-
-{
     "productId" : 12345,
-    "quantity" : 1
+    "name" : "Moby",
+    "description" : "Our mascot",
+    "price" : "1000000.00",
+    "image" : "image in 64bit encoded string"
 }
 
-HTTP/1.1 201 Created
-Date:
-Content-Type: application/json
 ```
 
-### Remove single item from cart
+### Customer requests
+
+#### Create customer
 
 ```
-/api/customer/{1d}/cart/{id}/remove?productId={productId}&quantity=1
+/api/customer/
 
-POST /api/customer/{1d}/cart/{id}/remove
+POST /api/customer?new:{customerId}&password:{password}&username:{username}
 Host: localhost:8080
 Auth: basic username:password
 Content-type: application/json
 Accept: application/json
 
 {
-    "productId" : 12345,
-    "quantity" : 1
-}
-
-HTTP/1.1 201 Created
-Date:
-Content-Type: application/json
-```
-
-### Empty cart
-
-```
-/api/customer/{1d}/cart/{id}/removeAll
-
-POST /api/customer/{1d}/cart/{id}/removeAll
-Host: localhost:8080
-Auth: basic username:password
-Content-type: application/json
-Accept: application/json
-
-{
-    "productId" : 12345,
-    "quantity" : 1
-}
-
-HTTP/1.1 201 Created
-Date:
-Content-Type: application/json
-```
-
-### Get cart contents / order
-
-```
-/api/customer/{id}/cart/{id}
-
-GET /api/customer/{id}/cart/{id}
-Host: localhost:8080
-Auth: basic username:password
-Content-type: application/json
-Accept: application/json
-
-{
-    [
-        {"productId" : 12345,
-        "quantity" : 1},
-        {"productId" : 12346,
-        "quantity" : 2},
-        {"productId" : 12347,
-        "quantity" : 1},
-    ]
-}
-
-HTTP/1.1 201 Created
-Date: {current date}
-Content-Type: application/json
-
-```
-
-### Submit order
-
-```
-/api/customer/{id}/cart/{id}/order?orderId={id}
-
-POST /api/customer/{id}/cart/{id}/order?orderId={id}
-Host: localhost:8080
-Auth: basic username:password
-Content-type: application/json
-Accept: application/json
-
-{
-    "orderId" = 12345,
-    "orderDate = {current date},
-    "orderNum" = 12345,
-    "customerId" = "54321"
+    "customerId" : 54321,
+    "name" : "Sally Vallery",
+    "address" : "address as single string",
+    "email" : "sally@example.com".
+    "phone" : "phone as string"
+    "username" : "sallyv",
+    "password" : "sallypassword"
 }
 
 ```
 
-### Create customer
-
-```
-/api/customer?new={customerId}}&password={password}&username={username}
-
-POST /api/customer?new={customerId}&password={password}&username={username}
-Host: localhost:8080
-Auth: basic username:password
-Content-type: application/json
-Accept: application/json
-
-{
-    "customerId" = 54321,
-    "name" = "Sally Vallery",
-    "address" = "address as single string",
-    "email" = "sally@example.com".
-    "phone" = "phone as string"
-    "username" = "sallyv",
-    "password" = "sallypassword"
-}
-
-```
-
-### Get customer
+#### Get customer
 ```
 /api/customer/{id}
 
@@ -258,12 +130,128 @@ Content-type: application/json
 Accept: application/json
 
 {
-    "customerId" = 54321,
-    "name" = "Sally Vallery",
-    "address" = "address as single string",
-    "email" = "sally@example.com".
-    "phone" = "phone as string"
-    "username" = "sallyv",
-    "password" = "sallypassword"
+    "customerId" : 54321,
+    "name" : "Sally Vallery",
+    "address" : "address as single string",
+    "email" : "sally@example.com".
+    "phone" : "phone as string"
+    "username" : "sallyv",
+    "password" : "sallypassword"
 }
 ```
+### Order requests
+
+#### Add item 
+
+```
+/api/order/
+
+POST /api/order/
+Host: localhost:8080
+Auth: basic username:password
+Content-type: application/json
+Accept: application/json
+
+{
+    "orderId" : 12345,
+    "orderDate : {current date},
+    "orderNum" : 12345,
+    "customerId" : "54321",
+    "productId" : "2"
+}
+```
+
+#### Delete item
+
+```
+/api/order/{orderId}
+
+DELETE /api/order/{orderId}
+Host: localhost:8080
+Auth: basic username:password
+Content-type: application/json
+Accept: application/json
+
+``` 
+#### Get all orders/items
+
+```
+/api/order/
+
+GET /api/order/
+Host: localhost:8080
+Auth: basic username:password
+Content-type: application/json
+Accept: application/json
+
+Returns:
+
+[
+    {
+        "customerId": 1,
+        "orderDate": "2017-03-08",
+        "orderId": 2,
+        "orderNum": 3,
+        "productId": 6
+    },
+    {
+        "customerId": null,
+        "orderDate": "2017-03-08",
+        "orderId": 4,
+        "orderNum": 1,
+        "productId": 5
+    }
+]
+```
+
+#### Get all items in an order
+
+```
+/api/order/orderItems={orderNum}
+
+GET /api/order/orderItems={orderNum}
+Host: localhost:8080
+Auth: basic username:password
+Content-type: application/json
+Accept: application/json
+
+Returns:
+
+[
+    {
+        "customerId": 1,
+        "orderDate": "2017-03-08",
+        "orderId": 2,
+        "orderNum": 3,
+        "productId": 6
+    },
+    {
+        "customerId": 1,
+        "orderDate": "2017-03-08",
+        "orderId": 4,
+        "orderNum": 3,
+        "productId": 9
+    }
+]
+```
+#### Get a single item added to an order
+```
+/api/order/{orderId}
+
+GET /api/order/{orderId}
+Host: localhost:8080
+Auth: basic username:password
+Content-type: application/json
+Accept: application/json
+
+Returns:
+
+{
+        "customerId": 1,
+        "orderDate": "2017-03-08",
+        "orderId": 2,
+        "orderNum": 3
+    }
+
+```
+

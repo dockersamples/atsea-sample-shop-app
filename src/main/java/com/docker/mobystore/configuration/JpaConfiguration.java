@@ -92,7 +92,7 @@ public class JpaConfiguration {
 	}
 
 	/*
-	 * Here you can specify any provider specific properties.
+	 * Provider specific properties.
 	 */
 	private Properties jpaProperties() {
 		Properties properties = new Properties();

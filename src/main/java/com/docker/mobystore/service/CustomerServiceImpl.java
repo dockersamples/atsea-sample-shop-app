@@ -45,7 +45,7 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	public boolean customerExist(Customer customer) {
-		return customerRepository.findOne(customer.customerId()) != null;
+		return customerRepository.findOne(customer.getCustomerId()) != null;
 	}
 
 }

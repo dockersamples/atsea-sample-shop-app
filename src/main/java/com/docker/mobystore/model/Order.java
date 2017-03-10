@@ -12,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Entity
-@NamedNativeQuery(name= "Order.findByOrderNum", query = "SELECT * FROM orders WHERE ordernum = 'orderNum'")
 @Table(name = "orders")
 @JsonInclude(Include.NON_NULL)
 public class Order implements Serializable {

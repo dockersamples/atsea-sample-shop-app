@@ -12,8 +12,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Entity
-@Table(name = "customer", uniqueConstraints = { @UniqueConstraint(columnNames = "customerid")})
-@JsonInclude(Include.NON_NULL)
+@Table(name = "customer") //, uniqueConstraints = { @UniqueConstraint(columnNames = "customerid")})
+//@JsonInclude(Include.NON_NULL)
 public class Customer implements Serializable {
 	
 	private static final long serialVersionUID = -8697455919895226841L;
@@ -73,11 +73,11 @@ public class Customer implements Serializable {
 		this.orders = orders;
 	}
 	
-	public Long customerId() {
+	public Long getCustomerId() {
     	return customerId;
     }
     
-    public void setCustomerId(long customerId) {
+    public void setCustomerId(Long customerId) {
         this.customerId = customerId;
     }
     
@@ -142,23 +142,27 @@ public class Customer implements Serializable {
 		return username != null ? username.equals(customer.username) : customer.username == null;
 	}
 
-	@Override
-	public int hashCode() {
-		int result;
-		long temp;
-		result = customerId != null ? customerId.hashCode() : 0;
-		result = 31 * result + (name != null ? name.hashCode() : 0);
-		result = 31 * result + (username != null ? username.hashCode() : 0);
-		//temp = Double.doubleToLongBits(salary);
-		//result = 31 * result + (int) (temp ^ (temp >>> 32));
-		return result;
-	}
+//	@Override
+//	public int hashCode() {
+//		int result;
+//		long temp;
+//		result = customerId != null ? customerId.hashCode() : 0;
+//		result = 31 * result + (name != null ? name.hashCode() : 0);
+//		result = 31 * result + (username != null ? username.hashCode() : 0);
+//		//temp = Double.doubleToLongBits(salary);
+//		//result = 31 * result + (int) (temp ^ (temp >>> 32));
+//		return result;
+//	}
 
 	@Override
 	public String toString() {
-		return "Customer [customerId=" + customerId + ", name=" + name + ", username=" + username
-				+ ", address=" + address + ", email=" + email + ", phone=" + phone 
-				+ ", password=" + password +  "]";
+		return "Customer [customerId=" + customerId 
+				          + ", name=" + name 
+				          + ", username=" + username
+				          + ", address=" + address 
+				          + ", email=" + email 
+				          + ", phone=" + phone 
+				          + ", password=" + password +  "]";
 	}
     
 }

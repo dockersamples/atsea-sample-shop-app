@@ -20,4 +20,51 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.m2e.core.maven2Nature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/main/resources/static/images</name>
+			<type>2</type>
+			<location>/Users/sophiaparafina/git/spara/mobyStore/src/main/resources/static/images</location>
+		</link>
+		<link>
+			<name>src/main/resources/static/index.html</name>
+			<type>1</type>
+			<location>/Users/sophiaparafina/git/spara/mobyStore/src/main/resources/static/index.html</location>
+		</link>
+		<link>
+			<name>src/main/resources/static/css/bootstrap.min.css</name>
+			<type>1</type>
+			<location>/Users/sophiaparafina/git/spara/mobyStore/src/main/resources/static/css/bootstrap.min.css</location>
+		</link>
+		<link>
+			<name>src/main/resources/static/css/cerulean.css</name>
+			<type>1</type>
+			<location>/Users/sophiaparafina/git/spara/mobyStore/src/main/resources/static/css/cerulean.css</location>
+		</link>
+		<link>
+			<name>src/main/resources/static/css/style.css</name>
+			<type>1</type>
+			<location>/Users/sophiaparafina/git/spara/mobyStore/src/main/resources/static/css/style.css</location>
+		</link>
+		<link>
+			<name>src/main/resources/static/templates/ngCart</name>
+			<type>2</type>
+			<location>/Users/sophiaparafina/git/spara/mobyStore/src/main/resources/static/templates/ngCart</location>
+		</link>
+		<link>
+			<name>src/main/resources/static/js/app/ngCart.js</name>
+			<type>1</type>
+			<location>/Users/sophiaparafina/git/spara/mobyStore/src/main/resources/static/js/app/ngCart.js</location>
+		</link>
+		<link>
+			<name>src/main/resources/static/js/app/ngCart.min.js</name>
+			<type>1</type>
+			<location>/Users/sophiaparafina/git/spara/mobyStore/src/main/resources/static/js/app/ngCart.min.js</location>
+		</link>
+		<link>
+			<name>src/main/resources/static/js/lib/angular.js</name>
+			<type>1</type>
+			<location>/Users/sophiaparafina/git/spara/ngcart/angular/angular.js</location>
+		</link>
+	</linkedResources>
 </projectDescription>

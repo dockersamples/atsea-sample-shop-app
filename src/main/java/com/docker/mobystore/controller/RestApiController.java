@@ -153,7 +153,7 @@ public class RestApiController {
 	// -------------------Retrieve All Items By orderNum------------------------------------------
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@RequestMapping(value = "/order/orderItems={orderNum}", method = RequestMethod.GET)
+	@RequestMapping(value = "/order/orderNum={orderNum}", method = RequestMethod.GET)
 	public ResponseEntity<?> getItemsInOrder(@PathVariable("orderNum") int orderNum) {
 		logger.info("Fetching Items in Order with orderNum {}", orderNum);
 		List<Order> order = orderService.findByOrderNum(orderNum);
@@ -201,7 +201,7 @@ public class RestApiController {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value = "/customer/", method = RequestMethod.POST)
-	public ResponseEntity<?> createUser(@RequestBody Customer customer, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<?> createCustomer(@RequestBody Customer customer, UriComponentsBuilder ucBuilder) {
 		logger.info("Creating Customer : {}", customer);
 
 		if (customerService.customerExist(customer)) {
@@ -217,7 +217,7 @@ public class RestApiController {
 		customerService.saveCustomer(customer);
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("/api/customer/{id}").buildAndExpand(customer.customerId()).toUri());
+		headers.setLocation(ucBuilder.path("/api/customer/{customerId").buildAndExpand(customer.getCustomerId()).toUri());
 		return new ResponseEntity<String>(headers, HttpStatus.CREATED);
 	}
 

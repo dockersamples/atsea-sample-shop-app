@@ -1,5 +1,13 @@
 # Moby Art Store Demo Application
 
+## Current build and run (this will be improved)
+```bash
+mvn package
+cp -f target/MobyStore-0.0.1-SNAPSHOT.jar app/
+docker-compose build
+docker-compose up
+```
+
 ## The demo application is a store application with the following features:
 
 * user account creation and sign-in 
@@ -17,7 +25,10 @@ A page for each feature will be needed in the client.
 * Nginx proxies for serving static data and handling HTTPS request
 * store front client written in Angular
 
-It was recommended that the client site should be similar to https://www.kingandmcgaw.com/ 
+## Front end is adopted from [ngCart](http://ngcart.snapjay.com/) and currently has a wireframe interface, not connected to the actual app.
+
+![ngCartwireframe](ngcart.png)
+
 
 ## The operational architecture features:
 

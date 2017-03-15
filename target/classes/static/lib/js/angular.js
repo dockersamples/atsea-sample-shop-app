@@ -27947,7 +27947,7 @@ is set to `true`. The parse error is stored in `ngModel.$error.parse`.
  *   var value = modelValue || viewValue;
  *
  *   // Lookup user by username
- *   return $http.get('/Mob/customer/customers/' + value).
+ *   return $http.get('/MobyStore/api/customer/' + value).
  *      then(function resolved() {
  *        //username exists, this means validation fails
  *        return $q.reject('exists');

@@ -46,25 +46,5 @@
 			<type>1</type>
 			<location>/Users/sophiaparafina/git/spara/mobyStore/src/main/resources/static/css/style.css</location>
 		</link>
-		<link>
-			<name>src/main/resources/static/templates/ngCart</name>
-			<type>2</type>
-			<location>/Users/sophiaparafina/git/spara/mobyStore/src/main/resources/static/templates/ngCart</location>
-		</link>
-		<link>
-			<name>src/main/resources/static/js/app/ngCart.js</name>
-			<type>1</type>
-			<location>/Users/sophiaparafina/git/spara/mobyStore/src/main/resources/static/js/app/ngCart.js</location>
-		</link>
-		<link>
-			<name>src/main/resources/static/js/app/ngCart.min.js</name>
-			<type>1</type>
-			<location>/Users/sophiaparafina/git/spara/mobyStore/src/main/resources/static/js/app/ngCart.min.js</location>
-		</link>
-		<link>
-			<name>src/main/resources/static/js/lib/angular.js</name>
-			<type>1</type>
-			<location>/Users/sophiaparafina/git/spara/ngcart/angular/angular.js</location>
-		</link>
 	</linkedResources>
 </projectDescription>

@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <title>MobyStore Login</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link href="css/registration.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="jumbotron">
+        <div class="container">
+            <div class="col-sm-8 col-sm-offset-2">
+                <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+                <div ng-view></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="//code.angularjs.org/1.6.0/angular.min.js"></script>
+    <script src="//code.angularjs.org/1.6.0/angular-route.min.js"></script>
+    <script src="//code.angularjs.org/1.6.0/angular-cookies.min.js"></script>
+
+    <script src="app.js"></script>
+    <script src="app/authentication.service.js"></script>
+    <script src="app/flash.service.js"></script>
+
+    <!-- Real user service that uses an api -->
+    <script src="app/user.service.js"></script>å
+
+    <!-- Fake user service for demo that uses local storage -->
+    <!-- <script src="app/user.service.local-storage.js"></script> -->
+
+    <script src="home/home.controller.js"></script>
+    <script src="login/login.controller.js"></script>
+    <script src="register/register.controller.js"></script>
+</body>
+</html>

@@ -15,6 +15,8 @@
   </head>
   <body ng-app="myApp">
     <div ng-controller="myCtrl">
+    
+   
 
     <div class="row">
     
@@ -26,27 +28,18 @@
         </div>
         <hr />
             <h3>Add to Cart</h3>
-    <div class="row">
-        <div class="col-xs-6 col-sm-3">
-            <img class="item-cart" src="/MobyStore/images/Docker-Security-Banner-01.svg"/>
-            <h4>Docker Security Banner</h4>
-            <p> $10.99</p>
-            <ngcart-addtocart id="item1" name="Docker Security Banner" price="10.99" quantity="1" quantity-max="5">Add to Cart</ngcart-addtocart>
-        </div>
-        <div class="col-xs-6 col-sm-3">
-            <img class="item-cart" src="/MobyStore/images/gordon.png"/>
-            <h4>Gordon</h4>
-            <p> $15.29</p>
-            <ngcart-addtocart id="item2" name="Gordon" price="15.29" quantity="1" quantity-max="5">Add to Cart</ngcart-addtocart>
-        </div>
-        <div class="col-xs-6 col-sm-3">
-            <img class="item-cart" src="/MobyStore/images/Swarmnado-1100x627-30.gif"/>
-            <h4>Swarmnado</h4>
-            <p> $25.75</p>
-            <ngcart-addtocart id="item3" name="Swarmnado" price="25.75" quantity="3" quantity-max="10">Add to Cart</ngcart-addtocart>
-        </div>
-    </div>
-
+             <div class="row">
+                <div ng-controller="products">
+                    <div ng-repeat="product in products">
+                        <div class="col-xs-6 col-sm-3">
+                            <img class="item-cart" src="data:image/png;base64,{{product.image}}"/>
+                            <h4>{{product.name}}</h4>
+                            <p> {{product.price}}</p>
+                            <ngcart-addtocart id="{{product.productId}}" name="{{product.name}}" price="{{product.price}}" quantity="1" quantity-max="5">Add to Cart</ngcart-addtocart>
+                        </div>
+                    </div>
+                </div>
+             </div>
         <hr/>
         <h3>Cart</h3>
 
@@ -149,9 +142,6 @@
             </tbody>
         </table>
     </div>
-    <div ng-controller="CatalogController">
-	    Data: {{data}}<br>
-    </div>
 
 
     </script>
@@ -180,28 +170,6 @@
         
     <div ng-if="service=='http' || service == 'log'">
         <button class="btn btn-primary" ng-click="checkout()" ng-disabled="!ngCart.getTotalItems()" ng-transclude>Checkout</button>
-    </div>
-
-
-    <div ng-if="service=='paypal'">
-
-        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" ng-show="ngCart.getTotalItems()">
-            <input type="hidden" name="cmd" value="_xclick">
-            <input type="hidden" name="business" value="{{ settings.paypal.business }}">
-            <input type="hidden" name="lc" value="CA">
-            <input type="hidden" name="item_name" value="{{ settings.paypal.item_name }}">
-            <input type="hidden" name="item_number" value="{{ settings.paypal.item_number }}">
-            <input type="hidden" name="amount" value="{{ ngCart.getSubTotal()}}">
-            <input type="hidden" name="currency_code" value="{{ settings.paypal.currency_code }}">
-            <input type="hidden" name="button_subtype" value="services">
-            <input type="hidden" name="no_note" value="0">
-            <input type="hidden" name="tax_rate" value="{{ ngCart.getTaxRate()}}">
-            <input type="hidden" name="shipping" value="{{ ngCart.getShipping()}}">
-            <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHostedGuest">
-            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-        </form>
-
     </div>
         
     </script>

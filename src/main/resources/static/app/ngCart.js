@@ -1,8 +1,19 @@
 'use strict';
-
+angular.module('demo', [])
+.controller('Hello', function($scope, $http) {
+    $http.get('localhost:8080/MobyStore/api/product/').
+        then(function(response) {
+            $scope.greeting = response.data;
+        });
+});
 
 angular.module('ngCart', ['ngCart.directives'])
-
+.controller('products', function($scope, $http) {
+    $http.get('http://localhost:8080/MobyStore/api/product/').
+        then(function(response) {
+            $scope.products = response.data;
+        });
+})
     .config([function () {
 
     }])
@@ -330,7 +341,6 @@ angular.module('ngCart', ['ngCart.directives'])
 
     .controller('CartController',['$scope', 'ngCart', function($scope, ngCart) {
         $scope.ngCart = ngCart;
-
     }])
 
     .value('version', '1.0.0');
@@ -338,6 +348,7 @@ angular.module('ngCart', ['ngCart.directives'])
 
 
 angular.module('ngCart.directives', ['ngCart.fulfilment'])
+    
 
     .controller('CartController',['$scope', 'ngCart', function($scope, ngCart) {
         $scope.ngCart = ngCart;
@@ -504,7 +515,12 @@ angular.module('ngCart.fulfilment', [])
                 { data: ngCart.toObject(), options: settings.options});
         }
  }])
-
+ .directive('catalogController',['$scope', 'ngCart', function($scope, ngCart) {
+        $http.get('http://localhost:8080/MobyStore/api/product/', config).then(function(data){
+            console.log(data);
+        }, function(){
+            console.log('no products at http://localhost:8080/MobyStore/api/product/')});
+    }])
 
 .service('ngCart.fulfilment.paypal', ['$http', 'ngCart', function($http, ngCart){
 

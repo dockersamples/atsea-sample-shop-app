@@ -1,12 +1,14 @@
-hr {
-    margin:40px 0;
-} 
-h3 { color:#1758AA}
-h3 span {font-size:14px; display:block;}
-span[ng-click] {
-        cursor: pointer;
-    }
-img.item-cart {
-  width:100px;
-  height:100px;
-}
+hr { margin:40px 0; }
+
+h3 { color:#1758AA;
+     padding-left: 45px }
+
+h3 span { font-size:14px;
+          display:block; }
+
+span[ng-click] { cursor: pointer; }
+
+img.item-cart { width:100px;
+                height:100px; }
+
+div.row{ padding-left: 45px }

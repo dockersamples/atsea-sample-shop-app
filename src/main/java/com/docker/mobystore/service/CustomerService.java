@@ -21,5 +21,9 @@ public interface CustomerService {
 	List<Customer> findAllCustomers();
 
 	boolean customerExist(Customer customer);
+	
+//	boolean findByLogin(String userName, String password);
+	
+//	boolean findByUserName(String userName);
 
 }

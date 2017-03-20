@@ -51,3 +51,5 @@ site.conf
 .Trashes
 ehthumbs.db
 Thumbs.db
+=======
+.DS_Store

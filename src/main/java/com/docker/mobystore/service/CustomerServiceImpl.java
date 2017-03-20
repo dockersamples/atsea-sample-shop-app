@@ -48,4 +48,24 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerRepository.findOne(customer.getCustomerId()) != null;
 	}
 
+
+//	public boolean findByLogin(String userName, String password) {
+//		Customer customer = customerRepository.findByUserName(userName);
+//		
+//		if (customer != null && customer.getPassword().equals(password)) {
+//			return true;
+//		}
+//		
+//		return false;
+//	}
+//	
+//	public boolean findByUserName(String userName) {
+//		Customer customer = customerRepository.findByUserName(userName);
+//		
+//		if(customer != null){
+//			return true;
+//		}
+//		
+//		return false;
+//	}
 }

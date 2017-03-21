@@ -1,23 +1,19 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <script src="lib/js/angular.js"></script>
+<head>
+    <meta charset="utf-8" />
+    <title>MobyStore Login</title>
+    <!-- <link rel="stylesheet" href="css/bootstrap.min.css" /> -->
+    <link href="css/registration.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css"/>
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="css/registration.css"/>
-    
-   
-    
+   <script src="lib/js/angular.js"></script>
+
     <script src="app/ngCart.js"></script>
-    <script>
-      var myApp = angular.module('myApp',['ngCart']);
-      
-      myApp.controller ('myCtrl', ['$scope', '$http', 'ngCart', function($scope, $http, ngCart) {
-        ngCart.setTaxRate(7.5);
-        ngCart.setShipping(2.99);    
-      }]);
-    </script>
-  </head>
-  <body ng-app="myApp">
+
+</head>
+<body>
+  <div ng-app="app">
     <div class="jumbotron">
         <div class="container">
             <div class="col-sm-8 col-sm-offset-2">
@@ -26,19 +22,29 @@
             </div>
         </div>
     </div>
-     <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="//code.angularjs.org/1.6.0/angular-route.min.js"></script>
-    <script src="//code.angularjs.org/1.6.0/angular-cookies.min.js"></script>
+    
+    <script src="lib/js/jquery-3.1.1.min.js"></script>
+    <script src="lib/js/angular-route.min.js"></script>
+    <script src="lib/js/angular-cookies.min.js"></script>
+
     <script src="app.js"></script>
     <script src="app/authentication.service.js"></script>
     <script src="app/flash.service.js"></script>
-    <script src="app/user.service.js"></script>
-    <div ng-controller="myCtrl">
-    
-   
 
+    <!-- Real user service that uses an api -->
+    <script src="app/user.service.js"></script>
+
+    <!-- Fake user service for demo that uses local storage -->
+    <!-- <script src="app/user.service.local-storage.js"></script> -->
+
+    <script src="home/home.controller.js"></script>
+    <script src="login/login.controller.js"></script>
+    <script src="register/register.controller.js"></script>
+  </div>
+<div>
+      
+  <div ng-controller="myCtrl" id="ngcart">
     <div class="row">
-    
         <div class="col-xs-offset-8 col-xs-4">
         <h3>Summary</h3>
             
@@ -89,7 +95,16 @@
     </div>
 
     </div>
-    
+    <script>
+      var myApp = angular.module('myApp',['ngCart']);
+      
+      myApp.controller ('myCtrl', ['$scope', '$http', 'ngCart', function($scope, $http, ngCart) {
+        ngCart.setTaxRate(7.5);
+        ngCart.setShipping(2.99);    
+      }]);
+      angular.bootstrap(document.getElementById('ngcart'),['myApp']);
+    </script>
+    <script type="text/ng-template" id="login/login.view.html"></script>
 
     <!--  TEMPALATES -->
     <!--  TEMPALATES -->
@@ -192,8 +207,6 @@
     </div>
         
     </script>
-    <script src="login/login.controller.js"></script>
-    <script src="register/register.controller.js"></script>
-
-  </body>
+</div>
+</body>
 </html>

@@ -32,22 +32,24 @@
                     });
             }, 1000);
 
-            /* Use this for real authentication
-             ----------------------------------------------*/
-            //$http.post('/api/authenticate', { username: username, password: password })
+            // /* Use this for real authentication
+            //  ----------------------------------------------*/
+            // $http.post('/api/authenticate', { username: username, password: password })
             //    .success(function (response) {
             //        callback(response);
             //    });
 
         }
 
-        function SetCredentials(username, password) {
+        function SetCredentials(username, password, customerid) {
             var authdata = Base64.encode(username + ':' + password);
+            var id = Base64.encode(customerid);
 
             $rootScope.globals = {
                 currentUser: {
                     username: username,
-                    authdata: authdata
+                    authdata: authdata,
+                    customerid: customerid
                 }
             };
 

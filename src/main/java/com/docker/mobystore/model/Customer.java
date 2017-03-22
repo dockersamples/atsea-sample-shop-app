@@ -4,7 +4,18 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotNull;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.CascadeType;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -12,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Entity
-@Table(name = "customer") //, uniqueConstraints = { @UniqueConstraint(columnNames = "customerid")})
+@Table(name = "customer")
 //@JsonInclude(Include.NON_NULL)
 public class Customer implements Serializable {
 	
@@ -20,6 +31,12 @@ public class Customer implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy =  GenerationType.IDENTITY)
+//	@SequenceGenerator(name="customer_customerid_seq", 
+//	                   sequenceName="customer_customerid_seq",
+//	                   allocationSize=1)
+//	@GeneratedValue(strategy=GenerationType.SEQUENCE,
+//	                generator="customer_customerid_seq")
+	//@Column(name="customerid", updatable=false)
     private Long customerId;
 	
 	@NotEmpty
@@ -28,8 +45,8 @@ public class Customer implements Serializable {
 	
 	@NotEmpty
 	@Column(name = "address", length = 512, nullable = false)
-    private String address;
 	
+	private String address;
 	@NotEmpty
 	@Column(name = "email", length = 128, nullable = false)
     private String email;
@@ -46,32 +63,40 @@ public class Customer implements Serializable {
 	@Column(name = "password", length = 255, nullable = false)
     private String password;
 	
-	@OneToMany(mappedBy = "customerId", cascade = CascadeType.ALL)
-	private Set<Order> orders = new HashSet<Order>();
 	
-	public Set<Order> getOrders() {
-		return orders;
-	}
-
-	public void setOrders(Set<Order> orders) {
-		this.orders = orders;
-	}
+	@Column(name = "enabled")
+	private boolean enabled;
 	
-	public Customer() {
-		
-	}
+	@NotEmpty
+	@Column(name = "role", columnDefinition = "varchar(5) DEFAULT 'USER'")
+	private String role;
 	
-	public Customer(Long customerId, String name, String address, String email, String phone,
-			String username, String password, Set<Order> orders) {
-		this.customerId = customerId;
-		this.name = name;
-		this.address = address;
-		this.email = email;
-		this.phone = phone;
-		this.username = username;
-		this.password = password;
-		this.orders = orders;
-	}
+//	@OneToMany(mappedBy = "customerId", cascade = CascadeType.ALL)
+//	private Set<Order> orders = new HashSet<Order>();
+	
+//	public Set<Order> getOrders() {
+//		return orders;
+//	}
+//
+//	public void setOrders(Set<Order> orders) {
+//		this.orders = orders;
+//	}
+	
+//	public Customer() {
+//		
+//	}
+//	
+//	public Customer(Long customerId, String name, String address, String email, String phone,
+//			String username, String password, Set<Order> orders) {
+//		this.customerId = customerId;
+//		this.name = name;
+//		this.address = address;
+//		this.email = email;
+//		this.phone = phone;
+//		this.username = username;
+//		this.password = password;
+//		this.orders = orders;
+//	}
 	
 	public Long getCustomerId() {
     	return customerId;
@@ -128,6 +153,22 @@ public class Customer implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+       
+    public Boolean getEnabled() {
+    	return enabled;
+    }
+    
+    public void setEnabled(Boolean enabled) {
+    	this.enabled = enabled;
+    }
+    
+    public String getRole() {
+    	return role;
+    }
+    
+    public void setRole(String role) {
+    	this.role = role;
+    }
     
 	@Override
 	public boolean equals(Object o) {
@@ -154,15 +195,15 @@ public class Customer implements Serializable {
 //		return result;
 //	}
 
-	@Override
-	public String toString() {
-		return "Customer [customerId=" + customerId 
-				          + ", name=" + name 
-				          + ", username=" + username
-				          + ", address=" + address 
-				          + ", email=" + email 
-				          + ", phone=" + phone 
-				          + ", password=" + password +  "]";
-	}
-    
+//	@Override
+//	public String toString() {
+//		return "Customer [customerId=" + customerId 
+//				          + ", name=" + name 
+//				          + ", username=" + username
+//				          + ", address=" + address 
+//				          + ", email=" + email 
+//				          + ", phone=" + phone 
+//				          + ", password=" + password +  "]";
+//	}
+//    
 }

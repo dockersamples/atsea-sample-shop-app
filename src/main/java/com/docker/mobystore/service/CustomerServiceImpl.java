@@ -4,6 +4,7 @@ package com.docker.mobystore.service;
 import java.util.List;
 
 import com.docker.mobystore.model.Customer;
+import com.docker.mobystore.model.Order;
 import com.docker.mobystore.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,16 +25,18 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerRepository.findByName(name);
 	}
 
+	public Customer createCustomer(Customer customer) {		
+		customer = customerRepository.save(customer);
+		customerRepository.flush();
+		return customer;
+	}
+	
 	public void saveCustomer(Customer customer) {
 		customerRepository.save(customer);
 	}
 
 	public void updateCustomer(Customer customer) {
 		customerRepository.save(customer);
-	}
-
-	public void deleteCustomerById(Long customerId) {
-		customerRepository.delete(customerId);
 	}
 
 	public void deleteAllCustomers() {
@@ -47,6 +50,11 @@ public class CustomerServiceImpl implements CustomerService {
 	public boolean customerExist(Customer customer) {
 		return customerRepository.findOne(customer.getCustomerId()) != null;
 	}
+
+	public void deleteCustomerById(Long customerId) {
+		customerRepository.delete(customerId);		
+	}
+
 
 
 //	public boolean findByLogin(String userName, String password) {

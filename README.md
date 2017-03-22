@@ -126,6 +126,15 @@ Accept: application/json
     "username" : "sallyv",
     "password" : "sallypassword"
 }
+```
+Returns:
+
+```
+customerId
+
+{
+    "customerId": 1
+}
 
 ```
 
@@ -170,6 +179,19 @@ Accept: application/json
     "customerId" : "54321",
     "productId" : "2"
 }
+
+```
+Returns:
+
+```
+orderId, orderNum
+
+{
+    "orderId": 1,
+    "orderNume" " 1
+}
+
+```
 ```
 
 #### Delete item

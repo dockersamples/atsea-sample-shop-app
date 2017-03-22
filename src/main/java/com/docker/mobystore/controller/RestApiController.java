@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.docker.mobystore.model.Product;
 import com.docker.mobystore.service.ProductService;
@@ -25,7 +27,6 @@ import com.docker.mobystore.service.OrderService;
 import com.docker.mobystore.model.Customer;
 import com.docker.mobystore.service.CustomerService;
 import com.docker.mobystore.util.CustomErrorType;
-
 
 @RestController
 @RequestMapping("/api")
@@ -78,7 +79,7 @@ public class RestApiController {
 	//--------------------------------------------------------------------
 
 
-	// -------------------Add Item to an Order-------------------------------------------
+	// -------------------Create an Order-------------------------------------------
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value = "/order/", method = RequestMethod.POST)
 	public ResponseEntity<?> createOrder(@RequestBody Order order, UriComponentsBuilder ucBuilder) {
@@ -89,13 +90,11 @@ public class RestApiController {
 			return new ResponseEntity(new CustomErrorType("Unable to create. An order with id " + 
 			order.getOrderId() + " already exists."),HttpStatus.CONFLICT);
 		}
-		
-		orderService.saveOrder(order);
-		Long orderId = order.getOrderId();
-		Integer orderNum = order.getOrderNum();
+				
+		Order currentOrder = orderService.createOrder(order);
+		Long currentOrderId = currentOrder.getOrderId();
 		JSONObject orderInfo = new JSONObject();
-		orderInfo.put("orderId", orderId);
-		orderInfo.put("orderNum", orderNum);
+		orderInfo.put("orderId", currentOrderId);
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("/api/order/").buildAndExpand(order.getOrderId()).toUri());
@@ -103,7 +102,7 @@ public class RestApiController {
 	}
 
 
-	// ------------------- Delete an Item in Order-----------------------------------------
+	// ------------------- Delete an Order-----------------------------------------
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value = "/order/{orderId}", method = RequestMethod.DELETE)
@@ -120,15 +119,6 @@ public class RestApiController {
 		return new ResponseEntity<Order>(HttpStatus.NO_CONTENT);
 	}
 
-	// ------------------- Delete All Items in Order-----------------------------
-
-	@RequestMapping(value = "/order/", method = RequestMethod.DELETE)
-	public ResponseEntity<Order> deleteAllItems() {
-		logger.info("Deleting All Items in Order");
-
-		orderService.findAllOrders();
-		return new ResponseEntity<Order>(HttpStatus.NO_CONTENT);
-	}
 	
 	// ------------------- Get All Orders-----------------------------
 	
@@ -158,20 +148,6 @@ public class RestApiController {
 		return new ResponseEntity<Order>(order, HttpStatus.OK);
 	}
 	
-	// -------------------Retrieve All Items By orderNum------------------------------------------
-
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@RequestMapping(value = "/order/orderNum={orderNum}", method = RequestMethod.GET)
-	public ResponseEntity<?> getItemsInOrder(@PathVariable("orderNum") int orderNum) {
-		logger.info("Fetching Items in Order with orderNum {}", orderNum);
-		List<Order> order = orderService.findByOrderNum(orderNum);
-		if (order == null) {
-			logger.error("Order with id {} not found.", orderNum);
-			return new ResponseEntity(new CustomErrorType("Order with id " + orderNum 
-					+ " not found"), HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<List<Order>>(order, HttpStatus.OK);
-	}
 	
 	// -------------------------------------------------------------------
 	//                   Customer methods
@@ -237,11 +213,10 @@ public class RestApiController {
 			System.out.println(customer);
 		}
 		
-		customerService.saveCustomer(customer);
-		Long customerId = customer.getCustomerId();
+		Customer currentCustomer = customerService.createCustomer(customer);
+		Long currentCustomerId = currentCustomer.getCustomerId();
 		JSONObject customerInfo = new JSONObject();
-		customerInfo.put("customerId", customerId);
-		
+		customerInfo.put("customerId", currentCustomerId);
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("/api/customer/{customerId").buildAndExpand(customer.getCustomerId()).toUri());
@@ -319,11 +294,17 @@ public class RestApiController {
 //		}				
 //	}
 	
-	@RequestMapping(value={"/login"})
-    public String login(){
-        return "login";
-    }
-    
+	// ----------------Page controllers -----------------------------------
+	@RequestMapping(value="/login/{message}", method = RequestMethod.GET)
+	public String echo(@PathVariable(value = "message") final String message,
+			@AuthenticationPrincipal final UserDetails user) {
+//			if (customer != null) {
+//			System.out.println(customer);
+//			}
+			return user.getUsername() +" said: " + message;
+	}	
+	
+	    
     
     @RequestMapping(value="/403")
     public String Error403(){

@@ -19,10 +19,16 @@ public class OrderServiceImpl implements OrderService {
 		return orderRepository.findOne(orderId) ;
 	}
 
+	public Order createOrder(Order order) {		
+		order = orderRepository.save(order);
+		orderRepository.flush();
+		return order;
+	}
+
 	public void saveOrder(Order order) {
 		orderRepository.save(order);
 	}
-
+	
 	public void updateOrder(Order order) {
 		orderRepository.save(order);
 	}
@@ -42,12 +48,5 @@ public class OrderServiceImpl implements OrderService {
 	public List<Order> findAllOrders() {
 		return (List<Order>) orderRepository.findAll();
 	}
-
-	@Override
-	public List<Order> findByOrderNum(int orderNum) {
-		// TODO Auto-generated method stub
-		return (List<Order>) orderRepository.findByOrderNum(orderNum);
-	}
 	
-
 }

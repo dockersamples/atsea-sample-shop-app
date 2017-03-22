@@ -9,6 +9,8 @@ public interface CustomerService {
 	Customer findById(Long customerId);
 
 	Customer findByName(String name);
+	
+	Customer createCustomer(Customer customer);
 
 	void saveCustomer(Customer customer);
 

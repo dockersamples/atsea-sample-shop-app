@@ -2,9 +2,9 @@
 /Users/sophiaparafina/git/spara/mobyStore/src/main/java/com/docker/mobystore/MobyStoreApp.java
 /Users/sophiaparafina/git/spara/mobyStore/src/main/java/com/docker/mobystore/service/ProductServiceImpl.java
 /Users/sophiaparafina/git/spara/mobyStore/src/main/java/com/docker/mobystore/service/CustomerService.java
+/Users/sophiaparafina/git/spara/mobyStore/src/main/java/com/docker/mobystore/security/SecurityConfiguration.java
 /Users/sophiaparafina/git/spara/mobyStore/src/main/java/com/docker/mobystore/repositories/OrderRepository.java
 /Users/sophiaparafina/git/spara/mobyStore/src/main/java/com/docker/mobystore/model/Customer.java
-/Users/sophiaparafina/git/spara/mobyStore/src/main/java/com/docker/mobystore/model/CustomerLogin.java
 /Users/sophiaparafina/git/spara/mobyStore/src/main/java/com/docker/mobystore/model/Product.java
 /Users/sophiaparafina/git/spara/mobyStore/src/main/java/com/docker/mobystore/service/OrderService.java
 /Users/sophiaparafina/git/spara/mobyStore/src/main/java/com/docker/mobystore/configuration/JpaConfiguration.java

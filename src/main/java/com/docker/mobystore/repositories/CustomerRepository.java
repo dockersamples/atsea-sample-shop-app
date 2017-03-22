@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
-//	Customer findOne(Long customerId);
+//	Customer findOne(Integer customerId);
 	Customer findByName(String name);
 	
 //	@Query("SELECT c FROM Customer c WHERE c.username = :userName")

@@ -18,7 +18,7 @@ public class Order implements Serializable {
 	private static final long serialVersionUID = 8367647197454666804L;
 
 	@Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy =  GenerationType.SEQUENCE)
     private Long orderId;
 	
     @CreationTimestamp
@@ -26,31 +26,27 @@ public class Order implements Serializable {
     @Column(name = "orderdate" )
     private Date orderDate;
         
-    @Column(name = "ordernum", nullable=false)
-    private Integer orderNum;
-
-    @JoinColumn(name = "customerId")
+    @Column(name = "customerid")
     private Long customerId;
 
-    @Column(name = "productId")
-    private Long productId;
-    
+    @ElementCollection
+    @Column(name = "productsordered")
+    private Set<String> productsOrdered = new HashSet<String>();
+        
     public Order(){
 		
 	}
 	
-	public Order(Long orderId, Integer orderNum, Date orderDate, Long productId) {
+	public Order(Long orderId, Date orderDate, Long productId, Set<String> productsOrdered) {
     	this.orderId = orderId;
-    	this.orderNum = orderNum;
     	this.orderDate = orderDate;
-    	this.productId = productId;
+    	this.productsOrdered = productsOrdered;
 	}
 
-    public Order(Long orderId, Integer orderNum, Date orderDate, Long customerId, Long productId) { 
+    public Order(Long orderId, Date orderDate, Long productId, Set<String> productsOrdered, Long customerId) { 
     	this.orderId = orderId;
-    	this.orderNum = orderNum;
     	this.orderDate = orderDate;
-    	this.productId = productId;
+    	this.productsOrdered = productsOrdered;
     	this.customerId = customerId;
     };
 
@@ -77,29 +73,20 @@ public class Order implements Serializable {
     public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
     }
-    
-    public Integer getOrderNum() {
-    	return orderNum;
+        
+    public Set<String> getProductsOrdered() {
+    	return productsOrdered;
     }
     
-    public void setOrderNum(int orderNum) {
-        this.orderNum = orderNum;
+    public void setProductsOrdered(Set<String> productsOrdered) {
+    	this.productsOrdered = productsOrdered;
     }
-    
-    public void setProduct(Long productId) {
-        this.productId = productId;
-    }
-    
-    public long getProductId() {
-    	return productId;
-    }
-	
+    	
 	@Override
 	public String toString() {
 		return String.format("Order[customerId = " + customerId + 
 				                    "orderDate= " +orderDate + 
 				                    "orderId = "+ orderId + 
-				                    "orderNum = " + orderNum +
-				                    "productId = " + productId);
+				                    "productsOrdred = " + productsOrdered);
 	}
 }

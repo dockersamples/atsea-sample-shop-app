@@ -10,7 +10,9 @@ public interface OrderService {
 	
 	Order findById(Long orderId);
 	
-	List<Order> findByOrderNum(int orderNum);
+//	Order getId(Long orderId);
+	
+	Order createOrder(Order order);
 	
 	void saveOrder(Order order);
 	

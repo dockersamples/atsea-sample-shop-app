@@ -118,13 +118,15 @@ Content-type: application/json
 Accept: application/json
 
 {
-    "customerId" : 54321,
+    "customerId" : 0,
     "name" : "Sally Vallery",
     "address" : "address as single string",
     "email" : "sally@example.com".
     "phone" : "phone as string"
     "username" : "sallyv",
-    "password" : "sallypassword"
+    "password" : "sallypassword",
+    "enabled" : "true",
+    "role" : "USER"
 }
 ```
 Returns:
@@ -173,11 +175,10 @@ Content-type: application/json
 Accept: application/json
 
 {
-    "orderId" : 12345,
+    "orderId" : 0,
     "orderDate : {current date},
-    "orderNum" : 12345,
     "customerId" : "54321",
-    "productId" : "2"
+    "productsOrdered" : [1,2,3]
 }
 
 ```
@@ -188,10 +189,8 @@ orderId, orderNum
 
 {
     "orderId": 1,
-    "orderNume" " 1
 }
 
-```
 ```
 
 #### Delete item
@@ -205,8 +204,10 @@ Auth: basic username:password
 Content-type: application/json
 Accept: application/json
 
+
+
 ``` 
-#### Get all orders/items
+#### Get all orders
 
 ```
 /api/order/
@@ -237,7 +238,24 @@ Returns:
 ]
 ```
 
-#### Get all items in an order
+Returns:
+
+```
+[
+    {
+        "customerId": 8,
+        "orderDate": "2017-03-23",
+        "orderId": 8,
+        "productsOrdered": {
+            "11": 1,
+            "3": 1,
+            "6": 2
+        }
+    }
+]
+```
+
+#### Get items and quantities in an order
 
 ```
 /api/order/orderItems={orderNum}
@@ -252,26 +270,22 @@ Returns:
 
 [
     {
-        "customerId": 1,
-        "orderDate": "2017-03-08",
-        "orderId": 2,
-        "orderNum": 3,
-        "productId": 6
-    },
-    {
-        "customerId": 1,
-        "orderDate": "2017-03-08",
-        "orderId": 4,
-        "orderNum": 3,
-        "productId": 9
+        "customerId": 8,
+        "orderDate": "2017-03-23",
+        "orderId": 8,
+        "productsOrdered": {
+            "11": 1,
+            "3": 1,
+            "6": 2
+        }
     }
 ]
 ```
-#### Get a single item added to an order
+#### Add a single item to an order
 ```
 /api/order/{orderId}
 
-GET /api/order/{orderId}
+POST: /api/order/{orderId}
 Host: localhost:8080
 Auth: basic username:password
 Content-type: application/json

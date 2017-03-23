@@ -2,7 +2,9 @@ package com.docker.mobystore.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -29,21 +31,28 @@ public class Order implements Serializable {
     @Column(name = "customerid")
     private Long customerId;
 
+//    @ElementCollection
+//    @Column(name = "productsordered")
+//    private Set<String> productsOrdered = new HashSet<String>();
+    
     @ElementCollection
+    @MapKeyColumn(name="productid")
     @Column(name = "productsordered")
-    private Set<String> productsOrdered = new HashSet<String>();
-        
+    @CollectionTable(name="orderquantities", joinColumns=@JoinColumn(name="orderid"))
+    Map<Integer, Integer> productsOrdered = new HashMap<Integer, Integer>();
+
+    
     public Order(){
 		
 	}
 	
-	public Order(Long orderId, Date orderDate, Long productId, Set<String> productsOrdered) {
+	public Order(Long orderId, Date orderDate, Long productId, Map<Integer, Integer> productsOrdered) {
     	this.orderId = orderId;
     	this.orderDate = orderDate;
     	this.productsOrdered = productsOrdered;
 	}
 
-    public Order(Long orderId, Date orderDate, Long productId, Set<String> productsOrdered, Long customerId) { 
+    public Order(Long orderId, Date orderDate, Long productId, Map<Integer, Integer> productsOrdered, Long customerId) { 
     	this.orderId = orderId;
     	this.orderDate = orderDate;
     	this.productsOrdered = productsOrdered;
@@ -74,11 +83,11 @@ public class Order implements Serializable {
         this.orderDate = orderDate;
     }
         
-    public Set<String> getProductsOrdered() {
+    public Map<Integer, Integer> getProductsOrdered() {
     	return productsOrdered;
     }
     
-    public void setProductsOrdered(Set<String> productsOrdered) {
+    public void setProductsOrdered(Map<Integer, Integer> productsOrdered) {
     	this.productsOrdered = productsOrdered;
     }
     	

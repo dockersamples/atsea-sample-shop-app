@@ -13,7 +13,6 @@
 
         function register() {
             vm.dataLoading = true;
-            vm.user.customerId = Math.random() * 100000;
             UserService.Create(vm.user)
                 .then(function (response) {
                     if (response.success) {

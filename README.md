@@ -83,6 +83,26 @@ Accept: application/json
 
 }
 ```
+Returns:
+```
+
+[    
+    {
+        "description": "Keeping it safe and secure",
+        "image": "/9j/4QAYRXhpZg ...."
+        "name": "Trusted Registry",
+        "price": 25.0,
+        "productId": 32
+    },
+    {
+        "description": "Moby at work",
+        "image": "/9j/4QAYRXhpZg ...."
+        "name": "Moby",
+        "price": 25.0,
+        "productId": 11
+    }
+]
+```
 
 #### Get single product (product detail)
 
@@ -103,6 +123,16 @@ Accept: application/json
 }
 
 ```
+Returns:
+```
+{
+        "description": "Keeping it safe and secure",
+        "image": "/9j/4QAYRXhpZg ...."
+        "name": "Trusted Registry",
+        "price": 25.0,
+        "productId": 32
+}
+```
 
 ### Customer requests
 
@@ -119,14 +149,14 @@ Accept: application/json
 
 {
     "customerId" : 0,
-    "name" : "Sally Vallery",
-    "address" : "address as single string",
-    "email" : "sally@example.com".
-    "phone" : "phone as string"
-    "username" : "sallyv",
-    "password" : "sallypassword",
-    "enabled" : "true",
-    "role" : "USER"
+    "name"       : "Sally Vallery",
+    "address"    : "address as single string",
+    "email"      : "sally@example.com".
+    "phone"      : "phone as string"
+    "username"   : "sallyv",
+    "password"   : "sallypassword",
+    "enabled"    : "true",
+    "role"       : "USER"
 }
 ```
 Returns:
@@ -161,9 +191,10 @@ Accept: application/json
     "password" : "sallypassword"
 }
 ```
+
 ### Order requests
 
-#### Add item 
+#### Create an order
 
 ```
 /api/order/
@@ -175,10 +206,10 @@ Content-type: application/json
 Accept: application/json
 
 {
-    "orderId" : 0,
+    "orderId" : 1,
     "orderDate : {current date},
     "customerId" : "54321",
-    "productsOrdered" : [1,2,3]
+    "productsOrdered" : {"1":1,"2":1,"3":1]
 }
 
 ```
@@ -188,25 +219,11 @@ Returns:
 orderId, orderNum
 
 {
-    "orderId": 1,
+    "orderId": 1
 }
 
 ```
 
-#### Delete item
-
-```
-/api/order/{orderId}
-
-DELETE /api/order/{orderId}
-Host: localhost:8080
-Auth: basic username:password
-Content-type: application/json
-Accept: application/json
-
-
-
-``` 
 #### Get all orders
 
 ```
@@ -222,45 +239,25 @@ Returns:
 
 [
     {
-        "customerId": 1,
-        "orderDate": "2017-03-08",
-        "orderId": 2,
-        "orderNum": 3,
-        "productId": 6
+        "orderId" : 1,
+        "orderDate : {current date},
+        "customerId" : "54321",
+        "productsOrdered" : {"1":1,"2":1,"3":1]
     },
     {
-        "customerId": null,
-        "orderDate": "2017-03-08",
-        "orderId": 4,
-        "orderNum": 1,
-        "productId": 5
+        "orderId" : 2,
+        "orderDate : {current date},
+        "customerId" : "12345",
+        "productsOrdered" : {"2":1,"3":1,"4":1]
     }
 ]
 ```
-
-Returns:
-
-```
-[
-    {
-        "customerId": 8,
-        "orderDate": "2017-03-23",
-        "orderId": 8,
-        "productsOrdered": {
-            "11": 1,
-            "3": 1,
-            "6": 2
-        }
-    }
-]
-```
-
-#### Get items and quantities in an order
+#### Get an order by id
 
 ```
-/api/order/orderItems={orderNum}
+/api/order/
 
-GET /api/order/orderItems={orderNum}
+GET /api/order/{orderId}
 Host: localhost:8080
 Auth: basic username:password
 Content-type: application/json
@@ -268,20 +265,14 @@ Accept: application/json
 
 Returns:
 
-[
     {
-        "customerId": 8,
-        "orderDate": "2017-03-23",
-        "orderId": 8,
-        "productsOrdered": {
-            "11": 1,
-            "3": 1,
-            "6": 2
-        }
+        "orderId" : 1,
+        "orderDate : {current date},
+        "customerId" : "54321",
+        "productsOrdered" : {"1":1,"2":1,"3":1]
     }
-]
 ```
-#### Add a single item to an order
+#### Update an order
 ```
 /api/order/{orderId}
 
@@ -291,14 +282,39 @@ Auth: basic username:password
 Content-type: application/json
 Accept: application/json
 
+curl -H "Content-Type: application/json" 
+     -X PUT 
+     -d ' {"orderId" : "0", "productsOrdered" : {"3":2,"6":3,"11":2} , "orderDate" : "2017-02-28T19:52:39Z", "customerId" : "8"}' 
+     thedoctor:tardis@localhost:8080/MobyStore/api/order/8
+
 Returns:
 
 {
-        "customerId": 1,
-        "orderDate": "2017-03-08",
-        "orderId": 2,
-        "orderNum": 3
+    "customerId": 8,
+    "orderDate": 1488311559000,
+    "orderId": 8,
+    "productsOrdered": {
+        "11": 2,
+        "3": 2,
+        "6": 3
     }
-
+}
 ```
 
+#### Delete an order
+```
+/api/order/{orderId}
+
+DELETE: /api/order/{orderId}
+Host: localhost:8080
+Auth: basic username:password
+Content-type: application/json
+Accept: application/json
+
+curl -H "Content-Type: application/json" 
+     -X DELETE 
+     thedoctor:tardis@localhost:8080/MobyStore/api/order/8
+
+Returns:
+
+ 200 OK

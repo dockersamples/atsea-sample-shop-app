@@ -23,35 +23,35 @@ CREATE TABLE product
 ALTER TABLE product
   OWNER TO gordonuser;
 
-CREATE TABLE customer
-(
-  customerid serial UNIQUE PRIMARY KEY,
-  address character varying(512) NOT NULL,
-  email character varying(128) NOT NULL,
-  name character varying(255) NOT NULL,
-  password character varying(255) NOT NULL,
-  phone character varying(32) NOT NULL,
-  username character varying(255) NOT NULL,
-  enabled boolean DEFAUTL true,
-  role character varying(20) DEFAULT 'USER'
-);
+-- CREATE TABLE customer
+-- (
+--   customerid serial UNIQUE PRIMARY KEY,
+--   address character varying(512) NOT NULL,
+--   email character varying(128) NOT NULL,
+--   name character varying(255) NOT NULL,
+--   password character varying(255) NOT NULL,
+--   phone character varying(32) NOT NULL,
+--   username character varying(255) NOT NULL,
+--   enabled boolean DEFAUTL true,
+--   role character varying(20) DEFAULT 'USER'
+-- );
 
 
-ALTER TABLE customer
-  OWNER TO gordonuser;
+-- ALTER TABLE customer
+--   OWNER TO gordonuser;
 
 
- CREATE TABLE order
- (
-   orderid bigint PRIMARY KEY,
-   orderdate date NOT NULL,
-   ordernum integer NOT NULL,
-   productid integer,
-   FOREIGN KEY (customerid) REFERENCES customer(customerid)
- );
+--  CREATE TABLE order
+--  (
+--    orderid bigint PRIMARY KEY,
+--    orderdate date NOT NULL,
+--    ordernum integer NOT NULL,
+--    productid integer,
+--    FOREIGN KEY (customerid) REFERENCES customer(customerid)
+--  );
 
- ALTER TABLE order
-   OWNER TO gordonuser;
+--  ALTER TABLE order
+--    OWNER TO gordonuser;
 
 
 -- add product data

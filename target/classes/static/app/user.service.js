@@ -31,7 +31,6 @@
         }
 
         function Create(user) {
-            console.log(user);
             return $http.post('/MobyStore/api/customer/', user).then(handleSuccess, handleError('Error creating user'));
         }
 
@@ -46,8 +45,8 @@
         // private functions
 
         function handleSuccess(res) {
-            res.data = {success: true};
-            return res.data;
+            res.success = "true";
+            return res;
         }
 
         function handleError(error) {

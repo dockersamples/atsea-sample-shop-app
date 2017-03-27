@@ -15,35 +15,35 @@
 
         return service;
 
-        function Login(username, password, callback) {
+        function Login(username, password, customerId, callback) {
 
             /* Dummy authentication for testing, uses $timeout to simulate api call
              ----------------------------------------------*/
-            $timeout(function () {
-                var response;
-                UserService.GetById(customerId)
-                    .then(function (user) {
-                        if (user !== null && user.password === password) {
-                            response = { success: true };
-                        } else {
-                            response = { success: false, message: 'Username or password is incorrect' };
-                        }
-                        callback(response);
-                    });
-            }, 1000);
+            // $timeout(function () {
+            //     var response;
+            //     UserService.GetByUsername(username)
+            //         .then(function (user) {
+            //             if (user !== null && user.password === password) {
+            //                 response = { success: true };
+            //             } else {
+            //                 response = { success: false, message: 'Username or password is incorrect' };
+            //             }
+            //             callback(response);
+            //         });
+            // }, 1000);
 
-            // /* Use this for real authentication
-            //  ----------------------------------------------*/
-            // $http.post('/api/authenticate', { username: username, password: password })
-            //    .success(function (response) {
-            //        callback(response);
-            //    });
+            /* Use this for real authentication
+             ----------------------------------------------*/
+            $http.get('/api/customer' + customerId)
+               .success(function (response) {
+                   callback(response);
+               });
 
         }
 
         function SetCredentials(username, password, customerid) {
-            var authdata = Base64.encode(username + ':' + password);
-            var id = Base64.encode(customerid);
+           var authdata = username + ':' + password;
+            var id = customerid;
 
             $rootScope.globals = {
                 currentUser: {

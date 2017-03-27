@@ -7,8 +7,10 @@
     <link href="css/registration.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css"/>
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
-   <script src="lib/js/angular.js"></script>
-
+    <script src="lib/js/angular.js"></script>
+    <script src="lib/js/jquery-3.1.1.min.js"></script>
+    <script src="lib/js/angular-route.min.js"></script>
+    <script src="lib/js/angular-cookies.min.js"></script>
     <script src="app/ngCart.js"></script>
 
 </head>
@@ -23,9 +25,7 @@
         </div>
     </div>
     
-    <script src="lib/js/jquery-3.1.1.min.js"></script>
-    <script src="lib/js/angular-route.min.js"></script>
-    <script src="lib/js/angular-cookies.min.js"></script>
+
 
     <script src="app.js"></script>
     <script src="app/authentication.service.js"></script>
@@ -37,8 +37,8 @@
     <!-- Fake user service for demo that uses local storage -->
     <!-- <script src="app/user.service.local-storage.js"></script> -->
 
-    <script src="home/home.controller.js"></script>
     <script src="login/login.controller.js"></script>
+    <script src="home/home.controller.js"></script>
     <script src="register/register.controller.js"></script>
   </div>
 <div>
@@ -98,7 +98,7 @@
     <script>
       var myApp = angular.module('myApp',['ngCart']);
       
-      myApp.controller ('myCtrl', ['$scope', '$http', 'ngCart', function($scope, $http, ngCart) {
+      myApp.controller ('myCtrl', ['$scope', '$rootScope', '$http', 'ngCart', function($scope, $rootScope, $http, ngCart) {
         ngCart.setTaxRate(7.5);
         ngCart.setShipping(2.99);    
       }]);

@@ -172,6 +172,18 @@ angular.module('ngCart', ['ngCart.directives'])
             
         };
 
+        this.toList = function() {
+            if (this.getItems().length === 0) return false;
+            var items = [];
+            angular.forEach(this.getItems(), function(item){
+                var itemid = item._id;
+                var quantity = item._quantity;
+                var listItem = {[itemid]:quantity};
+                items.push ({listItem});
+            });
+            console.log(itmes);
+            return items;
+        };
         this.toObject = function() {
 
             if (this.getItems().length === 0) return false;
@@ -509,17 +521,27 @@ angular.module('ngCart.fulfilment', [])
  }])
 
 .service('ngCart.fulfilment.http', ['$http', 'ngCart', function($http, ngCart){
-
+    
+        var customerId = 0;
+        var orderId = 0;
+        // if($rootScope.globals.orderId) {
+            // orderId = $rootScope.globals.orderId;
+        // } else {
+            orderId = 0;
+        // }
         this.checkout = function(settings){
             return $http.post(settings.url,
-                { data: ngCart.toObject(), options: settings.options});
+                { "orderId":orderId,
+                 "orderDate":Date.now(),
+                 "customerId":customerId,
+                "productsOrdered": ngCart.toList()});
         }
  }])
  .directive('catalogController',['$scope', 'ngCart', function($scope, ngCart) {
         $http.get('http://localhost:8080/MobyStore/api/product/', config).then(function(data){
             console.log(data);
         }, function(){
-            console.log('no products at http://localhost:8080/MobyStore/api/product/')});
+            console.log('no products at http://localhost:8080/MobyStore/api/order/')});
     }])
 
 .service('ngCart.fulfilment.paypal', ['$http', 'ngCart', function($http, ngCart){

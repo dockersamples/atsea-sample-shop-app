@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+  database:
+    build: 
+       context: ./database
+    image: mobystore_db
+    environment:
+      POSTGRES_USER: gordonuser
+      POSTGRES_PASSWORD: gordonpassword
+      POSTGRES_DB: mobystore
+    ports:
+      - "5432:5432" 
+    networks:
+      - back-tier
+    #restart: always
+
+  appserver:
+    build:
+       context: .
+       dockerfile: Dockerfile.app
+    image: mobystore_app
+    # mount point for application in tomcat
+    links:
+      - database:mobystore_db
+    # open ports for tomcat and remote debugging
+    ports:
+      - "8080:8080" 
+    networks:
+      - front-tier
+      - back-tier
+    #restart: always
+
+networks:
+  front-tier:
+  back-tier:

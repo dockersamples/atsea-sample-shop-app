@@ -318,3 +318,26 @@ curl -H "Content-Type: application/json"
 Returns:
 
  200 OK
+
+ #### Database Healthcheck
+
+ ```
+/api/HEALTHCHECK/
+
+POST: /api/HEALTHCHECK/
+Host: localhost:8080
+Auth: basic username:password
+Content-type: application/json
+Accept: application/json
+
+curl -H "Content-Type: application/json" 
+     -X GET 
+     thedoctor:tardis@localhost:8080/MobyStore/api/HEALTHCHECK/
+
+Returns:
+
+{
+    "status":"2017-03-27 03:01"
+}
+
+ ```

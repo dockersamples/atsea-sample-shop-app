@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.docker.mobystore.model.Product;
 import com.docker.mobystore.service.ProductService;
@@ -40,6 +42,9 @@ public class RestApiController {
 	OrderService orderService;
 	@Autowired
 	CustomerService customerService;
+	@Autowired
+	JdbcTemplate jdbcTemplate;
+
 	
 	// -------------------------------------------------------------------
 	//                   Product methods
@@ -53,7 +58,7 @@ public class RestApiController {
 	public ResponseEntity<List<Product>> listAllProducts() {
 		List<Product> products = productService.findAllProducts();
 		if (products.isEmpty()) {
-			return new ResponseEntity(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<List<Product>>(HttpStatus.NO_CONTENT);
 			// You many decide to return HttpStatus.NOT_FOUND
 		}
 		return new ResponseEntity<List<Product>>(products, HttpStatus.OK);
@@ -127,7 +132,7 @@ public class RestApiController {
 	public ResponseEntity<List<Order>> listAllOrderss() {
 		List<Order> order = orderService.findAllOrders();
 		if (order.isEmpty()) {
-			return new ResponseEntity(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<List<Order>>(HttpStatus.NO_CONTENT);
 			// You many decide to return HttpStatus.NOT_FOUND
 		}
 		return new ResponseEntity<List<Order>>(order, HttpStatus.OK);
@@ -147,20 +152,46 @@ public class RestApiController {
 		}
 		return new ResponseEntity<Order>(order, HttpStatus.OK);
 	}
-	
+
+	// ---------------------Update an order-------------------------------
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = "/order/{orderId}", method = RequestMethod.PUT)
+	public ResponseEntity<?> updateOrder(@PathVariable("orderId") long orderId, @RequestBody Order order) {
+		logger.info("Updating order with id {}", orderId);
+
+		Order currentOrder = orderService.findById(orderId);
+
+		if (currentOrder == null) {
+			logger.error("Unable to update. Order with id {} not found.", orderId);
+			return new ResponseEntity(new CustomErrorType("Unable to upate. Order with id " + orderId + " not found."),
+					HttpStatus.NOT_FOUND);
+		}
+
+		currentOrder.setCustomerId(order.getCustomerId());
+		currentOrder.setOrderDate(order.getOrderDate());
+		currentOrder.setProductsOrdered(order.getProductsOrdered());
+		orderService.updateOrder(currentOrder);
+		
+		JSONObject orderInfo = new JSONObject();
+		orderInfo.put("orderId", currentOrder.getOrderId());
+		orderInfo.put("customerId", currentOrder.getCustomerId());
+		orderInfo.put("orderDate", currentOrder.getOrderDate());
+		orderInfo.put("productsOrdered", currentOrder.getProductsOrdered());
+		return new ResponseEntity<JSONObject>(orderInfo, HttpStatus.OK);
+	}
 	
 	// -------------------------------------------------------------------
 	//                   Customer methods
 	//--------------------------------------------------------------------
 	
-	// -------------------Retrieve All Customer---------------------------------------------
+	// -------------------Retrieve All Customers---------------------------------------------
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/customer/", method = RequestMethod.GET)
 	public ResponseEntity<List<Customer>> listAllUsers() {
 		List<Customer> customer = customerService.findAllCustomers();
 		if (customer.isEmpty()) {
-			return new ResponseEntity(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<List<Customer>>(HttpStatus.NO_CONTENT);
 			// You many decide to return HttpStatus.NOT_FOUND
 		}
 		return new ResponseEntity<List<Customer>>(customer, HttpStatus.OK);
@@ -181,21 +212,36 @@ public class RestApiController {
 		return new ResponseEntity<Customer>(customer, HttpStatus.OK);
 	}
 	
+	// -------------------Retrieve Single Customer by UserName------------------------------------------
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@RequestMapping(value = "/customer/{userName}", method = RequestMethod.GET)
+	public ResponseEntity<?> getCustomerByUserName(@PathVariable("userName") String userName) {
+		logger.info("Fetching Customer with username {}", userName);
+		Customer customer = customerService.findByUserName(userName);
+		if (customer == null) {
+			logger.error("Customer with username {} not found.", userName);
+			return new ResponseEntity(new CustomErrorType("Customer with username " + userName 
+					+ " not found"), HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Customer>(customer, HttpStatus.OK);
+	}
+
 	// -------------------Retrieve Single Customer by Name------------------------------------------
 
-//	@SuppressWarnings({ "unchecked", "rawtypes" })
-//	@RequestMapping(value = "/customer/{customerId}", method = RequestMethod.GET)
-//	public ResponseEntity<?> getCustomer(@PathVariable("customerId") long customerId) {
-//		logger.info("Fetching Cistp,er with id {}", customerId);
-//		Customer customer = customerService.findById(customerId);
-//		if (customer == null) {
-//			logger.error("Customer with id {} not found.", customerId);
-//			return new ResponseEntity(new CustomErrorType("Customer with id " + customerId 
-//					+ " not found"), HttpStatus.NOT_FOUND);
-//		}
-//		return new ResponseEntity<Customer>(customer, HttpStatus.OK);
-//	}
-
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@RequestMapping(value = "/customer/{name}", method = RequestMethod.GET)
+	public ResponseEntity<?> getCustomerByName(@PathVariable("name") String name) {
+		logger.info("Fetching Customer with name {}", name);
+		Customer customer = customerService.findByName(name);
+		if (customer == null) {
+			logger.error("Customer with name {} not found.", name);
+			return new ResponseEntity(new CustomErrorType("Customer with name " + name 
+					+ " not found"), HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Customer>(customer, HttpStatus.OK);
+	}
+	
 	// -------------------Create a Customer-------------------------------------------
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -219,8 +265,7 @@ public class RestApiController {
 		customerInfo.put("customerId", currentCustomerId);
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("/api/customer/{customerId").buildAndExpand(customer.getCustomerId()).toUri());
-		//return new ResponseEntity<Customer>(headers, HttpStatus.CREATED);
+		headers.setLocation(ucBuilder.path("/api/customer/{customerId").buildAndExpand(customer.getCustomerId()).toUri());;
 		return new ResponseEntity<JSONObject>(customerInfo, HttpStatus.CREATED);
 	}
 
@@ -245,6 +290,8 @@ public class RestApiController {
 		currentCustomer.setPhone(customer.getPhone());
 		currentCustomer.setEmail(customer.getEmail());
 		currentCustomer.setPassword(customer.getPassword());
+		currentCustomer.setRole(customer.getRole());
+		currentCustomer.setEnabled(customer.getEnabled());
 
 		customerService.updateCustomer(currentCustomer);
 		return new ResponseEntity<Customer>(currentCustomer, HttpStatus.OK);
@@ -277,22 +324,19 @@ public class RestApiController {
 		return new ResponseEntity<Customer>(HttpStatus.NO_CONTENT);
 	}
 	
-//	@SuppressWarnings({ "unchecked", "rawtypes" })
-//	@RequestMapping(value = "/login/", method = RequestMethod.POST)
-//	public ResponseEntity<?> loginCustomer(@RequestParam("userName") String userName,
-//			@RequestParam("password") String password) {
-//		logger.info("Logging in customer with username {}", userName);
-//		
-//		Boolean found = customerService.findByLogin(userName, password);
-//		if (found == false) {
-//			logger.error("Password or customer not found {}", userName);
-//			return new ResponseEntity(new CustomErrorType("User name or password not found."), 
-//					HttpStatus.UNAUTHORIZED);
-//		}
-//		else {
-//			return new ResponseEntity<Customer>(HttpStatus.ACCEPTED);
-//		}				
-//	}
+	// ---------------------Healthcheck -----------------------------------
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value="/HEALTHCHECK/", method = RequestMethod.GET)
+    public ResponseEntity<?> healthCheck() {
+    	logger.info("Performing healthcheck");
+    	
+    		String sql = "SELECT to_char(current_timestamp, 'YYYY-MM-DD HH24:MI')";
+    		String status = jdbcTemplate.queryForObject(sql, String.class);
+    		JSONObject healthcheck = new JSONObject();
+    		healthcheck.put("status", status);
+    	    	
+		return new ResponseEntity<JSONObject>(healthcheck, HttpStatus.OK);
+    }
 	
 	// ----------------Page controllers -----------------------------------
 	@RequestMapping(value="/login/{message}", method = RequestMethod.GET)

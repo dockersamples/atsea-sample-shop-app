@@ -8,6 +8,8 @@ public interface CustomerService {
 
 	Customer findById(Long customerId);
 
+	Customer findByUserName(String name);
+	
 	Customer findByName(String name);
 	
 	Customer createCustomer(Customer customer);
@@ -23,9 +25,4 @@ public interface CustomerService {
 	List<Customer> findAllCustomers();
 
 	boolean customerExist(Customer customer);
-	
-//	boolean findByLogin(String userName, String password);
-	
-//	boolean findByUserName(String userName);
-
 }

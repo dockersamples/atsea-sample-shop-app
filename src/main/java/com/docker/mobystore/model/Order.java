@@ -30,10 +30,6 @@ public class Order implements Serializable {
         
     @Column(name = "customerid")
     private Long customerId;
-
-//    @ElementCollection
-//    @Column(name = "productsordered")
-//    private Set<String> productsOrdered = new HashSet<String>();
     
     @ElementCollection
     @MapKeyColumn(name="productid")
@@ -63,7 +59,7 @@ public class Order implements Serializable {
 		return customerId;
 	}
 	
-    public void setCustomer(Long customerId) {
+    public void setCustomerId(Long customerId) {
         this.customerId = customerId;
     }
     

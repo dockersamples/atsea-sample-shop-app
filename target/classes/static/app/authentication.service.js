@@ -21,7 +21,7 @@
              ----------------------------------------------*/
             $timeout(function () {
                 var response;
-                UserService.GetById(customerId)
+                UserService.GetByUsername(username)
                     .then(function (user) {
                         if (user !== null && user.password === password) {
                             response = { success: true };

@@ -21,10 +21,14 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerRepository.findOne(customerId);
 	}
 
+	public Customer findByUserName(String name) {
+		return customerRepository.findByUserName(name);
+	}
+
 	public Customer findByName(String name) {
 		return customerRepository.findByName(name);
 	}
-
+	
 	public Customer createCustomer(Customer customer) {		
 		customer = customerRepository.save(customer);
 		customerRepository.flush();
@@ -54,26 +58,4 @@ public class CustomerServiceImpl implements CustomerService {
 	public void deleteCustomerById(Long customerId) {
 		customerRepository.delete(customerId);		
 	}
-
-
-
-//	public boolean findByLogin(String userName, String password) {
-//		Customer customer = customerRepository.findByUserName(userName);
-//		
-//		if (customer != null && customer.getPassword().equals(password)) {
-//			return true;
-//		}
-//		
-//		return false;
-//	}
-//	
-//	public boolean findByUserName(String userName) {
-//		Customer customer = customerRepository.findByUserName(userName);
-//		
-//		if(customer != null){
-//			return true;
-//		}
-//		
-//		return false;
-//	}
 }

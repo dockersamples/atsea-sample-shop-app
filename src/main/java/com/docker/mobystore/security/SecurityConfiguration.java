@@ -35,10 +35,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http.authorizeRequests()
-		      .antMatchers(HttpMethod.POST, "/order/**").authenticated()
-		      .antMatchers(HttpMethod.DELETE, "/order/**").authenticated()
-		      .antMatchers(HttpMethod.GET, "/order/**").authenticated()
-		      .antMatchers(HttpMethod.GET, "/customer/**").authenticated()
+		      .antMatchers(HttpMethod.POST, "/purchase/**").authenticated()
+		      .antMatchers(HttpMethod.DELETE, "/admin/**").authenticated()
+//		      .antMatchers(HttpMethod.GET, "/order/**").authenticated()
+//		      .antMatchers(HttpMethod.GET, "/customer/**").authenticated()
 			  .anyRequest().permitAll()
 			.and().httpBasic()
 			.and().csrf().disable();

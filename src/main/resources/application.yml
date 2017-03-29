@@ -23,7 +23,7 @@ spring:
   profiles: postgres, default
 datasource:
   mobystore:
-    url: jdbc:postgresql://localhost:5432/mobystore
+    url: jdbc:postgresql://database:5432/mobystore
     username: gordonuser
     password: gordonpassword
     driverClassName: org.postgresql.Driver
@@ -36,10 +36,10 @@ datasource:
       dialect: org.hibernate.dialect.PostgreSQLDialect
 ---
 spring:
-  profiles: prod
+  profiles: mysql
 datasource:
   sampleapp:
-    url: jdbc:mysql://localhost:3306/websystique
+    url: jdbc:mysql://database:3306/mobystore
     username: gordonuser
     password: gordonpassword
     driverClassName: com.mysql.jdbc.Driver

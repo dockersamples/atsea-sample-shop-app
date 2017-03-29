@@ -4,7 +4,7 @@ server:
   contextPath: /MobyStore
 ---
 spring:
-  profiles: local, default
+  profiles: dev
 datasource:
   mobystore:
     url: jdbc:h2:~/test
@@ -20,10 +20,10 @@ datasource:
       dialect: org.hibernate.dialect.H2Dialect
 ---
 spring:
-  profiles: prod
+  profiles: postgres, default
 datasource:
   mobystore:
-    url: jdbc:postgresql://mobystore_db:5432/mobystore
+    url: jdbc:postgresql://localhost:5432/mobystore
     username: gordonuser
     password: gordonpassword
     driverClassName: org.postgresql.Driver
@@ -34,3 +34,19 @@ datasource:
       show_sql: true
       format_sql: true
       dialect: org.hibernate.dialect.PostgreSQLDialect
+---
+spring:
+  profiles: prod
+datasource:
+  sampleapp:
+    url: jdbc:mysql://localhost:3306/websystique
+    username: gordonuser
+    password: gordonpassword
+    driverClassName: com.mysql.jdbc.Driver
+    defaultSchema:
+    maxPoolSize: 20
+    hibernate:
+      hbm2ddl.method: update
+      show_sql: true
+      format_sql: true
+      dialect: org.hibernate.dialect.MySQLDialect

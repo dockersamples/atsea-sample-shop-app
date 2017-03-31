@@ -1,4 +1,4 @@
-package com.docker.mobystore.configuration;
+package com.docker.mobyartshop.configuration;
 
 import java.util.Properties;
 
@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "com.docker.mobystore.repositories",
+@EnableJpaRepositories(basePackages = "com.docker.mobyartshop.repositories",
 		entityManagerFactoryRef = "entityManagerFactory",
 		transactionManagerRef = "transactionManager")
 @EnableTransactionManagement
@@ -36,7 +36,7 @@ public class JpaConfiguration {
 	@Autowired
 	private Environment environment;
 
-	@Value("${datasource.mobystore.maxPoolSize:10}")
+	@Value("${datasource.mobyartshop.maxPoolSize:10}")
 	private int maxPoolSize;
 
 	/*
@@ -46,7 +46,7 @@ public class JpaConfiguration {
 	 */
 	@Bean
 	@Primary
-	@ConfigurationProperties(prefix = "datasource.mobystore")
+	@ConfigurationProperties(prefix = "datasource.mobyartshop")
 	public DataSourceProperties dataSourceProperties(){
 		return new DataSourceProperties();
 	}
@@ -76,7 +76,7 @@ public class JpaConfiguration {
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws NamingException {
 		LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
 		factoryBean.setDataSource(dataSource());
-		factoryBean.setPackagesToScan(new String[] { "com.docker.mobystore.model" });
+		factoryBean.setPackagesToScan(new String[] { "com.docker.mobyartshop.model" });
 		factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
 		factoryBean.setJpaProperties(jpaProperties());
 		return factoryBean;
@@ -96,12 +96,12 @@ public class JpaConfiguration {
 	 */
 	private Properties jpaProperties() {
 		Properties properties = new Properties();
-		properties.put("hibernate.dialect", environment.getRequiredProperty("datasource.mobystore.hibernate.dialect"));
-		properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("datasource.mobystore.hibernate.hbm2ddl.method"));
-		properties.put("hibernate.show_sql", environment.getRequiredProperty("datasource.mobystore.hibernate.show_sql"));
-		properties.put("hibernate.format_sql", environment.getRequiredProperty("datasource.mobystore.hibernate.format_sql"));
-		if(StringUtils.isNotEmpty(environment.getRequiredProperty("datasource.mobystore.defaultSchema"))){
-			properties.put("hibernate.default_schema", environment.getRequiredProperty("datasource.mobystore.defaultSchema"));
+		properties.put("hibernate.dialect", environment.getRequiredProperty("datasource.mobyartshop.hibernate.dialect"));
+		properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("datasource.mobyartshop.hibernate.hbm2ddl.method"));
+		properties.put("hibernate.show_sql", environment.getRequiredProperty("datasource.mobyartshop.hibernate.show_sql"));
+		properties.put("hibernate.format_sql", environment.getRequiredProperty("datasource.mobyartshop.hibernate.format_sql"));
+		if(StringUtils.isNotEmpty(environment.getRequiredProperty("datasource.mobyartshop.defaultSchema"))){
+			properties.put("hibernate.default_schema", environment.getRequiredProperty("datasource.mobyartshop.defaultSchema"));
 		}
 		return properties;
 	}

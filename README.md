@@ -3,7 +3,7 @@
 ## Current build and run (this will be improved)
 ```bash
 mvn package
-cp -f target/MobyStore-0.0.1-SNAPSHOT.jar app/
+cp -f target/mobyartshop-0.0.1-SNAPSHOT.jar app/
 docker-compose build
 docker-compose up
 ```
@@ -52,6 +52,23 @@ A page for each feature will be needed in the client.
 * Jmeter load generation
 * NFS store for static content
 
+## Configuration
+
+### Static content
+Make a directory for static content called 'static' in the same directory as the appication (MobyArtShop-0.0.1-SNAPSHOT.jar)
+
+```
+Application
+|- MobyArtShop-0.0.1-SNAPSHOT.jar
+|- static/
+   |- client files
+   |- images
+   |_ ...
+
+```
+
+
+
 ## REST requests
 
 ### Products
@@ -59,9 +76,9 @@ A page for each feature will be needed in the client.
 #### Get all products
 
 ```
-/MobyStore/api/product/
+/mobyartshop/api/product/
 
-GET /MobyStore/api/product/
+GET /mobyartshop/api/product/
 
 Host: localhost:8080
 Auth: basic username:password
@@ -107,9 +124,9 @@ Returns:
 #### Get single product (product detail)
 
 ```
-/MobyStore/api/product/{id}
+/mobyartshop/api/product/{id}
 
-GET /MobyStore/api/product/{id}
+GET /mobyartshop/api/product/{id}
 Host: localhost:8080
 Auth: basic username:password
 Content-type: application/json
@@ -285,7 +302,7 @@ Accept: application/json
 curl -H "Content-Type: application/json" 
      -X PUT 
      -d ' {"orderId" : "0", "productsOrdered" : {"3":2,"6":3,"11":2} , "orderDate" : "2017-02-28T19:52:39Z", "customerId" : "8"}' 
-     thedoctor:tardis@localhost:8080/MobyStore/api/order/8
+     thedoctor:tardis@localhost:8080/mobyartshop/api/order/8
 
 Returns:
 
@@ -313,7 +330,7 @@ Accept: application/json
 
 curl -H "Content-Type: application/json" 
      -X DELETE 
-     thedoctor:tardis@localhost:8080/MobyStore/api/order/8
+     thedoctor:tardis@localhost:8080/mobyartshop/api/order/8
 
 Returns:
 
@@ -332,7 +349,7 @@ Accept: application/json
 
 curl -H "Content-Type: application/json" 
      -X GET 
-     thedoctor:tardis@localhost:8080/MobyStore/api/HEALTHCHECK/
+     thedoctor:tardis@localhost:8080/mobyartshop/api/HEALTHCHECK/
 
 Returns:
 

@@ -1,4 +1,4 @@
-package com.docker.mobystore.util;
+package com.docker.mobyartshop.util;
 
 public class CustomErrorType {
 	

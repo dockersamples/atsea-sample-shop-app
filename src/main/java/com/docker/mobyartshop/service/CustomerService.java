@@ -1,8 +1,8 @@
-package com.docker.mobystore.service;
+package com.docker.mobyartshop.service;
 
 import java.util.List;
 
-import com.docker.mobystore.model.Customer;
+import com.docker.mobyartshop.model.Customer;
 
 public interface CustomerService {
 

@@ -1,4 +1,4 @@
-package com.docker.mobystore.model;
+package com.docker.mobyartshop.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
 

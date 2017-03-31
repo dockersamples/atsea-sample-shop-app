@@ -1,12 +1,12 @@
 ---
 server:
   port: 8080
-  contextPath: /MobyStore
+  contextPath: /mobyartshop
 ---
 spring:
-  profiles: dev
+  profiles: local, default
 datasource:
-  mobystore:
+  mobyartshop:
     url: jdbc:h2:~/test
     username: SA
     password:
@@ -20,9 +20,9 @@ datasource:
       dialect: org.hibernate.dialect.H2Dialect
 ---
 spring:
-  profiles: postgres, default
+  profiles: postgres
 datasource:
-  mobystore:
+  mobyartshop:
     url: jdbc:postgresql://database:5432/mobystore
     username: gordonuser
     password: gordonpassword
@@ -38,8 +38,8 @@ datasource:
 spring:
   profiles: mysql
 datasource:
-  sampleapp:
-    url: jdbc:mysql://database:3306/mobystore
+  mobyartshop:
+    url: jdbc:mysql://localhost:3306/mobystore
     username: gordonuser
     password: gordonpassword
     driverClassName: com.mysql.jdbc.Driver

@@ -7,10 +7,10 @@
     <version>1.4.3.RELEASE</version>
   </parent>
 
-  <groupId>com.docker.mobystore</groupId>
-  <artifactId>MobyStore</artifactId>
+  <groupId>com.docker.mobyartshop</groupId>
+  <artifactId>MobyArtShop</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>mobystore</name>
+  <name>mobyartshop</name>
   
   <properties>
     <java.version>1.8</java.version>
@@ -83,6 +83,23 @@
 		<groupId>com.google.code.gson</groupId>
 		<artifactId>gson</artifactId>
 		<scope>test</scope>
+	</dependency>
+	<!-- This is for mocking the service -->
+	<dependency>
+    	<groupId>org.mockito</groupId>
+    	<artifactId>mockito-all</artifactId>
+    	<version>1.9.5</version>
+    	<scope>test</scope>
+	</dependency>
+	<dependency>
+    	<groupId>org.hamcrest</groupId>
+    	<artifactId>hamcrest-library</artifactId>
+    	<scope>test</scope>
+	</dependency>
+	<dependency>
+    	<groupId>io.rest-assured</groupId>
+    	<artifactId>rest-assured</artifactId>
+    	<version>3.0.2</version>
 	</dependency>
   </dependencies>
   

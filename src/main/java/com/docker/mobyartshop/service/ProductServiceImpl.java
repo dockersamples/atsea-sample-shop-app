@@ -1,12 +1,13 @@
-package com.docker.mobystore.service;
+package com.docker.mobyartshop.service;
 
 import java.util.List;
 
-import com.docker.mobystore.model.Product;
-import com.docker.mobystore.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.docker.mobyartshop.model.Product;
+import com.docker.mobyartshop.repositories.ProductRepository;
 
 @Service("productService")
 @Transactional

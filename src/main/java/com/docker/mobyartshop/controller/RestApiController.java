@@ -1,4 +1,4 @@
-package com.docker.mobystore.controller;
+package com.docker.mobyartshop.controller;
 
 import java.util.List;
 
@@ -19,16 +19,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import com.docker.mobyartshop.model.Customer;
+import com.docker.mobyartshop.model.Order;
+import com.docker.mobyartshop.model.Product;
+import com.docker.mobyartshop.service.CustomerService;
+import com.docker.mobyartshop.service.OrderService;
+import com.docker.mobyartshop.service.ProductService;
+import com.docker.mobyartshop.util.CustomErrorType;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.docker.mobystore.model.Product;
-import com.docker.mobystore.service.ProductService;
-import com.docker.mobystore.model.Order;
-import com.docker.mobystore.service.OrderService;
-import com.docker.mobystore.model.Customer;
-import com.docker.mobystore.service.CustomerService;
-import com.docker.mobystore.util.CustomErrorType;
 
 @RestController
 @RequestMapping("/api")
@@ -186,13 +187,11 @@ public class RestApiController {
 	
 	// -------------------Retrieve All Customers---------------------------------------------
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/customer/", method = RequestMethod.GET)
 	public ResponseEntity<List<Customer>> listAllUsers() {
 		List<Customer> customer = customerService.findAllCustomers();
 		if (customer.isEmpty()) {
 			return new ResponseEntity<List<Customer>>(HttpStatus.NO_CONTENT);
-			// You many decide to return HttpStatus.NOT_FOUND
 		}
 		return new ResponseEntity<List<Customer>>(customer, HttpStatus.OK);
 	}
@@ -202,7 +201,7 @@ public class RestApiController {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value = "/customer/{customerId}", method = RequestMethod.GET)
 	public ResponseEntity<?> getCustomer(@PathVariable("customerId") long customerId) {
-		logger.info("Fetching Cistp,er with id {}", customerId);
+		logger.info("Fetching Customer with id {}", customerId);
 		Customer customer = customerService.findById(customerId);
 		if (customer == null) {
 			logger.error("Customer with id {} not found.", customerId);
@@ -215,7 +214,7 @@ public class RestApiController {
 	// -------------------Retrieve Single Customer by UserName------------------------------------------
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@RequestMapping(value = "/customer/{userName}", method = RequestMethod.GET)
+	@RequestMapping(value = "/customer/username={userName}", method = RequestMethod.GET)
 	public ResponseEntity<?> getCustomerByUserName(@PathVariable("userName") String userName) {
 		logger.info("Fetching Customer with username {}", userName);
 		Customer customer = customerService.findByUserName(userName);
@@ -230,7 +229,7 @@ public class RestApiController {
 	// -------------------Retrieve Single Customer by Name------------------------------------------
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@RequestMapping(value = "/customer/{name}", method = RequestMethod.GET)
+	@RequestMapping(value = "/customer/name={name}", method = RequestMethod.GET)
 	public ResponseEntity<?> getCustomerByName(@PathVariable("name") String name) {
 		logger.info("Fetching Customer with name {}", name);
 		Customer customer = customerService.findByName(name);

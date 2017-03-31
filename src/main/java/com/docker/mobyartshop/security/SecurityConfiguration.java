@@ -1,4 +1,4 @@
-package com.docker.mobystore.security;
+package com.docker.mobyartshop.security;
 
 import javax.sql.DataSource;
 

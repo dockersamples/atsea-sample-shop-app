@@ -67,6 +67,8 @@ Application
 
 ```
 
+the URL for the content is http://localhost:8080/mobyartshop/*
+
 
 
 ## REST requests

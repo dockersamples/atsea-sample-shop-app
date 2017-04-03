@@ -1,6 +1,6 @@
 FROM java:8-jdk-alpine
 
-RUN mkdir -p /app/ &&
+RUN mkdir -p /app/ && \
     mkdir -p /app/static
 
 COPY MobyStore-0.0.1-SNAPSHOT.jar /app

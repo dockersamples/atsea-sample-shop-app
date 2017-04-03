@@ -17,7 +17,8 @@ services:
 
   appserver:
     build:
-       context: ./app
+       context: .
+       dockerfile: app/Dockerfile
     image: mobystore_app
     # mount point for application in tomcat
     links:

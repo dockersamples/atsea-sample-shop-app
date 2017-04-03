@@ -2,11 +2,13 @@
 
 ## Current build and run (this will be improved)
 ```bash
-mvn package
-cp -f target/mobyartshop-0.0.1-SNAPSHOT.jar app/
+docker run -ti -v $(pwd):/mobyartshop -w /mobyartshop maven:alpine mvn package -DskipTests
 docker-compose build
 docker-compose up
 ```
+
+(Unfortunately the above will most likely not work on Linux due to root bind
+mount, you will need to get craftier with user remapping if executing there)
 
 ## The demo application is a store application with the following features:
 

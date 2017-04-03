@@ -196,7 +196,7 @@ customerId
 GET /api/customer/{id}
 
 Host: localhost:8080
-Auth: basic username:password
+Auth: 
 Content-type: application/json
 Accept: application/json
 
@@ -209,6 +209,126 @@ Accept: application/json
     "username" : "sallyv",
     "password" : "sallypassword"
 }
+```
+
+### Get customer by name
+```
+/api/customer/name={name}
+
+GET /api/customer/name={name}
+
+Host: localhost:8080
+Auth: 
+Content-type: application/json
+Accept: application/json
+```
+
+Returns:
+```
+{
+    "customerId":9,
+    "name":"Space Goat",
+    "address":"1800 Nebula Rd",
+    "email":"spacegoatlabel@gmail.com",
+    "phone":"222-333-4444",
+    "username":"spacegoat",
+    "password":"spacegoatpass",
+    "enabled":true,
+    "role":"USER"
+}
+```
+
+### Get customer by username
+```
+/api/customer/name={name}
+
+GET /api/customer/username={username}
+
+Host: localhost:8080
+Auth: 
+Content-type: application/json
+Accept: application/json
+```
+
+Returns:
+```
+{
+    "customerId":9,
+    "name":"Space Goat",
+    "address":"1800 Nebula Rd",
+    "email":"spacegoatlabel@gmail.com",
+    "phone":"222-333-4444",
+    "username":"spacegoat",
+    "password":"spacegoatpass",
+    "enabled":true,
+    "role":"USER"
+}
+```
+
+### Update Customer
+```
+/api/customer/{customerId}
+
+PUT /api/customer/{customerId}
+Host: localhost:8080
+Auth: 
+Content-type: application/json
+Accept: application/json
+
+{
+    "customerId" : 0,
+    "name"       : "Sally Vallery",
+    "address"    : "my new address",
+    "email"      : "sally@example.com".
+    "phone"      : "phone as string"
+    "username"   : "sallyv",
+    "password"   : "sallynewpassword",
+    "enabled"    : "true",
+    "role"       : "USER"
+}
+
+```
+
+Returns:
+```
+
+OK 200
+```
+
+### Delete a Customer
+```
+/api/customer/{customerId}
+
+DELETE /api/customer/{customerId}
+Host: localhost:8080
+Auth: 
+Content-type: application/json
+Accept: 
+
+```
+
+Returns:
+```
+
+OK 200
+```
+
+### Delete all Customers
+```
+/api/customer/
+
+DELETE /api/customer/
+Host: localhost:8080
+Auth: 
+Content-type: application/json
+Accept: 
+
+```
+
+Returns:
+```
+
+OK 200
 ```
 
 ### Order requests

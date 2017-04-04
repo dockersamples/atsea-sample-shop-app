@@ -13,7 +13,7 @@ const Cart  = ({ products, total, onCheckoutClicked }) => {
       />
     )
   ) : (
-    <em>Please add some products to cart.</em>
+    <em>Please add some products to the cart.</em>
   )
 
   return (

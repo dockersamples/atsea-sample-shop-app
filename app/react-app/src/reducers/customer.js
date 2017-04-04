@@ -1,5 +1,6 @@
 import {
-  CREATE_CUSTOMER 
+  CREATE_CUSTOMER,
+  LOGIN_CUSTOMER
 } from '../constants/ActionTypes'
 
 
@@ -18,7 +19,17 @@ const customer = (state = initialState, action) => {
         return {
         ...state,
         customerId: ''
-        }
+    }
+    case `${LOGIN_CUSTOMER}_ACK`:{
+        console.log('in login customer ack')
+        console.log(action.payload)
+        return state
+    }
+    case `${LOGIN_CUSTOMER}_ERR`:{
+        console.log('in login customer err')
+        console.log(action.payload)
+        return state
+    }
     default:
       return state
   }

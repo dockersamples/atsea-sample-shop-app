@@ -1,3 +1,4 @@
+const request = require('superagent-promise')(require('superagent'), Promise)
 import shop from '../api/shop'
 import * as types from '../constants/ActionTypes'
 
@@ -5,6 +6,23 @@ const receiveProducts = products => ({
   type: types.RECEIVE_PRODUCTS,
   products: products
 })
+
+const BASE_URL = '/mobyartshop/api'
+
+export const fetchAllItems = () => (dispatch) => {
+  let dispatchObj = {
+    type: types.ITEMS_REQUEST,
+    payload: {
+      promise:
+        request
+          .get(`${BASE_URL}/product/`)
+          .accept('application/json')
+          .end()
+          .then((res) => res.body)
+    },
+  }
+  return dispatch(dispatchObj)
+};
 
 export const getAllProducts = () => dispatch => {
   shop.getProducts(products => {

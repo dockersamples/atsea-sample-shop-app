@@ -6,7 +6,7 @@ import { createLogger } from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import promiseMiddleware from 'redux-promise-middleware'
 import reducer from './reducers'
-import { getAllProducts } from './actions'
+import { getAllProducts, fetchAllItems } from './actions'
 import App from './containers/App'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
@@ -27,6 +27,7 @@ const store = createStore(
 )
 
 store.dispatch(getAllProducts())
+store.dispatch(fetchAllItems())
 
 render(
   <Provider store={store}>

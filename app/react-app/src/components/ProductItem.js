@@ -4,7 +4,7 @@ import Product from './Product'
 const ProductItem = ({ product, onAddToCartClicked }) => (
   <div style={{ marginBottom: 20 }}>
     <Product
-      title={product.title}
+      name={product.name}
       price={product.price} />
     <button
       onClick={onAddToCartClicked} > 
@@ -15,7 +15,7 @@ const ProductItem = ({ product, onAddToCartClicked }) => (
 
 ProductItem.propTypes = {
   product: PropTypes.shape({
-    title: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
   }).isRequired,
   onAddToCartClicked: PropTypes.func.isRequired

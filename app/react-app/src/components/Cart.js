@@ -6,10 +6,10 @@ const Cart  = ({ products, total, onCheckoutClicked }) => {
   const nodes = hasProducts ? (
     products.map(product =>
       <Product
-        title={product.title}
+        name={product.name}
         price={product.price}
         quantity={product.quantity}
-        key={product.id}
+        key={product.productId}
       />
     )
   ) : (

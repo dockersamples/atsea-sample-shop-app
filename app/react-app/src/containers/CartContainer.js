@@ -13,8 +13,8 @@ const CartContainer = ({ products, total, checkout }) => (
 
 CartContainer.propTypes = {
   products: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
+    productId: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     quantity: PropTypes.number.isRequired
   })).isRequired,

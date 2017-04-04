@@ -9,17 +9,17 @@ const ProductsContainer = ({ products, addToCart }) => (
   <ProductsList title="Products">
     {products.map(product =>
       <ProductItem
-        key={product.id}
+        key={product.productId}
         product={product}
-        onAddToCartClicked={() => addToCart(product.id)} />
+        onAddToCartClicked={() => addToCart(product.productId)} />
     )}
   </ProductsList>
 )
 
 ProductsContainer.propTypes = {
   products: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
+    productId: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
   })).isRequired,
   addToCart: PropTypes.func.isRequired

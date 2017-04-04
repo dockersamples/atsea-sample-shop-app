@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { RECEIVE_PRODUCTS, ADD_TO_CART } from '../constants/ActionTypes'
+import { ITEMS_REQUEST, ADD_TO_CART } from '../constants/ActionTypes'
 
 const products = (state, action) => {
   switch (action.type) {
@@ -10,32 +10,25 @@ const products = (state, action) => {
   }
 }
 
-const byId = (state = {}, action) => {
+const byId = ( state = {}, action ) => {
   switch (action.type) {
-    case RECEIVE_PRODUCTS:
+    case `${ITEMS_REQUEST}_ACK`: 
       return {
         ...state,
-        ...action.products.reduce((obj, product) => {
-          obj[product.id] = product
+        ...action.payload.reduce((obj, product) => {
+          obj[product.productId] = product
           return obj
         }, {})
       }
     default:
-      const { productId } = action
-      if (productId) {
-        return {
-          ...state,
-          [productId]: products(state[productId], action)
-        }
-      }
       return state
   }
 }
 
 const visibleIds = (state = [], action) => {
   switch (action.type) {
-    case RECEIVE_PRODUCTS:
-      return action.products.map(product => product.id)
+    case `${ITEMS_REQUEST}_ACK`:
+      return action.payload.map(product => product.productId)
     default:
       return state
   }

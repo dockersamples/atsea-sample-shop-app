@@ -1,15 +1,15 @@
 import React, { PropTypes } from 'react'
 
-const Product = ({ price, quantity, title }) => (
+const Product = ({ price, quantity, name}) => (
   <div>
-    {title} - &#36;{price}{quantity ? ` x ${quantity}` : null}
+    {name} - &#36;{price}{quantity ? ` x ${quantity}` : null}
   </div>
 )
 
 Product.propTypes = {
   price: PropTypes.number,
   quantity: PropTypes.number,
-  title: PropTypes.string
+  name: PropTypes.string
 }
 
 export default Product

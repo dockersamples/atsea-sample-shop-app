@@ -24,6 +24,27 @@ export const fetchAllItems = () => (dispatch) => {
   return dispatch(dispatchObj)
 };
 
+export const createCustomer = (username, password) => (dispatch) => {
+  const url = `${BASE_URL}/customer/`
+  let dispatchObj = {
+    type: types.CREATE_CUSTOMER,
+    payload: {
+      promise:
+      request
+        .post(url)
+        .set('Content-Type', 'application/json')
+        .accept('application/json')
+        .send(
+          {address:"144 Townsend Street",email:"test@gmail.com",name:"Jess",password:password,phone:"9999999999",username:username,customerId:0, role:"user"}
+        )
+        .end()
+        .then((res) => res.body)
+    },
+  }
+
+  return dispatch(dispatchObj)
+};
+
 export const getAllProducts = () => dispatch => {
   shop.getProducts(products => {
     dispatch(receiveProducts(products))

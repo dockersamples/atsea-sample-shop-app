@@ -24,4 +24,6 @@ const customer = (state = initialState, action) => {
   }
 }
 
+export const isActive = state => state.customerId !== ''
+
 export default customer

@@ -3,12 +3,19 @@ import { render } from 'react-dom'
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import { createLogger } from 'redux-logger'
-import thunk from 'redux-thunk'
+import thunkMiddleware from 'redux-thunk'
+import promiseMiddleware from 'redux-promise-middleware'
 import reducer from './reducers'
 import { getAllProducts } from './actions'
 import App from './containers/App'
 
-const middleware = [ thunk ];
+const middleware = [ 
+  thunkMiddleware,
+  promiseMiddleware({
+    promiseTypeSuffixes: ['REQ', 'ACK', 'ERR'],
+  }),
+];
+
 if (process.env.NODE_ENV !== 'production') {
   middleware.push(createLogger());
 }

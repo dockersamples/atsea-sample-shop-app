@@ -9,12 +9,17 @@
     "react-scripts": "^0.9.5"
   },
   "dependencies": {
+    "material-ui": "0.16.4",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
     "react-redux": "^5.0.3",
+    "react-router": "2.8.0",
     "redux": "^3.5.2",
     "redux-logger": "^3.0.0",
-    "redux-thunk": "^2.1.0"
+    "redux-promise-middleware": "3.0.0",
+    "redux-thunk": "^2.1.0",
+    "superagent": "1.8.3",
+    "superagent-promise": "1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

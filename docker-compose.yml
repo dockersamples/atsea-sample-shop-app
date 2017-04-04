@@ -30,6 +30,8 @@ services:
       - front-tier
       - back-tier
     #restart: always
+    volumes:
+     - ./app/static:/static
 
 networks:
   front-tier:

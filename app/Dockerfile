@@ -5,5 +5,5 @@ RUN mkdir -p /app/ && \
 
 COPY target/MobyArtShop-0.0.1-SNAPSHOT.jar /app
 
-CMD ["java", "-jar","/app/MobyStore-0.0.1-SNAPSHOT.jar", "--spring.profiles.active=postgres", "--debug"]
+CMD ["java", "-jar","/app/MobyArtShop-0.0.1-SNAPSHOT.jar", "--spring.profiles.active=postgres", "--debug"]
 

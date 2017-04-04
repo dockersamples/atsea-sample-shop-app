@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react'
 
+
+
 const Product = ({ price, quantity, name}) => (
   <div>
     {name} - &#36;{price}{quantity ? ` x ${quantity}` : null}

@@ -29,6 +29,8 @@ services:
     networks:
       - front-tier
       - back-tier
+    volumes:
+      - ./app/static:/static
     #restart: always
     volumes:
      - ./app/static:/static

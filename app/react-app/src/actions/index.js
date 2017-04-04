@@ -24,6 +24,21 @@ export const fetchAllItems = () => (dispatch) => {
   return dispatch(dispatchObj)
 };
 
+export const fetchAllCustomers = () => (dispatch) => {
+  let dispatchObj = {
+    type: types.FETCH_CUSTOMERS,
+    payload: {
+      promise:
+        request
+          .get(`${BASE_URL}/customer/`)
+          .accept('application/json')
+          .end()
+          .then((res) => res.body)
+    },
+  }
+  return dispatch(dispatchObj)
+};
+
 export const createCustomer = (username, password) => (dispatch) => {
   const url = `${BASE_URL}/customer/`
   let dispatchObj = {
@@ -44,6 +59,21 @@ export const createCustomer = (username, password) => (dispatch) => {
 
   return dispatch(dispatchObj)
 };
+
+export const getCustomer = (username, password) => (dispatch) => {
+ let dispatchObj = {
+    type: types.LOGIN_CUSTOMER,
+    payload: {
+      promise:
+        request
+          .get(`${BASE_URL}/customer/username=${username}`)
+          .accept('application/json')
+          .end()
+          .then((res) => res.body)
+    },
+  }
+  return dispatch(dispatchObj)
+}
 
 export const getAllProducts = () => dispatch => {
   shop.getProducts(products => {

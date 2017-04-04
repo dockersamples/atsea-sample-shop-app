@@ -321,19 +321,6 @@ public class RestApiController {
 		return new ResponseEntity<Customer>(HttpStatus.NO_CONTENT);
 	}
 	
-	// ---------------------Healthcheck -----------------------------------
-	@SuppressWarnings("unchecked")
-	@RequestMapping(value="/HEALTHCHECK/", method = RequestMethod.GET)
-    public ResponseEntity<?> healthCheck() {
-    	logger.info("Performing healthcheck");
-    	
-    		String sql = "SELECT to_char(current_timestamp, 'YYYY-MM-DD HH24:MI')";
-    		String status = jdbcTemplate.queryForObject(sql, String.class);
-    		JSONObject healthcheck = new JSONObject();
-    		healthcheck.put("status", status);
-    	    	
-		return new ResponseEntity<JSONObject>(healthcheck, HttpStatus.OK);
-    }
 	
 	// ----------------Page controllers -----------------------------------
 	@RequestMapping(value="/login/{message}", method = RequestMethod.GET)

@@ -459,21 +459,24 @@ curl -H "Content-Type: application/json"
 Returns:
 
  200 OK
+```
 
- #### Database Healthcheck
+### System Utilities
+
+#### Database Healthcheck
 
  ```
-/api/HEALTHCHECK/
+/utility/healthcheck/
 
-POST: /api/HEALTHCHECK/
+GET: /utility/healthcheck/
 Host: localhost:8080
-Auth: basic username:password
+Auth: 
 Content-type: application/json
 Accept: application/json
 
 curl -H "Content-Type: application/json" 
      -X GET 
-     thedoctor:tardis@localhost:8080/mobyartshop/api/HEALTHCHECK/
+     http://localhost:8080/mobyartshop/utility/healthcheck/
 
 Returns:
 
@@ -482,3 +485,25 @@ Returns:
 }
 
  ```
+
+ #### Get Container Id
+```
+/utility/containerid/
+
+GET: /utility/containerid/
+Host: localhost:8080
+Auth: 
+Content-type: application/json
+Accept: application/json
+
+curl -H "Content-Type: application/json" 
+     -X GET 
+     http://localhost:8080/mobyartshop/utility/containerid/
+
+Returns:
+
+{
+    "host": "spara-mbp",
+    "ip": "192.168.0.6"
+}
+```

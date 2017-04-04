@@ -247,15 +247,13 @@ public class RestApiController {
 	@RequestMapping(value = "/customer/", method = RequestMethod.POST)
 	public ResponseEntity<?> createCustomer(@RequestBody Customer customer, UriComponentsBuilder ucBuilder) {
 		logger.info("Creating Customer : {}", customer);
-
-		if (customerService.customerExist(customer)) {
-			logger.error("Unable to create a customer with name {} already exist", customer.getName());
-			return new ResponseEntity(new CustomErrorType("Unable to create. A customer with name " + 
-			customer.getName() + " already exists."),HttpStatus.CONFLICT);
-		}
 		
-		if(customer != null) {
-			System.out.println(customer);
+		System.out.println(customerService.customerExist(customer));
+		
+		if (customerService.customerExist(customer)) {
+			logger.error("Unable to create a customer with username {}", customer.getUsername());
+			return new ResponseEntity(new CustomErrorType("A customer with username " + 
+			customer.getUsername() + " already exists."),HttpStatus.CONFLICT);
 		}
 		
 		Customer currentCustomer = customerService.createCustomer(customer);

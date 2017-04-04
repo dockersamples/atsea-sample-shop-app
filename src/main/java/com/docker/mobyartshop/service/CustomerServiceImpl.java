@@ -51,9 +51,10 @@ public class CustomerServiceImpl implements CustomerService {
 	public List<Customer> findAllCustomers() {
 		return (List<Customer>) customerRepository.findAll();
 	}
-
+	
 	public boolean customerExist(Customer customer) {
-		return customerRepository.findOne(customer.getCustomerId()) != null;
+		System.out.println(customer.getUsername());
+		return customerRepository.findByUserName(customer.getUsername()) != null;
 	}
 
 	public void deleteCustomerById(Long customerId) {

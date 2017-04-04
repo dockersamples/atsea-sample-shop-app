@@ -23,7 +23,7 @@ class CreateCustomer extends Component {
         createCustomer(this.state.username, this.state.password)
     }
 
-    render() {
+    renderCreate() {
        return (
             <div>
                 <h2> Create your user ID </h2>
@@ -32,12 +32,29 @@ class CreateCustomer extends Component {
                 <button onClick={this.handleCreate}> Sign Up</button>
 
             </div>
+
         );
+    }
+
+    renderActive() {
+        const { username } = this.state
+        const message = `Welcome ${username}!`
+        return (
+            <div>
+               {message}
+            </div>
+        );
+    }
+
+    render() {
+        const { isActive } = this.props
+        return isActive ? this.renderActive() : this.renderCreate()
     }
 }
 
 CreateCustomer.propTypes = {
-  createCustomer: PropTypes.func
+  createCustomer: PropTypes.func,
+  isActive: PropTypes.bool
 }
 
 

@@ -23,7 +23,10 @@ class Login extends Component {
         loginCustomer(this.state.username, this.state.password)
     }
 
-    handleLougout = () => {
+    handleLogout = () => {
+        const { logoutCustomer } = this.props;
+        this.setState({ username: '', password: ''})
+        logoutCustomer()
     }
 
     renderLogin() {
@@ -56,6 +59,7 @@ class Login extends Component {
 
 Login.propTypes = {
   loginCustomer: PropTypes.func,
+  logoutCustomer: PropTypes.func,
   isActive: PropTypes.bool
 }
 

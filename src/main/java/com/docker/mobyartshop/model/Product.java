@@ -34,17 +34,17 @@ public class Product implements Serializable {
     @Column(name = "image", length = Integer.MAX_VALUE, nullable = true)
     private byte[] image; 
           
-//	public Product() {
-//		
-//	}
-//	
-//	public Product(Long productId, Long orderId, String name, String description, double price, byte[] image) {
-//		this.productId = productId;
-//		this.name = name;
-//		this.description = description;
-//		this.price = price;
-//		this.image = image;
-//	}
+	public Product() {
+		
+	}
+	
+	public Product(Long productId, String name, String description, double price, byte[] image) {
+		this.productId = productId;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.image = image;
+	}
 
     public long getProductId() {
     	return productId;

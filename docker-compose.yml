@@ -36,6 +36,8 @@ services:
     secrets:
       - postgres_password
     #restart: always
+    volumes:
+     - ./app/static:/static
 
 networks:
   front-tier:

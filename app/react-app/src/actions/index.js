@@ -75,6 +75,13 @@ export const getCustomer = (username, password) => (dispatch) => {
   return dispatch(dispatchObj)
 }
 
+export const logoutCustomer = () => (dispatch) => {
+  dispatch({
+    type: types.LOGOUT_CUSTOMER
+  })
+}
+
+
 export const getAllProducts = () => dispatch => {
   shop.getProducts(products => {
     dispatch(receiveProducts(products))

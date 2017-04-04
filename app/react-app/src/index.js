@@ -8,6 +8,7 @@ import promiseMiddleware from 'redux-promise-middleware'
 import reducer from './reducers'
 import { getAllProducts } from './actions'
 import App from './containers/App'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 const middleware = [ 
   thunkMiddleware,
@@ -29,7 +30,9 @@ store.dispatch(getAllProducts())
 
 render(
   <Provider store={store}>
-    <App />
+    <MuiThemeProvider>
+      <App />
+    </MuiThemeProvider>
   </Provider>,
   document.getElementById('root')
 )

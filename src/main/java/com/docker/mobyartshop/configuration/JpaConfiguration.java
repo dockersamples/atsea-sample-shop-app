@@ -1,6 +1,9 @@
 package com.docker.mobyartshop.configuration;
 
 import java.util.Properties;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.naming.NamingException;
 import javax.persistence.EntityManagerFactory;
@@ -47,8 +50,26 @@ public class JpaConfiguration {
 	@Bean
 	@Primary
 	@ConfigurationProperties(prefix = "datasource.mobyartshop")
-	public DataSourceProperties dataSourceProperties(){
-		return new DataSourceProperties();
+	public DataSourceProperties dataSourceProperties() {
+		DataSourceProperties dataSourceProperties = new DataSourceProperties();
+
+		// From http://stackoverflow.com/questions/4716503/reading-a-plain-text-file-in-java
+		// Set password to connect to postgres using Docker secrets.
+		try(BufferedReader br = new BufferedReader(new FileReader("/run/secrets/postgres_password"))) {
+			StringBuilder sb = new StringBuilder();
+			String line = br.readLine();
+
+			while (line != null) {
+				sb.append(line);
+				sb.append(System.lineSeparator());
+				line = br.readLine();
+			}
+			dataSourceProperties.setDataPassword(sb.toString());
+		} catch (IOException e) {
+			System.err.println("Could not successfully load DB password file");
+		}
+
+		return dataSourceProperties;
 	}
 
 	/*

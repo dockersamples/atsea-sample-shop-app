@@ -25,7 +25,6 @@ datasource:
   mobyartshop:
     url: jdbc:postgresql://database:5432/mobystore
     username: gordonuser
-    password: gordonpassword
     driverClassName: org.postgresql.Driver
     defaultSchema:
     maxPoolSize: 20

@@ -1,14 +1,16 @@
-version: "3"
+version: "3.1"
 
 services:
   database:
     image: mobystore_db
     environment:
       POSTGRES_USER: gordonuser
-      POSTGRES_PASSWORD: gordonpassword
+      POSTGRES_DB_PASSWORD_FILE: /run/secrets/postgres_password
       POSTGRES_DB: mobystore
     networks:
      - back-tier
+    secrets:
+      - postgres_password
 
   appserver:
     image: mobystore_app
@@ -26,7 +28,9 @@ services:
         delay: 5s
         max_attempts: 3
         window: 120s
-  
+    secrets:
+      - postgres_password
+
   visualizer:
     image: dockersamples/visualizer:stable
     ports:
@@ -41,3 +45,7 @@ services:
 networks:
   front-tier:
   back-tier:
+
+secrets:
+  postgres_password:
+    file: ./prodsecrets/postgres_password

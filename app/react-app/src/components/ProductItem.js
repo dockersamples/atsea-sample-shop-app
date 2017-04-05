@@ -1,15 +1,16 @@
 import React, { PropTypes } from 'react'
-import Product from './Product'
+import GridTile from './GridTile'
 
 const ProductItem = ({ product, onAddToCartClicked }) => (
   <div style={{ marginBottom: 20 }}>
-    <Product
+    <GridTile
+      productId={product.productId}
       name={product.name}
-      price={product.price} />
-    <button
-      onClick={onAddToCartClicked} > 
-      Add to cart
-    </button>
+      description={product.description}
+      price={`$${product.price}`}
+      image={product.image}
+      onAddToCartClicked={onAddToCartClicked}
+    />
   </div>
 )
 
@@ -17,6 +18,8 @@ ProductItem.propTypes = {
   product: PropTypes.shape({
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
+    description: PropTypes.string,
+    image: PropTypes.string
   }).isRequired,
   onAddToCartClicked: PropTypes.func.isRequired
 }

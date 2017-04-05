@@ -13,6 +13,8 @@ ProductsContainer.propTypes = {
     productId: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
+    description: PropTypes.string,
+    image: PropTypes.string
   })).isRequired,
   addToCart: PropTypes.func.isRequired
 }

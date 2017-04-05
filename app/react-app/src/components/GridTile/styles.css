@@ -1,0 +1,55 @@
+  .tileTitle {
+  height: 24px;
+  margin-top: 35px;
+  font-family: "Open Sans";
+  font-size: 18px;
+  text-align: center;
+  color: #000000;
+}
+
+.tileDescription {
+  height: 38px;
+  opacity: 0.5;
+  font-family: "Open Sans";
+  font-size: 14px;
+  text-align: center;
+  border-bottom: 1px solid #e0e4e7;
+  color: #000000;
+  margin-top: 5px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.tile {
+  height: 347px;
+  width: 270px;
+  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.13);
+  display: flex;
+  flex-direction: column;
+}
+
+.tileImage {
+  align-self: center;
+  margin-top: 55px;
+}
+
+.titleBottom {
+  display: flex;
+  margin-top: 20px;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.tileAdd {
+  float: right;
+  margin-right: 20px;
+}
+
+.tilePrice {
+  float: left;
+  margin-left: 20px;
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000;
+}

@@ -27,9 +27,9 @@ A page for each feature will be needed in the client.
 * Nginx proxies for serving static data and handling HTTPS request
 * store front client written in Angular
 
-## Front end is adopted from [ngCart](http://ngcart.snapjay.com/) and currently has a wireframe interface, not connected to the actual app.
+## Front end is being written in React and currently looks like this:
 
-![ngCartwireframe](ngcart.png)
+![Front End](frontend-2017-04-05.png)
 
 
 ## The operational architecture features:

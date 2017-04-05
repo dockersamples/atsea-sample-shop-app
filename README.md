@@ -29,7 +29,7 @@ A page for each feature will be needed in the client.
 
 ## Front end is being written in React and currently looks like this:
 
-![Front End](frontend-2017-04-05)
+![Front End](frontend-2017-04-05.png)
 
 
 ## The operational architecture features:

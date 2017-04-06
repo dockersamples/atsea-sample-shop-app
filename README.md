@@ -73,39 +73,24 @@ the URL for the content is http://localhost:8080/mobyartshop/*
 
 
 
-## REST requests
+## REST Requests
 
 ### Products
 
 #### Get all products
-
+Request:
 ```
-/mobyartshop/api/product/
-
 GET /mobyartshop/api/product/
 
 Host: localhost:8080
-Auth: basic username:password
+Auth: 
 Content-type: application/json
 Accept: application/json
-{
-    ["productId" : 12345,
-    "name" : "Moby",
-    "description" : "Our mascot",
-    "price" : "1000000.00",
-    "image" : "image in 64bit encoded string"],
-     ["productId" : 12346,
-    "name" : "Gordon",
-    "description" : "Turtle",
-    "price" : "1000000.00",
-    "image" : "image in 64bit encoded string"],
 
-    ...
-
-}
 ```
 Returns:
 ```
+HTTP 200 OK
 
 [    
     {
@@ -124,24 +109,20 @@ Returns:
     }
 ]
 ```
-
-#### Get single product (product detail)
-
+Error:
 ```
-/mobyartshop/api/product/{id}
+HTTP 204 NO CONTENT
+```
+
+#### Get Single Product
+Request:
+```
 
 GET /mobyartshop/api/product/{id}
 Host: localhost:8080
 Auth: basic username:password
 Content-type: application/json
 Accept: application/json
-{
-    "productId" : 12345,
-    "name" : "Moby",
-    "description" : "Our mascot",
-    "price" : "1000000.00",
-    "image" : "image in 64bit encoded string"
-}
 
 ```
 Returns:
@@ -154,17 +135,19 @@ Returns:
         "productId": 32
 }
 ```
-
-### Customer requests
-
-#### Create customer
-
+Error:
 ```
-/api/customer/
+HTTP 404 NOT FOUND
+```
 
-POST /api/customer?new:{customerId}&password:{password}&username:{username}
+### Customer Requests
+
+#### Create Customer
+Request:
+```
+POST /api/customer/
 Host: localhost:8080
-Auth: basic username:password
+Auth: 
 Content-type: application/json
 Accept: application/json
 
@@ -188,20 +171,27 @@ customerId
 {
     "customerId": 1
 }
-
+```
+Error:
+```
+HTTP 409 CONFLICT
+{
+    "error" : "Unable to create customer with username xxxx"
+}
 ```
 
-#### Get customer
+#### Get Customer
+Request:
 ```
-/api/customer/{id}
-
 GET /api/customer/{id}
 
 Host: localhost:8080
 Auth: 
 Content-type: application/json
 Accept: application/json
-
+```
+Returns:
+```
 {
     "customerId" : 54321,
     "name" : "Sally Vallery",
@@ -212,11 +202,17 @@ Accept: application/json
     "password" : "sallypassword"
 }
 ```
-
-### Get customer by name
+Error:
 ```
-/api/customer/name={name}
+HTTP 404 NOT FOUND
+{
+    "error":"Customer with id xx not found."
+}
+```
 
+### Get Customer by Name
+Request:
+```
 GET /api/customer/name={name}
 
 Host: localhost:8080
@@ -239,11 +235,16 @@ Returns:
     "role":"USER"
 }
 ```
-
-### Get customer by username
+Error:
 ```
-/api/customer/name={name}
-
+HTTP 404 NOT FOUND
+{
+    "error":"Customer with name xxx not found"
+}
+```
+### Get Customer by Username
+Request:
+```
 GET /api/customer/username={username}
 
 Host: localhost:8080
@@ -266,11 +267,16 @@ Returns:
     "role":"USER"
 }
 ```
-
-### Update Customer
+Error:
 ```
-/api/customer/{customerId}
-
+HTTP 404 NOT FOUND
+{
+    "error":"Customer with username xxx not found"
+}
+```
+### Update Customer
+Request:
+```
 PUT /api/customer/{customerId}
 Host: localhost:8080
 Auth: 
@@ -293,14 +299,30 @@ Accept: application/json
 
 Returns:
 ```
-
 OK 200
+{
+    "customerId" : 0,
+    "name"       : "Sally Vallery",
+    "address"    : "my new address",
+    "email"      : "sally@example.com".
+    "phone"      : "phone as string"
+    "username"   : "sallyv",
+    "password"   : "betterpassword",
+    "enabled"    : "true",
+    "role"       : "USER"
+}
+```
+Error:
+```
+HTTP 404 NOT FOUND
+{
+    "error":"Unable to update. Customer with id xxx not found"
+}
 ```
 
 ### Delete a Customer
+Request:
 ```
-/api/customer/{customerId}
-
 DELETE /api/customer/{customerId}
 Host: localhost:8080
 Auth: 
@@ -308,17 +330,21 @@ Content-type: application/json
 Accept: 
 
 ```
-
 Returns:
 ```
 
-OK 200
+OK 204 NO CONTENT
+```
+Error:
+```
+{
+    "error":"Unable to delete. Customer with id xx not found."
+}
 ```
 
 ### Delete all Customers
+Request:
 ```
-/api/customer/
-
 DELETE /api/customer/
 Host: localhost:8080
 Auth: 
@@ -326,23 +352,19 @@ Content-type: application/json
 Accept: 
 
 ```
-
 Returns:
 ```
 
-OK 200
+OK 204 NO CONTENT
 ```
+### Order Requests
 
-### Order requests
-
-#### Create an order
-
+#### Create an Order
+Request:
 ```
-/api/order/
-
 POST /api/order/
 Host: localhost:8080
-Auth: basic username:password
+Auth:
 Content-type: application/json
 Accept: application/json
 
@@ -350,61 +372,73 @@ Accept: application/json
     "orderId" : 1,
     "orderDate : {current date},
     "customerId" : "54321",
-    "productsOrdered" : {"1":1,"2":1,"3":1]
+    "productsOrdered" : {
+                          "1":1,
+                          "2":1,
+                          "3":1
+                        }
 }
 
 ```
 Returns:
-
 ```
-orderId, orderNum
-
+HTTP 201 CREATED
 {
     "orderId": 1
 }
-
 ```
-
-#### Get all orders
-
+Error:
 ```
-/api/order/
-
+HTTP 409 CONFLICT
+{
+    "error":"Unable to create. An order with id xx already exists"
+}
+```
+#### Get All Orders
+Request:
+```
 GET /api/order/
 Host: localhost:8080
-Auth: basic username:password
+Auth: 
 Content-type: application/json
 Accept: application/json
-
+```
 Returns:
+```
+HTTP 200 OK
 
 [
     {
         "orderId" : 1,
         "orderDate : {current date},
         "customerId" : "54321",
-        "productsOrdered" : {"1":1,"2":1,"3":1]
+        "productsOrdered" : {"1":1,"2":1,"3":1}
     },
     {
         "orderId" : 2,
         "orderDate : {current date},
         "customerId" : "12345",
-        "productsOrdered" : {"2":1,"3":1,"4":1]
+        "productsOrdered" : {"2":1,"3":1,"4":1}
     }
 ]
 ```
-#### Get an order by id
-
+Error:
 ```
-/api/order/
+HTTP 404 NO CONTENT
+```
 
+#### Get an Order by Id
+Request:
+```
 GET /api/order/{orderId}
 Host: localhost:8080
-Auth: basic username:password
+Auth: 
 Content-type: application/json
 Accept: application/json
-
+```
 Returns:
+```
+HTTP 200 OK
 
     {
         "orderId" : 1,
@@ -413,97 +447,118 @@ Returns:
         "productsOrdered" : {"1":1,"2":1,"3":1]
     }
 ```
-#### Update an order
+Error:
 ```
-/api/order/{orderId}
-
-POST: /api/order/{orderId}
-Host: localhost:8080
-Auth: basic username:password
-Content-type: application/json
-Accept: application/json
-
-curl -H "Content-Type: application/json" 
-     -X PUT 
-     -d ' {"orderId" : "0", "productsOrdered" : {"3":2,"6":3,"11":2} , "orderDate" : "2017-02-28T19:52:39Z", "customerId" : "8"}' 
-     thedoctor:tardis@localhost:8080/mobyartshop/api/order/8
-
-Returns:
-
+HTTP 404 NOT FOUND
 {
-    "customerId": 8,
-    "orderDate": 1488311559000,
-    "orderId": 8,
-    "productsOrdered": {
-        "11": 2,
-        "3": 2,
-        "6": 3
-    }
+    "error":"Order with id xx not found."
 }
 ```
-
-#### Delete an order
+#### Update an Order
+Request:
 ```
-/api/order/{orderId}
-
-DELETE: /api/order/{orderId}
+POST: /api/order/{orderId}
 Host: localhost:8080
-Auth: basic username:password
+Auth: 
 Content-type: application/json
 Accept: application/json
-
-curl -H "Content-Type: application/json" 
-     -X DELETE 
-     thedoctor:tardis@localhost:8080/mobyartshop/api/order/8
-
-Returns:
-
- 200 OK
+{
+    "orderId" : "0", 
+    "productsOrdered" : {
+                          "3":2,
+                          "6":3,
+                          "11":2
+                        },
+     "orderDate" : "2017-02-28T19:52:39Z", 
+     "customerId" : "8"
+}
 ```
-
+Returns:
+```
+HTTP 200 OK
+{
+    "customerId": 8,
+    "orderDate": "2017-02-28T19:52:39Z",
+    "orderId": 8,
+    "productsOrdered": {
+                        "11": 1,
+                        "3": 1,
+                        "6": 1
+                        }
+}
+```
+Error:
+```
+HTTP 404 NOT FOUND
+{
+    "error":"Unable to update. Order with id xx not found."
+}
+```
+#### Delete an Order
+Request:
+```
+DELETE: /api/order/{orderId}
+Host: localhost:8080
+Auth:
+Content-type: application/json
+Accept: application/json
+```
+Returns:
+```
+HTTP 204 OK
+```
+Error:
+```
+HTTP 404 NOT FOUND
+{
+    "error":""Unable to delete order. Order with id xx not found."
+}
+```
 ### System Utilities
 
 #### Database Healthcheck
-
+Request:
  ```
-/utility/healthcheck/
-
 GET: /utility/healthcheck/
 Host: localhost:8080
 Auth: 
 Content-type: application/json
 Accept: application/json
-
-curl -H "Content-Type: application/json" 
-     -X GET 
-     http://localhost:8080/mobyartshop/utility/healthcheck/
-
+```
 Returns:
-
+```
+HTTP 200 OK
 {
     "status":"2017-03-27 03:01"
 }
-
  ```
-
- #### Get Container Id
+Error:
 ```
-/utility/containerid/
-
+HTTP 500 INTERNAL SERVER ERROR
+{
+    "error":"Database not responding."
+}
+```
+ #### Get Container Id
+Request:
+```
 GET: /utility/containerid/
 Host: localhost:8080
 Auth: 
 Content-type: application/json
 Accept: application/json
-
-curl -H "Content-Type: application/json" 
-     -X GET 
-     http://localhost:8080/mobyartshop/utility/containerid/
-
+```
 Returns:
-
+```
+HTTP 200 OK
 {
     "host": "spara-mbp",
     "ip": "192.168.0.6"
 }
 ```
+Error:
+```
+HTTP 404 NOT FOUND
+{
+    "error":"Container id not found"
+}

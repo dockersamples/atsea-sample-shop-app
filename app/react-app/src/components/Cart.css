@@ -1,0 +1,21 @@
+.cartRow {
+    display: flex;
+}
+
+.cartQuantity {
+    width: 10px;
+    height: 22px;
+    font-family: 'Open Sans';
+    font-size: 16px;
+    color: #101e26;
+}
+
+.cartIcon {
+    margin-right: 12px;
+}
+
+.checkoutSection {
+    display: inline-block;
+    float: right;
+    margin-right: 114px;
+}

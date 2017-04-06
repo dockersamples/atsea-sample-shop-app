@@ -1,18 +1,16 @@
 import React from 'react'
 import ProductsContainer from './ProductsContainer'
-import CartContainer from './CartContainer'
 import CustomerContainer from './CustomerContainer'
 import LoginContainer from './LoginContainer'
+import CartContainer from './CartContainer'
 
 const App = () => (
   <div>
-    <h2>Shopping Cart Example</h2>
+    <h2>Docker Art Store</h2>
     <LoginContainer />
     <CustomerContainer />
-    <hr/>
-    <ProductsContainer />
-    <hr/>
     <CartContainer />
+    <ProductsContainer />
   </div>
 )
 

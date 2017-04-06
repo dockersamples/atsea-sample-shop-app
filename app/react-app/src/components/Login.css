@@ -1,0 +1,14 @@
+.loginTitle {
+    font-family: 'Open Sans';
+    font-size: 24px;
+    text-align: left;
+    color: '#101e26';
+}
+
+.loginForm {
+    position: absolute;
+}
+
+.loginInput {
+    display: block;
+}

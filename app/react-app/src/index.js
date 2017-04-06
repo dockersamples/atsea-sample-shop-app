@@ -8,6 +8,7 @@ import promiseMiddleware from 'redux-promise-middleware'
 import reducer from './reducers'
 import { getAllProducts, fetchAllItems } from './actions'
 import App from './containers/App'
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 const middleware = [ 
@@ -26,12 +27,18 @@ const store = createStore(
   applyMiddleware(...middleware)
 )
 
+const muiTheme = getMuiTheme({
+  textField: {
+    focusColor: '#9fa5a8',
+  },
+})
+
 store.dispatch(getAllProducts())
 store.dispatch(fetchAllItems())
 
 render(
   <Provider store={store}>
-    <MuiThemeProvider>
+    <MuiThemeProvider muiTheme={muiTheme}>
       <App />
     </MuiThemeProvider>
   </Provider>,

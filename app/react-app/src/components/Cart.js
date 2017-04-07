@@ -1,30 +1,29 @@
 import React, { PropTypes } from 'react'
+import { Link } from 'react-router'
 import Product from './Product'
+import CartIcon from './CartIcon'
+import FlatButton from 'material-ui/FlatButton'
+import './Cart.css'
 
-const Cart  = ({ products, total, onCheckoutClicked }) => {
-  const hasProducts = products.length > 0
-  const nodes = hasProducts ? (
-    products.map(product =>
-      <Product
-        name={product.name}
-        price={product.price}
-        quantity={product.quantity}
-        key={product.productId}
-      />
-    )
-  ) : (
-    <em>Please add some products to the cart.</em>
+const Cart = ({ products, total, totalProducts }) => {
+  // const hasProducts = products.length > 0
+  const cartRow = (
+      <div className="cartRow">
+        <div className="cartIcon">
+          <CartIcon />
+        </div>
+        <div className="cartQuantity">
+          {totalProducts}
+        </div>
+      </div>
   )
-
   return (
-    <div>
-      <h3>Your Cart</h3>
-      <div>{nodes}</div>
-      <p>Total: &#36;{total}</p>
-      <button onClick={onCheckoutClicked}
-        disabled={hasProducts ? '' : 'disabled'}>
-        Checkout
-      </button>
+    <div className="checkoutSection">
+      <FlatButton
+        label="Checkout"
+        containerElement={<Link to="checkout"> Checkout </Link>}
+      />
+      {cartRow}
     </div>
   )
 }
@@ -32,7 +31,6 @@ const Cart  = ({ products, total, onCheckoutClicked }) => {
 Cart.propTypes = {
   products: PropTypes.array,
   total: PropTypes.string,
-  onCheckoutClicked: PropTypes.func
 }
 
 export default Cart

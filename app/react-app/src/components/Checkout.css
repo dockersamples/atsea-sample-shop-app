@@ -1,0 +1,67 @@
+.header {
+    height: 80px;
+    margin-right: 5%;
+    margin-left: 5%;
+    font-family: "Open Sans";
+    font-size: 20px;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.panel {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 30px;
+    margin-right: 5%;
+    margin-left: 5%;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.formSection {
+    width: 500px;
+    margin: 10px;
+}
+
+.cartSection {
+    border-right: 1px solid #e3e3e3;
+    border-left: 1px solid #e3e3e3;
+    width: 300px;
+    min-width: 300px;
+    height: 550px;
+    font-family: "Open Sans";
+}
+
+.productSection {
+    height: 430px;
+}
+
+.totalSection {
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.totalDetails {
+    height: 70px;
+    border-top: 1px solid #e3e3e3;
+    padding-top: 8px;
+    font-size: 12px;
+} 
+
+.totalDetails > * {
+    display: flex;
+    justify-content: space-between;
+}
+
+.totalFinal {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #e3e3e3;
+    padding-top: 8px;
+    font-size: 12px;
+}
+
+.buttonRow {
+    margin-top: 20px;
+    float: right;
+    margin-right: 30%;
+}

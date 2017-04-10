@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
-import Product from './Product'
 import CartIcon from './CartIcon'
 import FlatButton from 'material-ui/FlatButton'
 import './Cart.css'

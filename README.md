@@ -29,7 +29,35 @@ A page for each feature will be needed in the client.
 
 ## Front end is being written in React and currently looks like this:
 
-![Front End](frontend-2017-04-05.png)
+![Landing](landing.png)
+![Landing](checkout.png)
+
+Local development:
+From the `react-app` directory (within `app`), run `npm install` then `npm run start`.
+  Navigate to localhost:3000. Any changes within `react-app` will be updated in real-time.
+
+Update static files:
+```bash
+  cd react-app
+  npm run build
+  cd ../
+  rm -r static; mv react-app/build static
+```
+Finally, re-run `docker-compose up`
+Navigate to localhost:8080 to see your changes.
+
+* The command `npm run build` builds the react-app for production in the build folder.
+  The build is minified and the filenames include the hashes. 
+* The command  `mv react-app/build static` moves the build folder to the static folder.
+* The multistage build can be seen in `app/Dockerfile.app`
+  This includes building and updating the static files.
+```bash
+    FROM node:latest
+    COPY . /usr/src/mobystore
+    WORKDIR /usr/src/mobystore/app/react-app
+    RUN npm install
+    RUN npm run build
+```
 
 
 ## The operational architecture features:

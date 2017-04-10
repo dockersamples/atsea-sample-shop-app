@@ -118,7 +118,7 @@ public class RestApiController {
 		Order order = orderService.findById(orderId);
 		if (order == null) {
 			logger.error("Unable to delete item with orderid {} not found.", orderId);
-			return new ResponseEntity(new CustomErrorType("Unable to delete item in order with id " + orderId + " not found."),
+			return new ResponseEntity(new CustomErrorType("Unable to delete order. Order with id " + orderId + " not found."),
 					HttpStatus.NOT_FOUND);
 		}
 		orderService.deleteOrderById(orderId);

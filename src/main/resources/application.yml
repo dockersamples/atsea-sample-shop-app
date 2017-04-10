@@ -23,7 +23,7 @@ spring:
   profiles: postgres
 datasource:
   mobyartshop:
-    url: jdbc:postgresql://database:5432/mobystore
+    url: jdbc:postgresql://localhost:5432/mobystore
     username: gordonuser
     driverClassName: org.postgresql.Driver
     defaultSchema:

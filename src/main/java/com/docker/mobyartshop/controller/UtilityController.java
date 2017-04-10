@@ -34,11 +34,16 @@ public class UtilityController {
 	@RequestMapping(value="/healthcheck/", method = RequestMethod.GET)
     public ResponseEntity<?> healthCheck() {
     	logger.info("Performing healthcheck");
-    	
+    	JSONObject healthcheck = new JSONObject();
+    	try
+    	{
     		String sql = "SELECT to_char(current_timestamp, 'YYYY-MM-DD HH24:MI')";
-    		String status = jdbcTemplate.queryForObject(sql, String.class);
-    		JSONObject healthcheck = new JSONObject();
+    		String status = jdbcTemplate.queryForObject(sql, String.class);    		
     		healthcheck.put("status", status);
+    	} catch (Exception e) {
+    		logger.warn("An exception occurred while checking the database: {}", e);
+			return new ResponseEntity(new CustomErrorType("Database not responding."), HttpStatus.INTERNAL_SERVER_ERROR);
+    	}
     	    	
 		return new ResponseEntity<JSONObject>(healthcheck, HttpStatus.OK);
     }

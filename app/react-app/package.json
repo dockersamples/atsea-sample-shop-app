@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "material-ui": "0.16.4",
+    "moment": "^2.18.1",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
     "react-modal": "^1.7.3",
@@ -18,6 +19,7 @@
     "react-router": "2.8.0",
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.5.2",
+    "redux-form": "^6.6.1",
     "redux-logger": "^3.0.0",
     "redux-promise-middleware": "3.0.0",
     "redux-thunk": "^2.1.0",

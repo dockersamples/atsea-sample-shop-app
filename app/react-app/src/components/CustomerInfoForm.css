@@ -1,0 +1,13 @@
+.formRow {
+    display: flex;
+    font-family: "Open Sans";
+}
+
+.formHeader {
+    font-size: 16px;
+    font-family: "Open Sans";
+}
+
+.formButton {
+    display: inline-flex;
+}

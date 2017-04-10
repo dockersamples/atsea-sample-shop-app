@@ -1,7 +1,8 @@
 import {
   ADD_TO_CART,
   CHECKOUT_REQUEST,
-  CHECKOUT_FAILURE
+  CHECKOUT_FAILURE,
+  CREATE_ORDER
 } from '../constants/ActionTypes'
 
 const initialState = {
@@ -40,6 +41,10 @@ export const getAddedIds = state => state.addedIds
 
 const cart = (state = initialState, action) => {
   switch (action.type) {
+    case `${CREATE_ORDER}_ACK`:
+      return initialState
+    case `${CREATE_ORDER}_ERR`:
+      return action.cart
     case CHECKOUT_REQUEST:
       return initialState
     case CHECKOUT_FAILURE:

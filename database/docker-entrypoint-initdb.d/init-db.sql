@@ -1,15 +1,15 @@
--- CREATE DATABASE mobystore
+-- CREATE DATABASE atsea
 --   WITH OWNER = gordonuser
 --        ENCODING = 'UTF8'
 --        TABLESPACE = pg_default
 --        LC_COLLATE = 'en_US.utf8'
 --        LC_CTYPE = 'en_US.utf8'
 --        CONNECTION LIMIT = -1;
--- GRANT CONNECT, TEMPORARY ON DATABASE mobystore TO public;
--- GRANT ALL ON DATABASE mobystore TO gordonuser;
+-- GRANT CONNECT, TEMPORARY ON DATABASE atsea TO public;
+-- GRANT ALL ON DATABASE atsea TO gordonuser;
 
 
--- CONNECT `mobystore`;
+-- CONNECT `atsea`;
 
 CREATE TABLE product
 (

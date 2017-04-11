@@ -2,18 +2,18 @@ version: "3.1"
 
 services:
   database:
-    image: mobystore_db
+    image: atsea_db
     environment:
       POSTGRES_USER: gordonuser
       POSTGRES_DB_PASSWORD_FILE: /run/secrets/postgres_password
-      POSTGRES_DB: mobystore
+      POSTGRES_DB: atsea
     networks:
      - back-tier
     secrets:
       - postgres_password
 
   appserver:
-    image: mobystore_app
+    image: atsea_app
     ports:
       - "8080:8080" 
     networks:

@@ -53,8 +53,8 @@ Navigate to localhost:8080 to see your changes.
   This includes building and updating the static files.
 ```bash
     FROM node:latest
-    COPY . /usr/src/mobystore
-    WORKDIR /usr/src/mobystore/app/react-app
+    COPY . /usr/src/atsea
+    WORKDIR /usr/src/atsea/app/react-app
     RUN npm install
     RUN npm run build
 ```

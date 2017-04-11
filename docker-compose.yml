@@ -4,11 +4,11 @@ services:
   database:
     build: 
        context: ./database
-    image: mobystore_db
+    image: atsea_db
     environment:
       POSTGRES_USER: gordonuser
       POSTGRES_DB_PASSWORD_FILE: /run/secrets/postgres_password
-      POSTGRES_DB: mobystore
+      POSTGRES_DB: atsea
     ports:
       - "5432:5432" 
     networks:
@@ -21,10 +21,10 @@ services:
     build:
        context: .
        dockerfile: app/Dockerfile
-    image: mobystore_app
+    image: atsea_app
     # mount point for application in tomcat
     links:
-      - database:mobystore_db
+      - database:atsea_db
     # open ports for tomcat and remote debugging
     ports:
       - "8080:8080" 

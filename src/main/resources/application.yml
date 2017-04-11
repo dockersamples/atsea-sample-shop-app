@@ -23,7 +23,7 @@ spring:
   profiles: postgres
 datasource:
   atsea:
-    url: jdbc:postgresql://localhost:5432/mobystore
+    url: jdbc:postgresql://database:5432/atsea
     username: gordonuser
     driverClassName: org.postgresql.Driver
     defaultSchema:
@@ -38,7 +38,7 @@ spring:
   profiles: mysql
 datasource:
   atsea:
-    url: jdbc:mysql://localhost:3306/mobystore
+    url: jdbc:mysql://localhost:3306/atsea
     username: gordonuser
     password: gordonpassword
     driverClassName: com.mysql.jdbc.Driver

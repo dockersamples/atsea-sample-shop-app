@@ -78,7 +78,6 @@
     <RefactorLog Include="Docker.AtSea.Database.refactorlog" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Dockerfile" />
     <None Include="SeedData\images\Compose.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -106,6 +105,5 @@
     <None Include="SeedData\images\trusted_registry.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="InitializeDatabase.ps1" />
   </ItemGroup>
 </Project>

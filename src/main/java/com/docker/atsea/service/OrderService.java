@@ -1,8 +1,8 @@
-package com.docker.mobyartshop.service;
+package com.docker.atsea.service;
 
 import java.util.List;
 
-import com.docker.mobyartshop.model.Order;
+import com.docker.atsea.model.Order;
 
 public interface OrderService {
 

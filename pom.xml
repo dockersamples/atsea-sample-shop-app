@@ -7,10 +7,10 @@
     <version>1.4.3.RELEASE</version>
   </parent>
 
-  <groupId>com.docker.mobyartshop</groupId>
-  <artifactId>MobyArtShop</artifactId>
+  <groupId>com.docker.atsea</groupId>
+  <artifactId>AtSee</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>mobyartshop</name>
+  <name>atsea</name>
   
   <properties>
     <java.version>1.8</java.version>

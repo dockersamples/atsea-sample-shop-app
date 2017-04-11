@@ -1,8 +1,8 @@
-package com.docker.mobyartshop.repositories;
+package com.docker.atsea.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.docker.mobyartshop.model.Product;
+import com.docker.atsea.model.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 	

@@ -1,4 +1,4 @@
-package com.docker.mobyartshop.model;
+package com.docker.atsea.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
 

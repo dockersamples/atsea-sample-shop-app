@@ -1,4 +1,4 @@
-package com.docker.mobyartshop.controller;
+package com.docker.atsea.controller;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.docker.mobyartshop.util.CustomErrorType;
+import com.docker.atsea.util.CustomErrorType;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.ui.Model;
@@ -42,7 +42,7 @@ public class UtilityController {
     		healthcheck.put("status", status);
     	} catch (Exception e) {
     		logger.warn("An exception occurred while checking the database: {}", e);
-			return new ResponseEntity(new CustomErrorType("Database not responding."), HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<Object>(new CustomErrorType("Database not responding."), HttpStatus.INTERNAL_SERVER_ERROR);
     	}
     	    	
 		return new ResponseEntity<JSONObject>(healthcheck, HttpStatus.OK);
@@ -61,7 +61,7 @@ public class UtilityController {
 			containerId.put("ip", localHost.getHostAddress());
 		} catch (UnknownHostException e) {
 			logger.warn("An exception occurred while trying to determine the host and IP address: {}", e);
-			return new ResponseEntity(new CustomErrorType("Container Id not found."), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Object>(new CustomErrorType("Container Id not found."), HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<JSONObject>(containerId, HttpStatus.OK);
 		

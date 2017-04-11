@@ -1,4 +1,4 @@
-package com.docker.mobyartshop.service;
+package com.docker.atsea.service;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.docker.mobyartshop.model.Order;
-import com.docker.mobyartshop.repositories.OrderRepository;
+import com.docker.atsea.model.Order;
+import com.docker.atsea.repositories.OrderRepository;
 
 @Service("orderService")
 @Transactional

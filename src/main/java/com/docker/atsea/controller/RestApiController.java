@@ -1,4 +1,4 @@
-package com.docker.mobyartshop.controller;
+package com.docker.atsea.controller;
 
 import java.util.List;
 
@@ -20,13 +20,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.docker.mobyartshop.model.Customer;
-import com.docker.mobyartshop.model.Order;
-import com.docker.mobyartshop.model.Product;
-import com.docker.mobyartshop.service.CustomerService;
-import com.docker.mobyartshop.service.OrderService;
-import com.docker.mobyartshop.service.ProductService;
-import com.docker.mobyartshop.util.CustomErrorType;
+import com.docker.atsea.model.Customer;
+import com.docker.atsea.model.Order;
+import com.docker.atsea.model.Product;
+import com.docker.atsea.service.CustomerService;
+import com.docker.atsea.service.OrderService;
+import com.docker.atsea.service.ProductService;
+import com.docker.atsea.util.CustomErrorType;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;

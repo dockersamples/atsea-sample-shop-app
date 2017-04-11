@@ -28,7 +28,7 @@ import com.docker.atsea.service.ProductServiceImpl;
 
 @SuppressWarnings("serial")
 @RunWith(SpringRunner.class)
-public class UnitTest {
+public class UnitTest2 {
 	@Mock
 	CustomerRepository customerRepository;
 	

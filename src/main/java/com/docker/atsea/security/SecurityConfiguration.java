@@ -35,8 +35,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http.authorizeRequests()
-		      .antMatchers(HttpMethod.POST, "/purchase/**").authenticated()
-		      .antMatchers(HttpMethod.DELETE, "/admin/**").authenticated()
+		      .antMatchers(HttpMethod.POST, "/login/**").authenticated()
+//		      .antMatchers(HttpMethod.DELETE, "/admin/**").authenticated()
 //		      .antMatchers(HttpMethod.GET, "/order/**").authenticated()
 //		      .antMatchers(HttpMethod.GET, "/customer/**").authenticated()
 			  .anyRequest().permitAll()

@@ -9,6 +9,38 @@ const receiveProducts = products => ({
 
 const BASE_URL = '/mobyartshop/api'
 
+export const createOrder = (values) => (dispatch) => {
+  const url = `${BASE_URL}/order/`
+  let dispatchObj = {
+    type: types.CREATE_ORDER,
+    payload: {
+      promise:
+      request
+        .post(url)
+        // TODO: will there ever be some sort of authentication here? for username and password.
+        .set('Content-Type', 'application/json')
+        .accept('application/json')
+        .send(
+          {
+              /*
+                TODO: orderId is hard coded in because the api will return a null pointer exception without it.
+                However, the orderId is decided by the backend. If we pass an id in the request, and it already exists,
+                we will get an "Unable to create."
+                0 was chosen because the backend begins incrementing it's order id at 1.
+              */
+              "orderId": 0,
+              "orderDate" : values.orderDate,
+              "customerId" : values.customerId,
+              "productsOrdered" : values.quantityById,
+          }
+        )
+        .end()
+        .then((res) => res.body)
+    },
+  }
+  return dispatch(dispatchObj)
+};
+
 export const fetchAllItems = () => (dispatch) => {
   let dispatchObj = {
     type: types.ITEMS_REQUEST,
@@ -50,7 +82,8 @@ export const createCustomer = (username, password) => (dispatch) => {
         .set('Content-Type', 'application/json')
         .accept('application/json')
         .send(
-          {address:"144 Townsend Street",email:"test@gmail.com",name:"Jess",password:password,phone:"9999999999",username:username,customerId:0, role:"user"}
+          //TODO: take out hard coded values for customer information
+          {address:"144 Townsend Street",email:"test@gmail.com",name:"Jess",password:password,phone:"9999999999",username:username,customerId:0, enabled:"true", role:"user"}
         )
         .end()
         .then((res) => res.body)

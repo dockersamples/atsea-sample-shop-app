@@ -1,4 +1,4 @@
-package com.docker.mobyartshop.util;
+package com.docker.atsea.util;
 
 public class CustomErrorType {
 	

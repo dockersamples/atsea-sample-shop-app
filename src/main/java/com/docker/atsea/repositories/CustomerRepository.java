@@ -1,11 +1,11 @@
-package com.docker.mobyartshop.repositories;
+package com.docker.atsea.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.docker.mobyartshop.model.Customer;
+import com.docker.atsea.model.Customer;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {

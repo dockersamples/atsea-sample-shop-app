@@ -1,12 +1,12 @@
 ---
 server:
   port: 8080
-  contextPath: /mobyartshop
+  contextPath: /atsea
 ---
 spring:
   profiles: local, default
 datasource:
-  mobyartshop:
+  atsea:
     url: jdbc:h2:~/test
     username: SA
     password:
@@ -22,7 +22,7 @@ datasource:
 spring:
   profiles: postgres
 datasource:
-  mobyartshop:
+  atsea:
     url: jdbc:postgresql://localhost:5432/mobystore
     username: gordonuser
     driverClassName: org.postgresql.Driver
@@ -37,7 +37,7 @@ datasource:
 spring:
   profiles: mysql
 datasource:
-  mobyartshop:
+  atsea:
     url: jdbc:mysql://localhost:3306/mobystore
     username: gordonuser
     password: gordonpassword

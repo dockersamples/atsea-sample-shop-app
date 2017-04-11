@@ -1,0 +1,24 @@
+version: "3.1"
+
+services:
+
+  atsea-database:
+    image: atsea-db
+    ports:
+      - "1433:1433"
+    networks:
+      - app-net
+
+  atsea-api:
+    image: atsea-api
+    ports:
+      - "8080:8080" 
+    depends_on:
+      - atsea-database
+    networks:
+      - app-net
+
+networks:
+  app-net:
+    external:
+      name: nat

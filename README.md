@@ -1,8 +1,8 @@
-# Moby Art Store Demo Application
+#  AtSea Demo Application
 
 ## Current build and run (this will be improved)
 ```bash
-docker run -ti -v $(pwd):/mobyartshop -w /mobyartshop maven:alpine mvn package -DskipTests
+docker run -ti -v $(pwd):/atsea -w /atsea maven:alpine mvn package -DskipTests
 docker-compose build
 docker-compose up
 ```
@@ -85,11 +85,11 @@ Navigate to localhost:8080 to see your changes.
 ## Configuration
 
 ### Static content
-Make a directory for static content called 'static' in the same directory as the appication (MobyArtShop-0.0.1-SNAPSHOT.jar)
+Make a directory for static content called 'static' in the same directory as the appication (atsea-0.0.1-SNAPSHOT.jar)
 
 ```
 Application
-|- MobyArtShop-0.0.1-SNAPSHOT.jar
+|- AtSea-0.0.1-SNAPSHOT.jar
 |- static/
    |- client files
    |- images
@@ -97,7 +97,7 @@ Application
 
 ```
 
-the URL for the content is http://localhost:8080/mobyartshop/*
+the URL for the content is http://localhost:8080/atsea/*
 
 
 
@@ -108,7 +108,7 @@ the URL for the content is http://localhost:8080/mobyartshop/*
 #### Get all products
 Request:
 ```
-GET /mobyartshop/api/product/
+GET /atsea/api/product/
 
 Host: localhost:8080
 Auth: 
@@ -146,7 +146,7 @@ HTTP 204 NO CONTENT
 Request:
 ```
 
-GET /mobyartshop/api/product/{id}
+GET /atsea/api/product/{id}
 Host: localhost:8080
 Auth: basic username:password
 Content-type: application/json

@@ -8,7 +8,7 @@
   </parent>
 
   <groupId>com.docker.atsea</groupId>
-  <artifactId>AtSee</artifactId>
+  <artifactId>AtSea</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>atsea</name>
   

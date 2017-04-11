@@ -1,0 +1,31 @@
+.productItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+    margin-right: 20px;
+    margin-left: 20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.columnLeft {
+    width: 20%;
+}
+.columnCenter {
+    width: 65%;
+    font-size: 12px;
+}
+
+.remove {
+    color: red;
+    margin-left: 10px;
+}
+
+.columnRight {
+    font-size: 12px;
+    align-self: center;
+}

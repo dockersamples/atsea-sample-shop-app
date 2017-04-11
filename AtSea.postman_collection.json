@@ -1,0 +1,133 @@
+{
+	"variables": [],
+	"info": {
+		"name": "AtSea",
+		"_postman_id": "a8a3c5e5-d602-624f-b8be-5ddf2f9cfedf",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Customer",
+			"description": "",
+			"item": [
+				{
+					"name": "/api/customer",
+					"request": {
+						"url": "http://localhost:8080/atsea/api/customer/",
+						"method": "POST",
+						"header": [
+							{
+								"key": "//Authorization",
+								"value": "Basic dXNlcm5hbWU6cGFzc3dvcmQ=",
+								"description": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"address\":\"144 Townsend Street\",\n \"email\":\"tes222t@gmail.com\",\n \"name\":\"Jess\",\n \"password\":\"G0ord)n\",\n \"phone\":\"9999999999\",\n \"username\":\"moby\",\n \"customerId\":0,\n \"role\":\"user\"\n}"
+						},
+						"description": "Create a new customer"
+					},
+					"response": []
+				},
+				{
+					"name": "/api/customer",
+					"request": {
+						"url": "http://localhost:8080/atsea/api/customer/1",
+						"method": "GET",
+						"header": [
+							{
+								"key": "//Authorization",
+								"value": "Basic dXNlcm5hbWU6cGFzc3dvcmQ=",
+								"description": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"address\":\"144 Townsend Street\",\n \"email\":\"tes222t@gmail.com\",\n \"name\":\"Jess\",\n \"password\":\"G0ord)n\",\n \"phone\":\"9999999999\",\n \"username\":\"moby\",\n \"customerId\":0,\n \"role\":\"user\"\n}"
+						},
+						"description": "Get customer"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "Product",
+			"description": "",
+			"item": [
+				{
+					"name": "/api/product",
+					"request": {
+						"url": "http://localhost:8080/atsea/api/product/",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Product - list"
+					},
+					"response": []
+				},
+				{
+					"name": "/api/product/1",
+					"request": {
+						"url": "http://localhost:8080/atsea/api/product/1",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Product - individual"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Utility",
+			"description": "",
+			"item": [
+				{
+					"name": "/utility/containerid",
+					"request": {
+						"url": "http://localhost:8080/atsea/utility/containerid/",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Utility - container id"
+					},
+					"response": []
+				},
+				{
+					"name": "/utility/healthcheck",
+					"request": {
+						"url": "http://localhost:8080/mobyartshop/utility/healthcheck/",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Utility - healthcheck"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -7,7 +7,7 @@ const receiveProducts = products => ({
   products: products
 })
 
-const BASE_URL = '/mobyartshop/api'
+const BASE_URL = '/atsea/api'
 
 export const createOrder = (values) => (dispatch) => {
   const url = `${BASE_URL}/order/`

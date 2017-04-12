@@ -21,6 +21,7 @@
 }
 
 .tile {
+  background-color: #ffffff;
   height: 347px;
   width: 270px;
   box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.13);

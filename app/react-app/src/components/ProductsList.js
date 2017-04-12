@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import ProductItem from '../components/ProductItem'
 
-import { GridList } from 'material-ui/GridList'
 import './ProductsList.css'
 
 export default class ProductsList extends Component {
@@ -10,8 +9,10 @@ export default class ProductsList extends Component {
     const { title, products, addToCart } = this.props
     return(
       <div>
-        <div className="productListTitle">{title}</div>
-        <GridList cols={4} padding={42} cellHeight={347}>
+        <div className="productListTitle">
+          {title}
+        </div>
+        <div className="productListWrapper">
           {products.map(product => (
             <ProductItem
               key={product.productId}
@@ -19,7 +20,7 @@ export default class ProductsList extends Component {
               onAddToCartClicked={addToCart}
             />
           ))}
-        </GridList>
+        </div>
       </div>
     )
   }

@@ -15,7 +15,7 @@
 }
 
 .checkoutSection {
-    display: inline-block;
+    display: flex;
     float: right;
     margin-right: 114px;
 }

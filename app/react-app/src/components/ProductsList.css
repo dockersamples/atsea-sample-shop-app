@@ -1,8 +1,26 @@
 .productListTitle {
-    width: 100px;
-    height: 33px;
     font-family: "Open Sans";
     font-size: 24px;
+    margin-left: 120px;
     margin-bottom: 28px;
-    /*color: #ffffff;*/
+    color: #ffffff;
+}
+
+.productListWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    max-width: 1240px;
+}
+
+.productListWrapper > div {
+    padding: 20px;
+    flex: 0 0 25%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+    .productListWrapper {
+        justify-content: center;
+    }
 }

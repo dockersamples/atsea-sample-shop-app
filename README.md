@@ -6,6 +6,7 @@ mkdir -p app/react-app/node_modules
 npm install --prefix app/react-app
 npm run build --prefix app/react-app
 rm -r app/static; mv app/react-app/build app/static
+docker swarm init # needed if not presently in swarm mode
 docker run -ti -v $(pwd):/atsea -w /atsea maven:alpine mvn package -DskipTests
 docker-compose build
 docker-compose up

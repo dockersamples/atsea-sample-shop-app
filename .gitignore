@@ -1,6 +1,8 @@
 target/
 logs/*
 !.gitkeep
+app/static/
+app/react-app/build/
 node_modules/
 */node_modules/
 bower_components/

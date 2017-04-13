@@ -20,6 +20,8 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		
+	// -----Basic Authentication implemented but not used -------
+	
     @Autowired
     DataSource dataSource;
  

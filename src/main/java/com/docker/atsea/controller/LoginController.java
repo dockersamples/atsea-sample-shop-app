@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.Objects;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletResponse;
-
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +40,7 @@ public class LoginController {
         public String password;
     }
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseEntity<?> login(@RequestBody final UserLogin login) 
 		throws ServletException {

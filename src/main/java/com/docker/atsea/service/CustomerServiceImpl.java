@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.docker.atsea.model.Customer;
-import com.docker.atsea.model.Order;
 import com.docker.atsea.repositories.CustomerRepository;
 
 @Service("customerService")

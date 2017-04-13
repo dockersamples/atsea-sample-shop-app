@@ -156,18 +156,6 @@ public class Customer implements Serializable {
 		return username != null ? username.equals(customer.username) : customer.username == null;
 	}
 
-//	@Override
-//	public int hashCode() {
-//		int result;
-//		long temp;
-//		result = customerId != null ? customerId.hashCode() : 0;
-//		result = 31 * result + (name != null ? name.hashCode() : 0);
-//		result = 31 * result + (username != null ? username.hashCode() : 0);
-//		//temp = Double.doubleToLongBits(salary);
-//		//result = 31 * result + (int) (temp ^ (temp >>> 32));
-//		return result;
-//	}
-
 	@Override
 	public String toString() {
 		return "Customer [customerId=" + customerId 

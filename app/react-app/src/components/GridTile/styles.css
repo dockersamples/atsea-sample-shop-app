@@ -1,6 +1,6 @@
   .tileTitle {
+  margin-top: 5px;
   height: 24px;
-  margin-top: 35px;
   font-family: "Open Sans";
   font-size: 18px;
   text-align: center;
@@ -31,12 +31,17 @@
 
 .tileImage {
   align-self: center;
-  margin-top: 55px;
+  height: 200px;
+  padding: 20px 0 10px 0;
+}
+
+.tileImage > img {
+  height: 100%;
 }
 
 .titleBottom {
   display: flex;
-  margin-top: 20px;
+  margin-top: 5px;
   align-items: baseline;
   justify-content: space-between;
 }

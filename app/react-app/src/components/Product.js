@@ -8,9 +8,9 @@ class Product extends Component {
     const image2 = (
       <img
         alt="Logo"
-        src={`data:image/png;base64,${image}`}
-        height="40px"
-        width="40px"
+        src={process.env.PUBLIC_URL + image}
+        height="60px"
+        width="60px"
       />
     );
     return (

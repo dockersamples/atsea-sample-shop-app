@@ -15,9 +15,7 @@ export default class GridTile extends Component {
     const image2 = (
       <img
         alt="Logo"
-        src={`data:image/png;base64,${image}`}
-        height="115px"
-        width="126px"
+        src={process.env.PUBLIC_URL + image}
       />
     )
     return (

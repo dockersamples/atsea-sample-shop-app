@@ -1,8 +1,8 @@
-version: "3.1"
+version: "3.2"
 
 services:
   database:
-    image: atsea_db
+    image: dockersamples/atseadb
     environment:
       POSTGRES_USER: gordonuser
       POSTGRES_DB_PASSWORD_FILE: /run/secrets/postgres_password
@@ -13,12 +13,13 @@ services:
       - postgres_password
 
   appserver:
-    image: atsea_app
+    image: dockersamples/atseaapp
     ports:
       - "8080:8080" 
     networks:
       - front-tier
       - back-tier
+      - payment
     deploy:
       replicas: 2
       update_config:
@@ -40,12 +41,28 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
     deploy:
       placement:
-        constraints: [node.role == manager]
+        constraints:
+          - 'node.role == manager'
+
+  payment_gateway:
+    image: dockersamples/atseapayment
+    secrets:
+      - payment_token
+    deploy:
+      placement:
+        constraints:
+          - 'node.labels.pcidss == yes'
 
 networks:
   front-tier:
   back-tier:
+  payment:
+    driver: overlay
+    driver_opts:
+      encrypted: 'yes'
 
 secrets:
   postgres_password:
-    file: ./prodsecrets/postgres_password
+    external: true
+  payment_token:
+    external: true

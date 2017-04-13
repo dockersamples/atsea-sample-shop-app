@@ -39,10 +39,20 @@ services:
     volumes:
      - ./app/static:/static
 
+  payment_gateway:
+    build:
+      context: payment_gateway
+    networks:
+      - payment
+
 networks:
   front-tier:
   back-tier:
+  payment:
+    driver: overlay
 
 secrets:
   postgres_password:
     file: ./devsecrets/postgres_password
+  payment_token:
+    file: ./devsecrets/payment_token

@@ -15,7 +15,7 @@ CREATE TABLE product
 (
   productid serial UNIQUE PRIMARY KEY,
   description character varying(10485760) NOT NULL,
-  image oid,
+  image character varying(255) NOT NULL,
   name character varying(255) NOT NULL,
   price double precision NOT NULL
 );
@@ -64,7 +64,7 @@ INSERT INTO product (name, description, image, price) VALUES ('Containerd', 'Con
 INSERT INTO product (name, description, image, price) VALUES ('Registry', 'Where to put your containers', '/images/6.png', 25);
 INSERT INTO product (name, description, image, price) VALUES ('DockerMachine', 'Working like a well oiled machine', '/images/7.png', 25);
 INSERT INTO product (name, description, image, price) VALUES ('Swarm', 'Orchestrating work loads', '/images/8.png', 25);
-INSERT INTO product (name, description, image, price) VALUES ('Trusted Registry', 'Keeping it safe and secure', '/images/9.jpg', 25);
+INSERT INTO product (name, description, image, price) VALUES ('Trusted Registry', 'Keeping it safe and secure', '/images/9.png', 25);
 
 
 -- reset lo ownership of lo (images) to gordonuser

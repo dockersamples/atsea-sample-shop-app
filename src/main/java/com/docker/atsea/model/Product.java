@@ -30,15 +30,15 @@ public class Product implements Serializable {
     @Column(name = "description", length=10485760, nullable = false)
     private String description;
         
-    @Lob
+    @NotEmpty
     @Column(name = "image", length = Integer.MAX_VALUE, nullable = true)
-    private byte[] image; 
+    private String image; 
           
 	public Product() {
 		
 	}
 	
-	public Product(Long productId, String name, String description, double price, byte[] image) {
+	public Product(Long productId, String name, String description, double price, String image) {
 		this.productId = productId;
 		this.name = name;
 		this.description = description;
@@ -78,21 +78,21 @@ public class Product implements Serializable {
     	this.description = description;
     }
   
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
  
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
     
-//	@Override
-//	public String toString() {
-//		return "Product [productId=" + productId +
-//				         ", name=" + name +
-//				         ", price=" + price +
-//				         ", description=" + description +
-//				         ", image=" + image + "]";
-//	}
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId +
+				         ", name=" + name +
+				         ", price=" + price +
+				         ", description=" + description +
+				         ", image=" + image + "]";
+	}
 	
 }

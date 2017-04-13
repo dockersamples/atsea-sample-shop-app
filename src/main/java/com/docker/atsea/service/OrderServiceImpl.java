@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.docker.atsea.model.Customer;
 import com.docker.atsea.model.Order;
+import com.docker.atsea.repositories.CustomerRepository;
 import com.docker.atsea.repositories.OrderRepository;
 
 @Service("orderService")
@@ -15,6 +17,9 @@ public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	private OrderRepository orderRepository;
+	
+	@Autowired
+	private CustomerRepository customerRepository;
 	
 	public Order findById(Long orderId) {
 		return orderRepository.findOne(orderId) ;
@@ -49,5 +54,15 @@ public class OrderServiceImpl implements OrderService {
 	public List<Order> findAllOrders() {
 		return (List<Order>) orderRepository.findAll();
 	}
+
+//	@Override
+//	public Order findByUsername(String userName) {
+//		Customer customer = customerRepository.findByUserName(userName);
+//		Long customerId = customer.getCustomerId();
+//		Order order = orderRepository.
+//		
+//		customer = 
+//		return null;
+//	}
 	
 }

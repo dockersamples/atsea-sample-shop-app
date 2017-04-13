@@ -14,9 +14,4 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
 		registry.addResourceHandler("/**").addResourceLocations("file:static/");
 	}
 	
-	@Bean
-	public RestTemplate templare() {
-		return new RestTemplate();
-	}
-
 }

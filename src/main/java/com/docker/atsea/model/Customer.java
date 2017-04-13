@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
 
+import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -45,8 +46,8 @@ public class Customer implements Serializable {
 	@Column(name = "password", length = 255, nullable = false)
     private String password;
 	
-	
-	@Column(name = "enabled")
+	@Column(name = "enabled", nullable = false)
+	@Type( type = "org.hibernate.type.NumericBooleanType")
 	private boolean enabled;
 	
 	@NotEmpty

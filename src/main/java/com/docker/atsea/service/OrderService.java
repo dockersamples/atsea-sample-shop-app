@@ -10,6 +10,8 @@ public interface OrderService {
 	
 	Order findById(Long orderId);
 	
+//	Order findByUsername(String userName);
+	
 	Order createOrder(Order order);
 	
 	void saveOrder(Order order);

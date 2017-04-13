@@ -27,6 +27,7 @@ import com.docker.atsea.service.CustomerService;
 import com.docker.atsea.service.OrderService;
 import com.docker.atsea.service.ProductService;
 import com.docker.atsea.util.CustomErrorType;
+import com.docker.atsea.util.CustomerInfo;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
@@ -153,6 +154,21 @@ public class RestApiController {
 		}
 		return new ResponseEntity<Order>(order, HttpStatus.OK);
 	}
+	
+	// -------------------Retrieve Single Order By Username------------------------------------------
+
+//	@SuppressWarnings({ "unchecked", "rawtypes" })
+//	@RequestMapping(value = "/order/username={userName}", method = RequestMethod.GET)
+//	public ResponseEntity<?> getOrder(@PathVariable("userName") String userName) {
+//		logger.info("Fetching Order for username {}", userName);
+//		Order order = orderService.
+//		if (order == null) {
+//			logger.error("Order with id {} not found.", orderId);
+//			return new ResponseEntity(new CustomErrorType("Order with id " + orderId 
+//					+ " not found"), HttpStatus.NOT_FOUND);
+//		}
+//		return new ResponseEntity<Order>(order, HttpStatus.OK);
+//	}
 
 	// ---------------------Update an order-------------------------------
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -208,7 +224,10 @@ public class RestApiController {
 			return new ResponseEntity(new CustomErrorType("Customer with id " + customerId 
 					+ " not found"), HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Customer>(customer, HttpStatus.OK);
+		
+		CustomerInfo customerInfo = new CustomerInfo();
+		JSONObject customerData = customerInfo.getCustomerInfo(customer);
+		return new ResponseEntity<JSONObject>(customerData, HttpStatus.OK);
 	}
 	
 	// -------------------Retrieve Single Customer by UserName------------------------------------------
@@ -223,7 +242,10 @@ public class RestApiController {
 			return new ResponseEntity(new CustomErrorType("Customer with username " + userName 
 					+ " not found"), HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Customer>(customer, HttpStatus.OK);
+		
+		CustomerInfo customerInfo = new CustomerInfo();
+		JSONObject customerData = customerInfo.getCustomerInfo(customer);
+		return new ResponseEntity<JSONObject>(customerData, HttpStatus.OK);
 	}
 
 	// -------------------Retrieve Single Customer by Name------------------------------------------
@@ -238,7 +260,10 @@ public class RestApiController {
 			return new ResponseEntity(new CustomErrorType("Customer with name " + name 
 					+ " not found"), HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Customer>(customer, HttpStatus.OK);
+
+		CustomerInfo customerInfo = new CustomerInfo();
+		JSONObject customerData = customerInfo.getCustomerInfo(customer);
+		return new ResponseEntity<JSONObject>(customerData, HttpStatus.OK);
 	}
 	
 	// -------------------Create a Customer-------------------------------------------
@@ -321,22 +346,5 @@ public class RestApiController {
 		return new ResponseEntity<Customer>(HttpStatus.NO_CONTENT);
 	}
 	
-	
-	// ----------------Page controllers -----------------------------------
-	@RequestMapping(value="/login/{message}", method = RequestMethod.GET)
-	public String echo(@PathVariable(value = "message") final String message,
-			@AuthenticationPrincipal final UserDetails user) {
-//			if (customer != null) {
-//			System.out.println(customer);
-//			}
-			return user.getUsername() +" said: " + message;
-	}	
-	
-	    
-    
-    @RequestMapping(value="/403")
-    public String Error403(){
-        return "403";
-    }
 	
 }

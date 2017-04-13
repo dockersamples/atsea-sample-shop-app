@@ -547,6 +547,39 @@ HTTP 404 NOT FOUND
     "error":""Unable to delete order. Order with id xx not found."
 }
 ```
+### Login and Purchase
+
+#### Login
+Request:
+```
+GET: /login/
+Host: localhost:8080
+Auth: 
+Content-type: application/json
+Accept: application/json
+
+{
+    "username" : "gordon",
+    "password" : "gordonpassword"
+}
+```
+Returns:
+```
+HTTP 200 OK
+
+{
+    "token" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzcGFjZWdvYXQiLCJyb2xlcyI6InNwYWNlZ29hdCIsImlhdCI6MTQ5MjA5ODAwM30.8zdJd5PyWmIEMkBcdtJlaT65nvRhKWH5QBSHjTLGQpo"
+}
+```
+Error:
+```
+HTTP 403 UNAUTHORIZED
+
+"Customer name or password not found."
+```
+
+
+
 ### System Utilities
 
 #### Database Healthcheck
@@ -595,3 +628,4 @@ HTTP 404 NOT FOUND
 {
     "error":"Container id not found"
 }
+

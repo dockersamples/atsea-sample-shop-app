@@ -1,4 +1,4 @@
-package com.docker.mobyartshop.test;
+package com.docker.atsea.test;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -28,7 +28,7 @@ import com.docker.atsea.service.ProductServiceImpl;
 
 @SuppressWarnings("serial")
 @RunWith(SpringRunner.class)
-public class UnitTest2 {
+public class UnitTest {
 	@Mock
 	CustomerRepository customerRepository;
 	
@@ -61,8 +61,7 @@ public class UnitTest2 {
 			"arthurd", "docker!", true, "ADMIN");
 	
 	// Mock product
-	public byte[] value = new byte[1];
-	public Product returnProduct = new Product(1l, "Container", "container picture", 25.50, value);
+	public Product returnProduct = new Product(1l, "Container", "container picture", 25.50, "http://localhost:8080/atsea/static/images/container.jpg");
 	
 	// Mock order
 	public Date orderDate = new Date(); 

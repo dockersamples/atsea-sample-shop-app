@@ -552,7 +552,7 @@ HTTP 404 NOT FOUND
 #### Login
 Request:
 ```
-GET: /login/
+POST: /login/
 Host: localhost:8080
 Auth: 
 Content-type: application/json
@@ -577,8 +577,29 @@ HTTP 403 UNAUTHORIZED
 
 "Customer name or password not found."
 ```
+#### Purchase
+Request:
+```
+GET: /purchase/
+Host: localhost:8080
+Auth: 
+Content-type: application/json
+Accept: application/json
 
+{
+    "username" : "spacegoat", 
+    "password" : "spacegoatpass"
+}
+```
+Returns:
+```
+HTTP 200 OK
 
+{
+    "message": "Thank you for shopping @Sea! We're sending a confirmation email shortly and getting your order ready!"
+}
+```
+Error:
 
 ### System Utilities
 

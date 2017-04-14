@@ -5,16 +5,19 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.docker.atsea.configuration.JpaConfiguration;
+import com.docker.atsea.controller.LoginController;
 import com.docker.atsea.security.JwtFilter;
 
 
 @Import(JpaConfiguration.class)
 @SpringBootApplication(scanBasePackages={"com.docker.atsea"})
 @EntityScan("com.docker.atsea.model")
+@ComponentScan(basePackageClasses = LoginController.class)
 @EnableJpaRepositories("com.docker.atsea.repository")
 public class AtSeaApp {
 

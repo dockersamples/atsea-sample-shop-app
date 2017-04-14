@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/purchase/")
 public class PurchaseController {
 	
-	public static final Logger logger = LoggerFactory.getLogger(UtilityController.class);
+	public static final Logger logger = LoggerFactory.getLogger(PurchaseController.class);
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="", method = RequestMethod.GET)

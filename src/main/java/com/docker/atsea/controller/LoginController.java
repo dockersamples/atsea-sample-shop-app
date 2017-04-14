@@ -27,7 +27,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @RequestMapping(path = "/login/")
 public class LoginController {
 	
-	public static final Logger logger = LoggerFactory.getLogger(UtilityController.class);
+	public static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@Autowired
 	CustomerService customerService;

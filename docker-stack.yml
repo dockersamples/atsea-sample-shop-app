@@ -24,6 +24,7 @@ services:
       replicas: 2
       update_config:
         parallelism: 2
+        failure_action: rollback
       restart_policy:
         condition: on-failure
         delay: 5s
@@ -40,6 +41,8 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     deploy:
+      update_config:
+        failure_action: rollback
       placement:
         constraints:
           - 'node.role == manager'
@@ -47,8 +50,11 @@ services:
   payment_gateway:
     image: dockersamples/atseapayment
     secrets:
-      - payment_token
+      - source: payment_token
+        target: payment_token
     deploy:
+      update_config:
+        failure_action: rollback
       placement:
         constraints:
           - 'node.labels.pcidss == yes'
@@ -65,4 +71,6 @@ secrets:
   postgres_password:
     external: true
   payment_token:
+    external: true
+  payment_token_b:
     external: true

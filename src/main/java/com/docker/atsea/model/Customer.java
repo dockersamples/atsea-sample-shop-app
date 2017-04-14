@@ -156,15 +156,15 @@ public class Customer implements Serializable {
 		return username != null ? username.equals(customer.username) : customer.username == null;
 	}
 
-	@Override
-	public String toString() {
-		return "Customer [customerId=" + customerId 
-				          + ", name=" + name 
-				          + ", username=" + username
-				          + ", address=" + address 
-				          + ", email=" + email 
-				          + ", phone=" + phone 
-				          + ", password=" + password +  "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Customer [customerId=" + customerId 
+//				          + ", name=" + name 
+//				          + ", username=" + username
+//				          + ", address=" + address 
+//				          + ", email=" + email 
+//				          + ", phone=" + phone 
+//				          + ", password=" + password +  "]";
+//	}
     
 }

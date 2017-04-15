@@ -34,6 +34,8 @@ services:
       context: payment_gateway
     networks:
       - payment
+    secrets:
+      - payment_token
 
 networks:
   front-tier:

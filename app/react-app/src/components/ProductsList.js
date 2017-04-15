@@ -9,9 +9,6 @@ export default class ProductsList extends Component {
     const { title, products, addToCart } = this.props
     return(
       <div>
-        <div className="productListTitle">
-          {title}
-        </div>
         <div className="productListWrapper">
           {products.map(product => (
             <ProductItem

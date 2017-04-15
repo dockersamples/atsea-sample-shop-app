@@ -7,7 +7,11 @@ import { createLogger } from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import promiseMiddleware from 'redux-promise-middleware'
 import reducer from './reducers'
-import { getAllProducts, fetchAllItems } from './actions'
+import {
+  getAllProducts,
+  fetchAllItems,
+  fetchContainerId,
+} from './actions'
 import App from './containers/App'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
@@ -38,6 +42,7 @@ const muiTheme = getMuiTheme({
 
 store.dispatch(getAllProducts())
 store.dispatch(fetchAllItems())
+store.dispatch(fetchContainerId())
 
 render(
   <Provider store={store}>

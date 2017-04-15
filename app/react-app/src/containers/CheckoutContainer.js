@@ -1,7 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
-import { checkout, createOrder } from '../actions'
+import {
+  checkout,
+  createOrder,
+  purchaseOrder,
+} from '../actions'
 import { getTotal, getCartProducts, getTotalProducts, getCustomerId, getQuantityById } from '../reducers'
 import Checkout from '../components/Checkout'
 
@@ -14,17 +18,12 @@ class CheckoutContainer extends Component {
     }
 
     handleSuccess = () => {
-      // TODO: make an overlay panel
-      // TODO: should state be controlled in this container?
-      // change the state to a success
       this.setState({ orderComplete: true })
       console.log('success!')
     }
 
     handleSubmit = (values) => {
-      // e.preventDefault()
-      //TODO: put check for if there's no user logged in or no quantity
-      const { customerId, createOrder, quantityById } = this.props
+      const { customerId, purchaseOrder, quantityById } = this.props
       const date = moment().format()
       const {
         firstName,
@@ -37,15 +36,16 @@ class CheckoutContainer extends Component {
         lastName,
         quantityById
       }
-      createOrder(submitData)
+
+      // TODO: Create Order
+      purchaseOrder()
         .then(this.handleSuccess)
         // error: status 404
         .catch((err) => {
           //TODO: more elegant error handling
-          console.log('There was an error creating the order!!!!')
+          console.log('There was an error creating the order, please try loggin in!!!!')
           console.log(err)
         })
-
    }
 
    renderCheckout() {
@@ -103,5 +103,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
   mapStateToProps,
-  { checkout, createOrder }
+  { checkout, createOrder, purchaseOrder }
 )(CheckoutContainer)

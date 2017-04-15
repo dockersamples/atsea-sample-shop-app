@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import Cart from '../Cart'
 import FlatButton from 'material-ui/FlatButton'
 import { Link } from 'react-router'
@@ -26,5 +26,12 @@ const Title = ({ products, total, totalProducts }) => (
         </div>
     </div>
 )
+
+// Title.propTypes = {
+//     products: PropTypes.array,
+//     total: PropTypes.string,
+//     totalProducts: PropTypes.string,
+// }
+
 
 export default Title

@@ -127,7 +127,7 @@ class TopNav extends Component {
     const content = this.state.createUserSuccessful
       ? <SuccessMessage
           message={successMessage}
-          buttonLabel={'Continue Shopping'}
+          label={'Continue Shopping'}
           handleClick={this.toggleCreateModal}
         />
       : <CreateUserForm onSubmit={this.handleCreateUser} />;
@@ -158,10 +158,14 @@ class TopNav extends Component {
   };
 
   renderUnauthenticated() {
+    const styles = {
+        color: '#fff'
+    };
+
     return (
         <div>
-          <FlatButton onClick={this.toggleCreateModal} label="Create User" />
-          <FlatButton onClick={this.toggleLoginModal} label="Login" />
+          <FlatButton style={styles} onClick={this.toggleCreateModal} label="Create User" />
+          <FlatButton style={styles} onClick={this.toggleLoginModal} label="Login" />
           {this.renderCreateModal()}
           {this.renderLoginModal()}
         </div>
@@ -171,7 +175,9 @@ class TopNav extends Component {
   renderAuthenticated() {
     return (
       <div>
+        <span className="welcomeMessage">
           Welcome!
+        </span>
         <FlatButton onClick={this.removeToken} label="Logout" />
       </div>
     );

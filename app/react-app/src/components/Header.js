@@ -3,7 +3,7 @@ import './Header.css'
 
 const Header = () => {
     const title = 'Welcome to the atsea shop'
-    const subtitle = 'swaggy swag!'
+    const subtitle = ''
     return (
         <div className='headerSection'>
             <div className='headerTitle'>

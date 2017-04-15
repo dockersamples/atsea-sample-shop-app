@@ -14,6 +14,10 @@ const Title = ({ products, total, totalProducts }) => (
             </div>
              <div className="checkout-button">
                 <FlatButton
+                    style={{
+                        color: '#fff',
+                        backgroundColor: "#099CEC",
+                    }}
                     label="Checkout"
                     containerElement={<Link to="checkout"> Checkout </Link>}
                 />

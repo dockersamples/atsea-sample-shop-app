@@ -1,6 +1,16 @@
 #  AtSea Demo Application
 
-## Current build and run (this will be improved)
+## Current build and run 
+
+> If you have Docker 17.05+ with multistage builds:
+
+```bash
+docker-compose build
+docker-compose up
+```
+
+> Otherwise:
+
 ```bash
 mkdir -p app/react-app/node_modules
 npm install --prefix app/react-app
@@ -14,6 +24,10 @@ docker-compose up
 
 (Unfortunately the above will most likely not work on Linux due to root bind
 mount, you will need to get craftier with user remapping if executing there)
+
+Browse to the app at [http://localhost:8080/atsea/index.html](http://localhost:8080/atsea/index.html).
+
+The REST API base URL is `http://localhost:8080/atsea/api/`.
 
 ## The demo application is a store application with the following features:
 

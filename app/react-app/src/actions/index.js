@@ -46,7 +46,19 @@ export const createOrder = (values) => (dispatch) => {
 
 export const purchaseOrder = () => (dispatch) => {
   const token = getJwtToken()
-  // post to purchase order
+  let dispatchObj = {
+    type: types.PURCHASE,
+    payload: {
+      promise:
+        request
+          .get(`${BASE_URL}/purchase/`)
+          .set('Authorization', 'Bearer ' + token)
+          .accept('application/json')
+          .end()
+          .then((res) => res.body)
+    },
+  }
+  return dispatch(dispatchObj)
 }
 
 export const fetchAllItems = () => (dispatch) => {
@@ -117,40 +129,27 @@ export const getCustomer = (username, password) => (dispatch) => {
   return dispatch(dispatchObj)
 }
 
-// export const loginCustomer = (username, password) => (dispatch) => {
-//  let dispatchObj = {
-//     type: types.LOGIN_CUSTOMER,
-//     payload: {
-//       promise:
-//         request
-//           .post(`${BASE_URL}/login/`)
-//           .set('Content-Type', 'application/json')
-//           .accept('application/json')
-//           .send(
-//             {
-//               username:username,
-//               password:password,
-//             }
-//           )
-//           .end()
-//           .then((res) => res.body)
-//     },
-//   }
-//   return dispatch(dispatchObj)
-// }
-
 export const loginCustomer = (username, password) => (dispatch) => {
  let dispatchObj = {
     type: types.LOGIN_CUSTOMER,
     payload: {
-      promise: Promise.resolve({
-          token: "random_string",
-      })
+      promise:
+        request
+          .post(`${BASE_URL}/login/`)
+          .set('Content-Type', 'application/json')
+          .accept('application/json')
+          .send(
+            {
+              username:username,
+              password:password,
+            }
+          )
+          .end()
+          .then((res) => res.body)
     },
   }
   return dispatch(dispatchObj)
 }
-
 
 export const fetchContainerId = () => (dispatch) => {
   const url = `${UTILITY}/containerid/`

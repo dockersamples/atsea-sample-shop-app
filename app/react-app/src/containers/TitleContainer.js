@@ -1,17 +1,17 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { getTotal, getTotalProducts, getCartProducts } from '../reducers'
-import Cart from '../components/Cart'
+import Title from '../components/Title'
 
-const CartContainer = ({ products, total, totalProducts }) => (
-  <Cart
+const TitleContainer = ({ products, total, totalProducts }) => (
+  <Title
     products={products}
     total={total}
     totalProducts={totalProducts}
    />
 )
 
-CartContainer.propTypes = {
+TitleContainer.propTypes = {
   products: PropTypes.arrayOf(PropTypes.shape({
     productId: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -28,4 +28,4 @@ const mapStateToProps = (state) => ({
   totalProducts: getTotalProducts(state)
 })
 
-export default connect(mapStateToProps)(CartContainer)
+export default connect(mapStateToProps)(TitleContainer)

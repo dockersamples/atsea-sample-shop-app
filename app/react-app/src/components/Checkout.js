@@ -91,7 +91,9 @@ class Checkout extends Component {
     return (
       <div>
         <div className='header'>
-          Checkout
+          <div className='checkoutTitle'>
+            Checkout
+          </div>
         </div>
         <div className='panel'>
           <div className='formSection'>

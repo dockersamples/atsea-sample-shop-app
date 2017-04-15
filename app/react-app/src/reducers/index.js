@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import cart, * as fromCart from './cart'
 import products, * as fromProducts from './products'
 import customer, * as fromCustomer from './customer'
+import container from './container'
 import { reducer as formReducer } from 'redux-form'
 
 
@@ -9,6 +10,7 @@ export default combineReducers({
   cart,
   products,
   customer,
+  container,
   form: formReducer,
 })
 
@@ -18,6 +20,12 @@ const getProduct = (state, id) => fromProducts.getProduct(state.products, id)
 
 // TODO: rename selectors?
 export const isActive = state => fromCustomer.isActive(state.customer)
+export const getContainerId = state => { 
+  return state.container.containerId
+}
+export const getHost = state => { 
+  return state.container.host
+}
 export const getCustomerId = state => {
   return state.customer.customerId
 }

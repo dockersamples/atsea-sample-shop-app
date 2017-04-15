@@ -1,12 +1,5 @@
-.productListTitle {
-    font-family: "Open Sans";
-    font-size: 24px;
-    margin-left: 120px;
-    margin-bottom: 28px;
-    color: #ffffff;
-}
-
 .productListWrapper {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     margin: 0 auto;

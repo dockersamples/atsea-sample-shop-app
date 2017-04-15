@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form';
 import { TextField, FlatButton } from 'material-ui';
+import Input from './Input';
 import './CustomerInfoForm.css';
 
 class CustomerInfoForm extends Component {
@@ -13,50 +14,35 @@ class CustomerInfoForm extends Component {
           <div className='formRow'>
           <Field 
             name="firstName"
-            component={firstName=> 
-              <TextField
-                hintText="First Name" 
-                errorText={firstName.touched && firstName.error}
-                {...firstName.input} 
-              />} 
+            component={firstName=>
+              <Input field={firstName} hintText={"First Name"} /> 
+            }
          />
           <Field 
             name="lastName"
-            component={lastName=> 
-              <TextField
-                hintText="Last Name" 
-                errorText={lastName.touched && lastName.error}
-                {...lastName.input} 
-              />} 
+            component={lastName=>
+              <Input field={lastName} hintText={"Last Name"} /> 
+            }
          />
          </div>
           <div className='formRow'>
           <Field 
             name="cardNumber"
-            component={cardNumber=> 
-              <TextField
-                hintText="Card Number" 
-                errorText={cardNumber.touched && cardNumber.error}
-                {...cardNumber.input} 
-              />} 
+            component={cardNumber=>
+              <Input field={cardNumber} hintText={"Card Number"} /> 
+            }
          />
           <Field 
             name="cvv"
             component={cvv=> 
-              <TextField
-                hintText="CVV" 
-                errorText={cvv.touched && cvv.error}
-                {...cvv.input} 
-              />} 
+              <Input field={cvv} hintText={"CVV"} /> 
+            }
          />
           <Field 
             name="expirationDate"
             component={date=> 
-              <TextField
-                hintText="Month / Year" 
-                errorText={date.touched && date.error}
-                {...date.input} 
-              />} 
+              <Input field={date} hintText={"Date"} /> 
+            }
          />
         </div>
       </div>
@@ -66,45 +52,33 @@ class CustomerInfoForm extends Component {
   renderBilling() {
     return (
       <div>
-        <div className='formHeader'>Billing Information</div>
-        <div className='formRow'>
+        <div className='infoHeader'>Billing Information</div>
+        <div className='infoRow'>
         <Field 
           name="company"
-          component={company => 
-            <TextField
-              hintText="Company" 
-              errorText={company.touched && company.error}
-              {...company.input} 
-            />} 
+          component={company=> 
+            <Input field={company} hintText={"Company"} /> 
+          }
         />
       <Field 
         name="title"
         component={title=> 
-          <TextField
-            hintText="Title" 
-            errorText={title.touched && title.error}
-            {...title.input} 
-          />} 
+            <Input field={title} hintText={"Title"} /> 
+        }
       />
       </div>
-        <div className='formRow'>
+        <div className='infoRow'>
           <Field 
             name="address"
             component={address=> 
-              <TextField
-                hintText="Address" 
-                errorText={address.touched && address.error}
-                {...address.input} 
-              />} 
+              <Input field={address} hintText={"Address"} /> 
+            }
           />
           <Field 
             name="city"
             component={city=> 
-              <TextField
-                hintText="City" 
-                errorText={city.touched && city.error}
-                {...city.input} 
-              />} 
+              <Input field={city} hintText={"City"} /> 
+            }
           />
         </div>
       </div>
@@ -113,7 +87,7 @@ class CustomerInfoForm extends Component {
 
   renderButtons() {
     return(
-      <div className='formButton'>
+      <div className='infoButton'>
         <FlatButton
           label="Continue Shopping"
           containerElement={<Link to="/" />}
@@ -145,7 +119,6 @@ class CustomerInfoForm extends Component {
 
 CustomerInfoForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  fields: PropTypes.object.isRequired
 };
 
 export default CustomerInfoForm = reduxForm({

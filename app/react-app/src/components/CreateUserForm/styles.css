@@ -1,14 +1,14 @@
-.infoRow {
-    display: flex;
+.formRow {
+    display: grid;
     font-family: "Open Sans";
 }
 
-.infoHeader {
+.formHeader {
     padding-top: 30px;
     font-size: 16px;
     font-family: "Open Sans";
 }
 
-.infoButton {
+.formButton {
     display: inline-flex;
 }

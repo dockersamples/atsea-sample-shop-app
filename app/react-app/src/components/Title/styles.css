@@ -1,0 +1,16 @@
+.productsSection {
+    float: left;
+    font-family: "Open Sans";
+    font-size: 24px;
+    color: #ffffff;
+}
+
+.titleBar {
+   height: 60px;
+}
+
+.checkout-button{
+    display: flex;
+    float: right;
+    margin-top: -50px;
+}

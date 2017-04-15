@@ -67,26 +67,6 @@ class Checkout extends Component {
     );
   }
 
-  
-  //TODO: ask Josh if it's ok that this is within the form div
-  // OR search around for solution.
-  renderCheckout() {
-    const { products, onCheckoutClicked } = this.props;
-    const hasProducts = products.length > 0;
-    return (
-      <div>
-        <FlatButton onClick={onCheckoutClicked}
-          disabled={hasProducts ? '' : 'disabled'}
-          label={`Continue Shopping`}
-        />
-        <FlatButton onClick={onCheckoutClicked}
-          disabled={hasProducts ? '' : 'disabled'}
-          label={`Complete Order`}
-        />
-      </div>
-    );
-  }
-
   render() {
     return (
       <div>
@@ -103,9 +83,6 @@ class Checkout extends Component {
             {this.renderProductList()}
             {this.renderCartTotal()}
           </div>
-        </div>
-        <div className='buttonRow'>
-          {/*{this.renderCheckout()}*/}
         </div>
       </div>
     )

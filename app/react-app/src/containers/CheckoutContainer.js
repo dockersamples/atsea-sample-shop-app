@@ -7,7 +7,10 @@ import {
   purchaseOrder,
 } from '../actions'
 import { getTotal, getCartProducts, getTotalProducts, getCustomerId, getQuantityById } from '../reducers'
+import SuccessMessage from '../components/SuccessMessage'
 import Checkout from '../components/Checkout'
+import { Link } from 'react-router'
+
 
 class CheckoutContainer extends Component {
     constructor(props){
@@ -19,7 +22,6 @@ class CheckoutContainer extends Component {
 
     handleSuccess = () => {
       this.setState({ orderComplete: true })
-      console.log('success!')
     }
 
     handleSubmit = (values) => {
@@ -62,11 +64,18 @@ class CheckoutContainer extends Component {
    }
 
    renderSuccess() {
+     const successMessage = 'You have successfully placed an order!'
       return (
-        <div>
-          You have successfully placed an order!
-        </div>
+        <SuccessMessage
+          message={successMessage}
+          label={`Continue Shopping`}
+          containerElement={<Link to="/" />}
+        />
       );
+   }
+
+   handleClick = () => {
+    //  this.toggleModal
    }
 
   render () {

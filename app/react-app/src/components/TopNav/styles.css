@@ -21,9 +21,16 @@
     font-size: 12px;
 }
 
-.formContainer{
+.formContainer {
     height: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.welcomeMessage {
+    padding-right: 12px;
+    color: #ffffff;
+    font-family: "Open Sans";
+    font-size: 14px;
 }

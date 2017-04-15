@@ -15,29 +15,19 @@ services:
       - back-tier
     secrets:
       - postgres_password
-    #restart: always
 
   appserver:
     build:
        context: .
        dockerfile: app/Dockerfile
     image: atsea_app
-    # mount point for application in tomcat
-    links:
-      - database:atsea_db
-    # open ports for tomcat and remote debugging
     ports:
       - "8080:8080" 
     networks:
       - front-tier
       - back-tier
-    volumes:
-      - ./app/static:/static
     secrets:
       - postgres_password
-    #restart: always
-    volumes:
-     - ./app/static:/static
 
   payment_gateway:
     build:

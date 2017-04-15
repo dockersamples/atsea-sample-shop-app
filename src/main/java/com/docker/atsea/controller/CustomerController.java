@@ -6,6 +6,7 @@ import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.docker.atsea.model.Customer;
 import com.docker.atsea.service.CustomerService;
+import com.docker.atsea.service.CustomerServiceImpl;
+import com.docker.atsea.service.OrderService;
+import com.docker.atsea.service.OrderServiceImpl;
 import com.docker.atsea.util.CustomErrorType;
 import com.docker.atsea.util.CustomerInfo;
 
@@ -26,6 +30,11 @@ import com.docker.atsea.util.CustomerInfo;
 public class CustomerController {
 	
 	public static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
+	
+	@Bean
+	public CustomerService customerService() {
+		return new CustomerServiceImpl();
+	}
 
 	@Autowired
 	CustomerService customerService;

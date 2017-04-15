@@ -8,6 +8,8 @@ import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.docker.atsea.model.Customer;
 import com.docker.atsea.repositories.CustomerRepository;
 import com.docker.atsea.service.CustomerService;
+import com.docker.atsea.service.CustomerServiceImpl;
 import com.docker.atsea.util.CustomErrorType;
 
 import io.jsonwebtoken.Jwts;
@@ -28,13 +31,10 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class LoginController {
 	
 	public static final Logger logger = LoggerFactory.getLogger(LoginController.class);
-	
+		
 	@Autowired
 	CustomerService customerService;
-	
-	@Autowired 
-	CustomerRepository customerRepository;
- 
+		
 	private static class UserLogin {
         public String username;
         public String password;

@@ -30,11 +30,7 @@ import com.docker.atsea.util.CustomerInfo;
 public class CustomerController {
 	
 	public static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
-	
-	@Bean
-	public CustomerService customerService() {
-		return new CustomerServiceImpl();
-	}
+
 
 	@Autowired
 	CustomerService customerService;

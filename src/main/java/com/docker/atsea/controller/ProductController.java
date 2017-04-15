@@ -24,11 +24,6 @@ import com.docker.atsea.util.CustomErrorType;
 @RequestMapping("/api")
 public class ProductController {
 	public static final Logger logger = LoggerFactory.getLogger(ProductController.class);
-
-	@Bean
-	public ProductService productService() {
-		return new ProductServiceImpl();
-	}
 	
 	@Autowired
 	ProductService productService; //Service which will do all data retrieval/manipulation work

@@ -27,11 +27,6 @@ import com.docker.atsea.util.CustomErrorType;
 public class OrderController {
 	
 	public static final Logger logger = LoggerFactory.getLogger(OrderController.class);
-
-	@Bean
-	public OrderService orderService() {
-		return new OrderServiceImpl();
-	}
 	
 	@Autowired
 	OrderService orderService;

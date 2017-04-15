@@ -8,9 +8,13 @@ services:
       POSTGRES_DB_PASSWORD_FILE: /run/secrets/postgres_password
       POSTGRES_DB: atsea
     networks:
-     - back-tier
+      - back-tier
     secrets:
       - postgres_password
+    deploy:
+      placement:
+        constraints:
+          - 'node.role == worker'
 
   appserver:
     image: dockersamples/atseaapp
@@ -25,6 +29,9 @@ services:
       update_config:
         parallelism: 2
         failure_action: rollback
+      placement:
+        constraints:
+          - 'node.role == worker'
       restart_policy:
         condition: on-failure
         delay: 5s
@@ -52,11 +59,14 @@ services:
     secrets:
       - source: payment_token
         target: payment_token
+    networks:
+      - payment
     deploy:
       update_config:
         failure_action: rollback
       placement:
         constraints:
+          - 'node.role == worker'
           - 'node.labels.pcidss == yes'
 
 networks:
@@ -71,6 +81,4 @@ secrets:
   postgres_password:
     external: true
   payment_token:
-    external: true
-  payment_token_b:
     external: true

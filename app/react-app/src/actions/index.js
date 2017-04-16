@@ -1,5 +1,5 @@
 const request = require('superagent-promise')(require('superagent'), Promise)
-import getJwtToken from './getJwtToken'
+import { getJwtToken } from './storage'
 import shop from '../api/shop'
 import * as types from '../constants/ActionTypes'
 
@@ -172,6 +172,13 @@ export const fetchContainerId = () => (dispatch) => {
 export const logoutCustomer = () => (dispatch) => {
   dispatch({
     type: types.LOGOUT_CUSTOMER
+  })
+}
+
+export const addUser = (username) => (dispatch) => {
+  dispatch({
+    type: types.ADD_USER,
+    username
   })
 }
 

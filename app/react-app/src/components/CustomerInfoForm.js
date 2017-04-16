@@ -10,8 +10,8 @@ class CustomerInfoForm extends Component {
   renderCredit() {
     return (
       <div>
-        <div className='formHeader'>Credit Card Information</div>
-          <div className='formRow'>
+        <div className='infoHeader'>Credit Card Information</div>
+          <div className='infoRow'>
           <Field 
             name="firstName"
             component={firstName=>
@@ -25,7 +25,7 @@ class CustomerInfoForm extends Component {
             }
          />
          </div>
-          <div className='formRow'>
+          <div className='infoRow'>
           <Field 
             name="cardNumber"
             component={cardNumber=>
@@ -41,7 +41,7 @@ class CustomerInfoForm extends Component {
           <Field 
             name="expirationDate"
             component={date=> 
-              <Input field={date} hintText={"Date"} /> 
+              <Input field={date} hintText={"MM/YY"} /> 
             }
          />
         </div>
@@ -86,15 +86,29 @@ class CustomerInfoForm extends Component {
   }
 
   renderButtons() {
+    const labelStyles = {
+      textTransform: 'none',
+      fontFamily: 'Open Sans',
+      fontWeight: 600,
+    };
     return(
       <div className='infoButton'>
         <FlatButton
           label="Continue Shopping"
           containerElement={<Link to="/" />}
+          style={{
+              color: '#099CEC',
+          }}
+          labelStyle={labelStyles}
         />
         <FlatButton
           label="Complete Order"
           type="submit"
+          style={{
+              color: '#fff',
+              backgroundColor: '#099CEC',
+          }}
+          labelStyle={labelStyles}
         />
       </div>
     );
@@ -103,13 +117,16 @@ class CustomerInfoForm extends Component {
   render() {
     const { 
       handleSubmit,
+      error,
     } = this.props;
+    const err = error ? <span className='loginErrorMessage'>{error}</span> : null
 
     return (
       <div>
         <form onSubmit={handleSubmit}>
           {this.renderCredit()}
           {this.renderBilling()}
+          {err}
           {this.renderButtons()}
         </form>
       </div>

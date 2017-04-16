@@ -29,6 +29,9 @@ export const getHost = state => {
 export const getCustomerId = state => {
   return state.customer.customerId
 }
+export const getUsername = state => {
+  return state.customer.username
+}
 
 export const getQuantityById = state => {
   return state.cart.quantityById

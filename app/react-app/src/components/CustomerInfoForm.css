@@ -10,5 +10,13 @@
 }
 
 .infoButton {
+    padding-top: 50px;
+    float: right;
     display: inline-flex;
+}
+
+.loginErrorMessage {
+    font-size: 14px;
+    font-family: "Open Sans";
+    color: red;
 }

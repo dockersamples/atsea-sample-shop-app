@@ -1,14 +1,18 @@
-.formRow {
-    display: grid;
+.createFormRow {
     font-family: "Open Sans";
 }
 
-.formHeader {
+.createFormHeader {
+    font-size: 18px;
+    font-family: "Open Sans";
+    padding-bottom: 30px;
+}
+
+.createFormButton {
     padding-top: 30px;
-    font-size: 16px;
-    font-family: "Open Sans";
 }
 
-.formButton {
-    display: inline-flex;
+.createFormContent {
+    display: flex;
+    text-align: center;
 }

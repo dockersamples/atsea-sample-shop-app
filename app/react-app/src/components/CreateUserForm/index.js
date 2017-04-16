@@ -3,26 +3,30 @@ import { Field, reduxForm } from 'redux-form';
 import { FlatButton } from 'material-ui';
 import Input from '../Input';
 import './styles.css';
+import validate from './validate.js';
 
 class CreateUserForm extends Component {
 
-  renderLogin() {
+  renderCreateUser() {
+    const header = 'Create your user ID'
     return (
       <div>
-        <div className='formHeader'>Create your user ID</div>
-          <div className='formRow'>
-          <Field 
-            name="username"
-            component={username=>
-              <Input field={username} hintText={"Username"} /> 
-            }
-         />
-          <Field 
-            name="password"
-            component={password=>
-              <Input field={password} hintText={"Password"} /> 
-            }
-         />
+        <div className='createFormHeader'>
+          {header}
+        </div>
+          <div className='createFormRow'>
+            <Field 
+              name="username"
+              component={username=>
+                <Input field={username} hintText={"Choose a user ID"} /> 
+              }
+          />
+            <Field 
+              name="password"
+              component={password=>
+                <Input type={"password"} field={password} hintText={"Choose a password"} /> 
+              }
+          />
          </div>
       </div>
     );
@@ -30,11 +34,23 @@ class CreateUserForm extends Component {
 
   renderButtons() {
     const { handleSubmit } = this.props
+    const labelStyles = {
+      textTransform: 'none',
+      fontFamily: 'Open Sans',
+      fontWeight: 600,
+    };
+    const styles = {
+      color: '#fff',
+      backgroundColor: '#099CEC',
+    };
+
     return(
-      <div className='formButton'>
+      <div className='createFormButton'>
         <FlatButton
-          onClick={handleSubmit}
           label="Sign up"
+          onClick={handleSubmit}
+          style={styles}
+          labelStyle={labelStyles}
         />
       </div>
     );
@@ -46,9 +62,9 @@ class CreateUserForm extends Component {
     } = this.props;
 
     return (
-      <div>
+      <div className='createFormContent'>
         <form onSubmit={handleSubmit}>
-          {this.renderLogin()}
+          {this.renderCreateUser()}
           {this.renderButtons()}
         </form>
       </div>
@@ -62,4 +78,5 @@ CreateUserForm.propTypes = {
 
 export default CreateUserForm = reduxForm({
   form: 'createUserForm',
+  validate,
 })(CreateUserForm);

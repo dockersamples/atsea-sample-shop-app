@@ -1,7 +1,7 @@
 ---
 server:
   port: 8080
-  contextPath: /atsea
+  contextPath: /
 ---
 spring:
   profiles: local, default

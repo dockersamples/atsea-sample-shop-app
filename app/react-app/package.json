@@ -2,7 +2,6 @@
   "name": "shopping-cart",
   "version": "0.0.1",
   "private": true,
-  "homepage": "/atsea/",
   "proxy": "http://localhost:8080",
   "devDependencies": {
     "enzyme": "^2.8.0",

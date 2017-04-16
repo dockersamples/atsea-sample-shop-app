@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { addToCart } from '../actions'
+import { addToCart, fetchAllItems } from '../actions'
 import { getVisibleProducts } from '../reducers/products'
 import ProductsList from '../components/ProductsList'
 
-const ProductsContainer = ({ products, addToCart }) => (
-  <ProductsList products={products} addToCart={addToCart}/>
+const ProductsContainer = ({ products, addToCart, fetchAllItems }) => (
+  <ProductsList products={products} addToCart={addToCart} fetchAllItems={fetchAllItems} />
 )
 
 ProductsContainer.propTypes = {
@@ -25,5 +25,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addToCart }
+  { addToCart, fetchAllItems }
 )(ProductsContainer)

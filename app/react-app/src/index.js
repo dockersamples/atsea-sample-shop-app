@@ -9,6 +9,7 @@ import promiseMiddleware from 'redux-promise-middleware'
 import reducer from './reducers'
 import {
   getAllProducts,
+  // fetchAllItemsWithTimeout,
   fetchAllItems,
   fetchContainerId,
 } from './actions'
@@ -41,8 +42,11 @@ const muiTheme = getMuiTheme({
 })
 
 store.dispatch(getAllProducts())
-store.dispatch(fetchAllItems())
 store.dispatch(fetchContainerId())
+// store.dispatch(fetchAllItemsWithTimeout())
+setTimeout(() => {
+  store.dispatch(fetchAllItems())
+}, 250)
 
 render(
   <Provider store={store}>

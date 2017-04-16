@@ -25,9 +25,9 @@ docker-compose up
 (Unfortunately the above will most likely not work on Linux due to root bind
 mount, you will need to get craftier with user remapping if executing there)
 
-Browse to the app at [http://localhost:8080/atsea/index.html](http://localhost:8080/atsea/index.html).
+Browse to the app at [http://localhost:8080/](http://localhost:8080/).
 
-The REST API base URL is `http://localhost:8080/atsea/api/`.
+The REST API base URL is `http://localhost:8080/api/`.
 
 ## The demo application is a store application with the following features:
 
@@ -116,7 +116,7 @@ Application
 
 ```
 
-the URL for the content is http://localhost:8080/atsea/*
+the URL for the content is http://localhost:8080/*
 
 
 

@@ -75,6 +75,29 @@ export const fetchAllItems = () => (dispatch) => {
   return dispatch(dispatchObj)
 };
 
+// export const fetchAllItemsWithTimeout = () => dispatch => {
+//   let dispatchObj = {
+//       type: types.ITEMS_REQUEST,
+//       payload: {
+//         promise: request
+//           .get(`${API}/product/`)
+//           .accept('application/json')
+//           .end()
+//           .then(res => res.body),
+//       },
+//     };
+//     return dispatch => {
+//       setTimeout(
+//         () => {
+//           dispatch(dispatchObj);
+//         },
+//         250,
+//       );
+//     };
+// };
+
+
+
 export const fetchAllCustomers = () => (dispatch) => {
   let dispatchObj = {
     type: types.FETCH_CUSTOMERS,

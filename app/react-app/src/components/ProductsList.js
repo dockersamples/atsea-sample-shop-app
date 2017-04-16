@@ -5,8 +5,33 @@ import './ProductsList.css'
 
 export default class ProductsList extends Component {
 
+  fetchAll = () => {
+    const { fetchAllItems } = this.props
+      fetchAllItems()
+        .then((resp) => {
+          console.log('yay we have products')
+        })
+        .catch((err) => {
+          console.log('boo retry failed')
+          console.log(err)
+        })
+  }
+
+  retryFetchProducts = () => {
+    const { products } = this.props
+    if (products.length===0) {
+      console.log('attempting retry')
+      setTimeout(() => {
+        this.fetchAll()
+        }, 250)
+    } else {
+      console.log('no need to retry')
+    }
+  }
+
   render() {
     const { products, addToCart } = this.props
+    this.retryFetchProducts()
     return(
       <div>
         <div className="productListWrapper">
@@ -32,5 +57,6 @@ ProductsList.propTypes = {
     image: PropTypes.string,
   })).isRequired,
   addToCart: PropTypes.func.isRequired,
+  fetchAllItems: PropTypes.func.isRequired,
 }
 

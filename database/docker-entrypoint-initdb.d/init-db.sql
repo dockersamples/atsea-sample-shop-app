@@ -15,14 +15,12 @@ ALTER TABLE product
 
 -- add product data
 -- note: images are pulled from the public folder at atsea/app/react-app/public
-INSERT INTO product (name, description, image, price) VALUES ('Big Moby', 'Moby', '/images/1.png', 25);
-INSERT INTO product (name, description, image, price) VALUES ('On the dock', 'Working together', '/images/2.png', 25);
-INSERT INTO product (name, description, image, price) VALUES ('Compose', 'Compose', '/images/3.png', 25);
-INSERT INTO product (name, description, image, price) VALUES ('Gordon', 'Gordon the Turle', '/images/4.png', 25);
-INSERT INTO product (name, description, image, price) VALUES ('Containerd', 'Containerd for the people', '/images/5.png', 25);
-INSERT INTO product (name, description, image, price) VALUES ('Registry', 'Where to put your containers', '/images/6.png', 25);
-INSERT INTO product (name, description, image, price) VALUES ('DockerMachine', 'Working like a well oiled machine', '/images/7.png', 25);
-INSERT INTO product (name, description, image, price) VALUES ('Swarm', 'Orchestrating work loads', '/images/8.png', 25);
-INSERT INTO product (name, description, image, price) VALUES ('Trusted Registry', 'Keeping it safe and secure', '/images/9.png', 25);
-
+INSERT INTO product (name, description, image, price) VALUES ('Work Life Balance', '', '/images/work_life_balance.png', 19.99);
+INSERT INTO product (name, description, image, price) VALUES ('Teamwork', '', '/images/teamwork.png', 19.99);
+INSERT INTO product (name, description, image, price) VALUES ('Synergy', '', '/images/synergy.png', 19.99);
+INSERT INTO product (name, description, image, price) VALUES ('Integrate', '', '/images/integrate.png', 19.99);
+INSERT INTO product (name, description, image, price) VALUES ('Growth', '', '/images/growth.png', 19.99);
+INSERT INTO product (name, description, image, price) VALUES ('Enterprise', '', '/images/enterprise.png', 19.99);
+INSERT INTO product (name, description, image, price) VALUES ('Empowerment', '', '/images/empowerment.png', 19.99);
+INSERT INTO product (name, description, image, price) VALUES ('Collaborate', '', '/images/collaborate.png', 19.99);
 

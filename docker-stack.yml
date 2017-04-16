@@ -1,6 +1,19 @@
 version: "3.2"
 
 services:
+  reverse_proxy:
+    image: "dockersamples/atsearevprox@sha256:4e14f65adac6af818edaad104c8e4dcf3cbc837bfd4fb5060d7a5c00189915bd"
+    ports:
+      - "80:80"
+      - "443:443"
+    secrets:
+      - source: revprox_cert
+        target: revprox_cert
+      - source: revprox_key
+        target: revprox_key
+    networks:
+      - front-tier
+
   database:
     image: dockersamples/atseadb
     environment:
@@ -18,8 +31,6 @@ services:
 
   appserver:
     image: dockersamples/atseaapp
-    ports:
-      - "8080:8080" 
     networks:
       - front-tier
       - back-tier
@@ -57,7 +68,7 @@ services:
   payment_gateway:
     image: dockersamples/atseapayment
     secrets:
-      - source: payment_token
+      - source: staging_token
         target: payment_token
     networks:
       - payment
@@ -80,5 +91,9 @@ networks:
 secrets:
   postgres_password:
     external: true
-  payment_token:
+  staging_token:
+    external: true
+  revprox_key:
+    external: true
+  revprox_cert:
     external: true

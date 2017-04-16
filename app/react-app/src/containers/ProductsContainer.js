@@ -5,7 +5,7 @@ import { getVisibleProducts } from '../reducers/products'
 import ProductsList from '../components/ProductsList'
 
 const ProductsContainer = ({ products, addToCart }) => (
-  <ProductsList title="Products" products={products} addToCart={addToCart}/>
+  <ProductsList products={products} addToCart={addToCart}/>
 )
 
 ProductsContainer.propTypes = {

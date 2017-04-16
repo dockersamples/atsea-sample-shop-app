@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react'
 import CartIcon from './CartIcon'
 import './Cart.css'
 
-const Cart = ({ products, total, totalProducts }) => {
-  const successMessage = `Added to your cart`;
+const Cart = ({ total }) => {
+  // const successMessage = `Added to your cart`;
   const filler = ' ';
   return (
     <div className="checkoutSection">
@@ -14,7 +14,7 @@ const Cart = ({ products, total, totalProducts }) => {
         <div className="cartQuantity">
           <CartIcon />
           <div className="cartDigit">
-            {totalProducts}
+            {total}
           </div>
         </div>
       </div>
@@ -23,8 +23,7 @@ const Cart = ({ products, total, totalProducts }) => {
 }
 
 Cart.propTypes = {
-  products: PropTypes.array,
-  total: PropTypes.string,
+  total: PropTypes.number,
 }
 
 export default Cart

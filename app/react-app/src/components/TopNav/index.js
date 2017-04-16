@@ -1,7 +1,13 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {createCustomer, loginCustomer} from '../../actions';
-import {isActive, getContainerId, getHost} from '../../reducers';
+import {
+  createCustomer,
+  loginCustomer,
+} from '../../actions';
+import {
+  getContainerId,
+  getHost,
+} from '../../reducers';
 import LoginForm from '../LoginForm';
 import CreateUserForm from '../CreateUserForm';
 import SuccessMessage from '../SuccessMessage';
@@ -10,7 +16,13 @@ import Modal from 'react-modal';
 import Logo from '../Logo';
 import './styles.css';
 import '../globalStyles.css';
-import getJwtToken from '../../actions/getJwtToken'
+import {
+  getJwtToken,
+  removeJwtToken,
+  setJwtToken,
+} from '../../actions/storage';
+import { SubmissionError } from 'redux-form'
+
 
 const customStyles = {
   overlay: {
@@ -44,13 +56,11 @@ class TopNav extends Component {
       authenticated: (getJwtToken() !== null) ,
       loginSuccessful: false,
       createUserSuccessful: false,
-      user: {},
     };
   }
 
-  handleLoginSuccess = ({value: {token}}) => {
-    console.log('login success!');
-    localStorage.setItem('jwtToken', token);
+  handleLoginSuccess = ({value: {token}}, username) => {
+    setJwtToken(token);
     this.setState({authenticated: true});
     this.setState({loginSuccessful: true});
   };
@@ -58,7 +68,7 @@ class TopNav extends Component {
   handleCreateUserSuccess(username, password) {
     const {loginCustomer} = this.props;
     this.setState({createUserSuccessful: true});
-    console.log('create user success');
+
     // temporary sleep so that login will work
     var start = new Date().getTime();
     for (var i = 0; i < 1e7; i++) {
@@ -67,10 +77,12 @@ class TopNav extends Component {
       }
     }
 
-    loginCustomer(username, password)
-      .then(this.handleLoginSuccess)
+    return loginCustomer(username, password)
+      .then((response) => {
+        this.handleLoginSuccess(response, username)
+      })
       .catch(err => {
-        console.log('error loggging in the customer');
+          throw new SubmissionError({_error: "Error logging in."})
       });
   }
 
@@ -80,10 +92,12 @@ class TopNav extends Component {
       password,
     } = values;
     const {createCustomer} = this.props;
-    createCustomer(username, password)
-      .then(this.handleCreateUserSuccess(username, password))
+    return createCustomer(username, password)
+      .then((response) => {
+        this.handleCreateUserSuccess(username, password)
+      })
       .catch(err => {
-        console.log('error creating the customer');
+          throw new SubmissionError({username: "Username already exists"})
       });
   };
 
@@ -93,11 +107,13 @@ class TopNav extends Component {
       password,
     } = values;
     const {loginCustomer} = this.props;
-    console.log('logging in');
-    loginCustomer(username, password)
-      .then(this.handleLoginSuccess)
+    return loginCustomer(username, password)
+      .then((response) => {
+        this.handleLoginSuccess(response, username)
+        this.toggleLoginModal();
+      })
       .catch(err => {
-        console.log('error loggging in the customer');
+        throw new SubmissionError({_error: "Error logging in."})
       });
   };
 
@@ -130,15 +146,16 @@ class TopNav extends Component {
           label={'Continue Shopping'}
           handleClick={this.toggleCreateModal}
         />
-      : <CreateUserForm onSubmit={this.handleCreateUser} />;
+      : <CreateUserForm onSubmit={this.handleCreateUser} onSubmitFail={this.handleSubmitFail} />;
     return (
       <Modal
         isOpen={this.state.isCreateModalOpen}
         onRequestClose={this.toggleCreateModal}
         style={customStyles}
       >
+        <div className="formContainer">
         {content}
-        <div className="formContainer" />
+        </div>
       </Modal>
     );
   };
@@ -159,32 +176,59 @@ class TopNav extends Component {
 
   renderUnauthenticated() {
     const styles = {
-        color: '#fff'
+      color: '#fff',
+    };
+    const labelStyles = {
+      textTransform: 'none',
+      fontFamily: 'Open Sans',
+      fontWeight: 600,
     };
 
     return (
-        <div>
-          <FlatButton style={styles} onClick={this.toggleCreateModal} label="Create User" />
-          <FlatButton style={styles} onClick={this.toggleLoginModal} label="Login" />
-          {this.renderCreateModal()}
-          {this.renderLoginModal()}
-        </div>
+      <div>
+        <FlatButton
+          style={styles}
+          labelStyle={labelStyles}
+          onClick={this.toggleCreateModal}
+          label="Create User"
+        />
+        <FlatButton
+          style={styles}
+          labelStyle={labelStyles}
+          onClick={this.toggleLoginModal}
+          label="Sign in"
+        />
+      </div>
     );
   }
 
   renderAuthenticated() {
+    const styles = {
+        color: '#fff'
+    };
+    const labelStyles = {
+      textTransform: 'none',
+      fontFamily: 'Open Sans',
+      fontWeight: 600,
+    };
+    const welcome = 'Welcome!'
     return (
       <div>
         <span className="welcomeMessage">
-          Welcome!
+          {welcome}
         </span>
-        <FlatButton onClick={this.removeToken} label="Logout" />
+        <FlatButton
+          style={styles}
+          labelStyle={labelStyles}
+          onClick={this.removeToken}
+          label="Sign out"
+        />
       </div>
     );
   }
 
   removeToken = () => {
-    localStorage.removeItem("jwtToken");
+    removeJwtToken();
     this.setState({
       isCreateModalOpen: false,
       isLoginModalOpen: false,
@@ -206,6 +250,8 @@ class TopNav extends Component {
             {this.state.authenticated
               ? this.renderAuthenticated()
               : this.renderUnauthenticated()}
+            {this.renderCreateModal()}
+            {this.renderLoginModal()}
           </div>
         </div>
       </div>
@@ -213,12 +259,19 @@ class TopNav extends Component {
   }
 }
 
+TopNav.propTypes = {
+  containerId: PropTypes.string.isRequired,
+  host: PropTypes.string.isRequired,
+  createCustomer: PropTypes.func.isRequired,
+  loginCustomer: PropTypes.func.isRequired,
+}
+
 const mapStateToProps = state => ({
-  isActive: isActive(state),
   containerId: getContainerId(state),
   host: getHost(state),
 });
 
-export default connect(mapStateToProps, {createCustomer, loginCustomer})(
-  TopNav,
-);
+export default connect(mapStateToProps, {
+  createCustomer,
+  loginCustomer,
+})(TopNav);

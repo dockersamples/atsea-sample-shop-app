@@ -1,17 +1,24 @@
 import {
   CREATE_CUSTOMER,
   LOGIN_CUSTOMER,
-  LOGOUT_CUSTOMER
+  LOGOUT_CUSTOMER,
+  ADD_USER,
 } from '../constants/ActionTypes'
 
 
 const initialState = {
     customerId: '',
+    username: '',
     details: {}
 }
 
 const customer = (state = initialState, action) => {
   switch (action.type) {
+    case `${ADD_USER}`:
+        return {
+            ...state,
+            username: action.username
+        }
     case `${CREATE_CUSTOMER}_ACK`:
       return {
             ...state,

@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import Product from './Product'
 import CustomerInfoForm from './CustomerInfoForm'
-import FlatButton from 'material-ui/FlatButton'
 import './Checkout.css'
 
 class Checkout extends Component {
@@ -28,7 +27,7 @@ class Checkout extends Component {
       )
     ) : (
       //TODO: Ask Josh for formatting
-      <em>Please add some products to the cart.</em>
+      <span className='emptyMessage'>Please add some products to the cart.</span>
     )
     return (
         <div className='productSection'>
@@ -98,7 +97,6 @@ Checkout.propTypes = {
     image: PropTypes.string.isRequired
   })).isRequired,
   total: PropTypes.string,
-  onCheckoutClicked: PropTypes.func,
   handleSubmit: PropTypes.func,
 }
 

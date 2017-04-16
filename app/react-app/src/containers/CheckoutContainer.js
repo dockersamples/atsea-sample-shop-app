@@ -10,6 +10,7 @@ import { getTotal, getCartProducts, getTotalProducts, getCustomerId, getQuantity
 import SuccessMessage from '../components/SuccessMessage'
 import Checkout from '../components/Checkout'
 import { Link } from 'react-router'
+import { SubmissionError } from 'redux-form'
 
 
 class CheckoutContainer extends Component {
@@ -25,7 +26,14 @@ class CheckoutContainer extends Component {
     }
 
     handleSubmit = (values) => {
-      const { customerId, purchaseOrder, quantityById } = this.props
+      const {
+        customerId,
+        purchaseOrder,
+        totalProducts,
+        quantityById
+      } = this.props
+
+      // This data will be used for create order endpoint
       const date = moment().format()
       const {
         firstName,
@@ -39,14 +47,16 @@ class CheckoutContainer extends Component {
         quantityById
       }
 
+      if (totalProducts === 0) {
+        throw new SubmissionError({ _error: "Please add to cart first..."})
+      }
+
       // TODO: Create Order
-      purchaseOrder()
+      return purchaseOrder()
         .then(this.handleSuccess)
         // error: status 404
         .catch((err) => {
-          //TODO: more elegant error handling
-          console.log('There was an error creating the order, please try loggin in!!!!')
-          console.log(err)
+          throw new SubmissionError({ _error: "Please login before completing order..."})
         })
    }
 
@@ -64,11 +74,11 @@ class CheckoutContainer extends Component {
    }
 
    renderSuccess() {
-     const successMessage = 'You have successfully placed an order!'
+     const successMessage = "You have successfully placed an order!"
       return (
         <SuccessMessage
           message={successMessage}
-          label={`Continue Shopping`}
+          label="Continue Shopping"
           containerElement={<Link to="/" />}
         />
       );

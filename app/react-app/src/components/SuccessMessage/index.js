@@ -3,6 +3,15 @@ import FlatButton from 'material-ui/FlatButton'
 import './styles.css'
 
 const SuccessMessage = ({ message, label, handleClick, containerElement }) => {
+  const styles = {
+    color: '#fff',
+    backgroundColor: "#099CEC",
+  }
+  const labelStyles = {
+      textTransform: 'none',
+      fontFamily: 'Open Sans',
+      fontWeight: 600,
+  }
   return (
     <div className="successContainer">
       <div className="successMessage">
@@ -13,6 +22,8 @@ const SuccessMessage = ({ message, label, handleClick, containerElement }) => {
           label={label}
           onClick={handleClick}
           containerElement={containerElement}
+          style={styles}
+          labelStyle={labelStyles}
         />
       </div>
     </div>

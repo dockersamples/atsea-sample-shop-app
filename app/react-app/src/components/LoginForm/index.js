@@ -3,14 +3,15 @@ import { Field, reduxForm } from 'redux-form';
 import { FlatButton } from 'material-ui';
 import Input from '../Input';
 import './styles.css';
+import validate from './validate.js'
 
 class LoginForm extends Component {
 
   renderLogin() {
     return (
       <div>
-        <div className='formHeader'>Sign in to your account</div>
-          <div className='formRow'>
+        <div className='loginFormHeader'>Sign in to your account</div>
+          <div className='loginFormRow'>
           <Field 
             name="username"
             component={username=>
@@ -20,7 +21,7 @@ class LoginForm extends Component {
           <Field 
             name="password"
             component={password=>
-              <Input field={password} hintText={"Password"} /> 
+              <Input type={"password"} field={password} hintText={"Password"} /> 
             }
          />
          </div>
@@ -30,11 +31,23 @@ class LoginForm extends Component {
 
   renderButtons() {
     const { handleSubmit } = this.props
+    const styles = {
+      color: '#fff',
+      backgroundColor: '#099CEC',
+    };
+    const labelStyles = {
+      textTransform: 'none',
+      fontFamily: 'Open Sans',
+      fontWeight: 600,
+    };
+
     return(
-      <div className='formButton'>
+      <div className='loginFormButton'>
         <FlatButton
+          label="Sign in"
           onClick={handleSubmit}
-          label="Login"
+          style={styles}
+          labelStyle={labelStyles}
         />
       </div>
     );
@@ -43,12 +56,16 @@ class LoginForm extends Component {
   render() {
     const { 
       handleSubmit,
+      error,
     } = this.props;
 
+    const err = error ? <span className='errorMessage'>{error}</span> : null
+
     return (
-      <div>
+      <div className='loginFormContent'>
         <form onSubmit={handleSubmit}>
           {this.renderLogin()}
+          {err}
           {this.renderButtons()}
         </form>
       </div>
@@ -62,4 +79,5 @@ LoginForm.propTypes = {
 
 export default LoginForm = reduxForm({
   form: 'loginForm',
+  validate,
 })(LoginForm);

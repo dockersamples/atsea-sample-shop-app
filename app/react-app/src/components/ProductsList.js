@@ -6,7 +6,7 @@ import './ProductsList.css'
 export default class ProductsList extends Component {
 
   render() {
-    const { title, products, addToCart } = this.props
+    const { products, addToCart } = this.props
     return(
       <div>
         <div className="productListWrapper">
@@ -32,6 +32,5 @@ ProductsList.propTypes = {
     image: PropTypes.string,
   })).isRequired,
   addToCart: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired
 }
 

@@ -16,10 +16,10 @@ ALTER TABLE product
 -- add product data
 -- note: images are pulled from the public folder at atsea/app/react-app/public
 INSERT INTO product (name, description, image, price) VALUES ('Unusable Security', 'Unusuable security is not security', '/images/1.png', 25);
-INSERT INTO product (name, description, image, price) VALUES ('Valentine\'s Day', 'Love is meant to be shared', '/images/2.png', 25);
+INSERT INTO product (name, description, image, price) VALUES ('Valentine''s Day', 'Love is meant to be shared', '/images/2.png', 25);
 INSERT INTO product (name, description, image, price) VALUES ('Compose', 'Compose', '/images/3.png', 25);
 INSERT INTO product (name, description, image, price) VALUES ('Docker Presents', 'Giving gifts every day', '/images/4.png', 25);
-INSERT INTO product (name, description, image, price) VALUES ('Valentine\'s Day', 'Love is in the air', '/images/5.png', 25);
+INSERT INTO product (name, description, image, price) VALUES ('Valentine''s Day', 'Love is in the air', '/images/5.png', 25);
 INSERT INTO product (name, description, image, price) VALUES ('Docker Babies', 'For those with a cute little whale', '/images/6.png', 25);
 INSERT INTO product (name, description, image, price) VALUES ('Experimental', 'Trying the latest', '/images/7.png', 25);
 INSERT INTO product (name, description, image, price) VALUES ('Docker for Developers', 'Escape the App Dependency Matrix', '/images/8.png', 25);

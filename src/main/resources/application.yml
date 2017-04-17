@@ -29,6 +29,8 @@ datasource:
     defaultSchema:
     maxConnections: 300
     initialConnections: 20
+    maxAge: 30000
+    testOnBorrow: true
     testWhileIdle:  true
     timeBetweenEvictionRunsMillis: 60000
     validationQuery: SELECT 1

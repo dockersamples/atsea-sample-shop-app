@@ -1,5 +1,6 @@
 package com.docker.atsea.configuration;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
 import com.docker.atsea.service.CustomerService;
@@ -8,6 +9,7 @@ import com.docker.atsea.service.OrderService;
 import com.docker.atsea.service.OrderServiceImpl;
 import com.docker.atsea.service.ProductService;
 import com.docker.atsea.service.ProductServiceImpl;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 public class BeanConfiguration {
 
@@ -26,5 +28,9 @@ public class BeanConfiguration {
 		return new ProductServiceImpl();
 	}
 
-	
+	@Bean
+	@ConfigurationProperties("atsea.datasource")
+	public ComboPooledDataSource dataSource() {
+	    return new ComboPooledDataSource();
+	}
 }

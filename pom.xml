@@ -49,6 +49,7 @@
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
     </dependency>
+    <!-- Pooling connection -->
     <dependency>
 		<groupId>org.hibernate</groupId>
 		<artifactId>hibernate-c3p0</artifactId>

@@ -34,6 +34,8 @@ datasource:
     testWhileIdle:  true
     timeBetweenEvictionRunsMillis: 60000
     validationQuery: SELECT 1
+    minPoolSize: 6
+    maxPoolSize: 15
     hibernate:
       hbm2ddl.method: update
       show_sql: true

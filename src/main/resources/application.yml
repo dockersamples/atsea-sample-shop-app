@@ -27,11 +27,8 @@ datasource:
     username: gordonuser
     driverClassName: org.postgresql.Driver
     defaultSchema:
-    maxConnections: 200
-    initialConnections: 100
-    poolSize: 300
-    keepAliveTime: 100
-    maxPoolSize: 500
+    maxConnections: 300
+    initialConnections: 20
     testWhileIdle:  true
     timeBetweenEvictionRunsMillis: 60000
     validationQuery: SELECT 1

@@ -248,9 +248,11 @@ class TopNav extends Component {
           </div>
           <div className="navUser">
             {this.renderContainerId()}
-            {this.state.authenticated
-              ? this.renderAuthenticated()
-              : this.renderUnauthenticated()}
+            <div className="buttonSection">
+              {this.state.authenticated
+                ? this.renderAuthenticated()
+                : this.renderUnauthenticated()}
+            </div>
             {this.renderCreateModal()}
             {this.renderLoginModal()}
           </div>
@@ -265,11 +267,6 @@ TopNav.propTypes = {
   host: PropTypes.string.isRequired,
   createCustomer: PropTypes.func.isRequired,
   loginCustomer: PropTypes.func.isRequired,
-};
-
-TopNav.defaultProps = {
-  ip: '10.0.2.3',
-  host: 'fa8f41f55e98',
 };
 
 const mapStateToProps = state => ({

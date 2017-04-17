@@ -163,7 +163,6 @@ export const fetchContainerId = () => (dispatch) => {
 }
 
 
-
 export const logoutCustomer = () => (dispatch) => {
   dispatch({
     type: types.LOGOUT_CUSTOMER
@@ -177,7 +176,6 @@ export const addUser = (username) => (dispatch) => {
   })
 }
 
-
 // DUMMY ITEMS
 const fetchDummyItems = products => ({
   type: types.DUMMY_ITEMS_REQUEST,
@@ -190,13 +188,30 @@ export const fetchAllDummyItems = () => dispatch => {
   })
 }
 
+// success message shows for 2.5 seconds
+export const resetItemAdded = () => (dispatch) => {
+  dispatch({
+    type: types.RESET_ADD_TO_CART,
+  })
+}
+
 const addToCartUnsafe = productId => ({
   type: types.ADD_TO_CART,
   productId
 })
 
+export const showAddToCart = () => (dispatch) => {
+  dispatch({
+    type: types.SHOW_ADD_TO_CART,
+  })
+}
+
 export const addToCart = productId => (dispatch, getState) => {
   dispatch(addToCartUnsafe(productId))
+  dispatch(showAddToCart())
+  setTimeout(() => {
+    dispatch(resetItemAdded())
+  }, 2500)
 }
 
 export const checkout = products => (dispatch, getState) => {

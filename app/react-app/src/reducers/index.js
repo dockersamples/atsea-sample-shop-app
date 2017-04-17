@@ -36,6 +36,10 @@ export const getQuantityById = state => {
   return state.cart.quantityById
 }
 
+export const itemJustAddedSelector = state => {
+  return state.cart.itemJustAdded
+}
+
 export const getTotal = state =>
   getAddedIds(state)
     .reduce((total, id) =>

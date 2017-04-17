@@ -3,8 +3,8 @@ import {
 } from '../constants/ActionTypes'
 
 const initialState = {
-  ip: '',
-  host: '',
+  ip: '10.0.2.3',
+  host: 'fa8f41f55e98',
 }
 const container = (state = initialState, action) => {
   switch (action.type) {
@@ -17,7 +17,7 @@ const container = (state = initialState, action) => {
     case `${FETCH_CONTAINER_ID}_ERR`:
       return {
         ...state,
-        ip: ''
+        ip: '10.0.2.3',
       }
     default:
       return state

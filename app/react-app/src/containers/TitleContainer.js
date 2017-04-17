@@ -1,31 +1,27 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { getTotal, getTotalProducts, getCartProducts } from '../reducers'
+import {
+  getTotalProducts,
+  itemJustAddedSelector,
+} from '../reducers'
+
 import Title from '../components/Title'
 
-const TitleContainer = ({ products, total, totalProducts }) => (
+const TitleContainer = ({ totalProducts, showItemAdded }) => (
   <Title
-    products={products}
-    total={total}
     totalProducts={totalProducts}
-  />
+    showItemAdded={showItemAdded}
+   />
 )
 
 TitleContainer.propTypes = {
-  products: PropTypes.arrayOf(PropTypes.shape({
-    productId: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    quantity: PropTypes.number.isRequired
-  })).isRequired,
-  total: PropTypes.string,
   totalProducts: PropTypes.number,
+  showItemAdded: PropTypes.bool,
 }
 
 const mapStateToProps = (state) => ({
-  products: getCartProducts(state),
-  total: getTotal(state),
-  totalProducts: getTotalProducts(state)
+  totalProducts: getTotalProducts(state),
+  showItemAdded: itemJustAddedSelector(state),
 })
 
 export default connect(mapStateToProps)(TitleContainer)

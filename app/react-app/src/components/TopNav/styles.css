@@ -15,10 +15,13 @@
 
 .containerSection {
   text-align: right;
-  width: 200px;
   color: #ffffff;
   font-family: "Open Sans";
-  font-size: 12px;
+  font-size: 14px;
+}
+
+.buttonSection {
+  float: right;
 }
 
 .formContainer {

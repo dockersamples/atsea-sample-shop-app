@@ -12,6 +12,7 @@ CREATE TABLE product
 ALTER TABLE product
   OWNER TO gordonuser;
 
+ALTER ROLE gordonuser CONNECTION LIMIT -1;
 
 -- add product data
 -- note: images are pulled from the public folder at atsea/app/react-app/public

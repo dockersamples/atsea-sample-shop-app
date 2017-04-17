@@ -27,7 +27,7 @@ datasource:
     username: gordonuser
     driverClassName: org.postgresql.Driver
     defaultSchema:
-    maxPoolSize: 20
+    maxPoolSize: 500
     testWhileIdle = true
     timeBetweenEvictionRunsMillis = 60000
     validationQuery = SELECT 1

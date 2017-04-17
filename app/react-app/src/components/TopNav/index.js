@@ -118,10 +118,10 @@ class TopNav extends Component {
   };
 
   renderContainerId() {
-    const {containerId, host} = this.props;
+    // const {containerId, host} = this.props;
     return (
       <div className="containerSection">
-        {`IP: ${containerId} HOST: ${host}`}
+        {'IP: 10.0.2.3 HOST: fa8f41f55e98'}
       </div>
     );
   }

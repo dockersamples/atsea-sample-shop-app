@@ -28,9 +28,9 @@ datasource:
     driverClassName: org.postgresql.Driver
     defaultSchema:
     maxPoolSize: 500
-    testWhileIdle = true
-    timeBetweenEvictionRunsMillis = 60000
-    validationQuery = SELECT 1
+    testWhileIdle:  true
+    timeBetweenEvictionRunsMillis: 60000
+    validationQuery: SELECT 1
     hibernate:
       hbm2ddl.method: update
       show_sql: true

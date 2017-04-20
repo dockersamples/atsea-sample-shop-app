@@ -6,23 +6,22 @@ The AtSea Shop is a demonstration application comprised of:
 * a database for product inventory, customer data, and orders,
 * a React shopping cart,
 * a NGINX reverse proxy implementing https,
-* a payment gateway to simulate certificate management,
-* 
+* a payment gateway to simulate certificate management
 
 # Building and Running the AtSea Shop
-
-## Building the AtSea application
-
-To build the AtSea application locally:
-```
-./setup.sh
-```
 
 ## Run as an application
 
 To run the AtSea shop as an application:
 ```
-docker-compose up
+docker-compose up --build
+```
+
+## Deploy to a swarm
+```
+#If you need to create a Swarm
+docker swarm init
+docker stack deploy -c docker-stack.yml atsea
 ```
 
 ## The AtSea Shop 

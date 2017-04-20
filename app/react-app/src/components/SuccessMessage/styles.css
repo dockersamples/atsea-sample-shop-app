@@ -1,0 +1,13 @@
+.successMessage {
+    font-family: 'Open Sans';
+    font-size: 20px;
+    color: #56b25e;
+}
+
+.successContainer {
+    width: 100%;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

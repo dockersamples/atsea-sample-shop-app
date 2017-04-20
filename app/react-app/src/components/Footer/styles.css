@@ -1,0 +1,14 @@
+.footer {
+    height: 200px;
+    background: #101e26;
+    width: 100%;
+    padding-top: 20px;
+}
+
+.copyright {
+    font-size: 14px;
+    color: #fff;
+    opacity: .8;
+    text-align: center;
+    font-family: 'Open Sans'
+}

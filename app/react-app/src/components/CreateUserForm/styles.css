@@ -1,0 +1,18 @@
+.createFormRow {
+    font-family: "Open Sans";
+}
+
+.createFormHeader {
+    font-size: 18px;
+    font-family: "Open Sans";
+    padding-bottom: 30px;
+}
+
+.createFormButton {
+    padding-top: 30px;
+}
+
+.createFormContent {
+    display: flex;
+    text-align: center;
+}

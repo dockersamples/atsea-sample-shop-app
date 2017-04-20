@@ -1,0 +1,19 @@
+.productListWrapper {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    max-width: 1240px;
+}
+
+.productListWrapper > div {
+    padding: 20px;
+    flex: 0 0 25%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+    .productListWrapper {
+        justify-content: center;
+    }
+}

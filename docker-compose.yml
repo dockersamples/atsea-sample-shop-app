@@ -1,0 +1,53 @@
+version: "3.1"
+
+services:
+  reverse_proxy:
+    build: ./reverse_proxy
+
+  database:
+    build: 
+       context: ./database
+    image: atsea_db
+    environment:
+      POSTGRES_USER: gordonuser
+      POSTGRES_DB_PASSWORD_FILE: /run/secrets/postgres_password
+      POSTGRES_DB: atsea
+    ports:
+      - "5432:5432" 
+    networks:
+      - back-tier
+    secrets:
+      - postgres_password
+
+  appserver:
+    build:
+       context: .
+       dockerfile: app/Dockerfile
+    image: atsea_app
+    ports:
+      - "8080:8080" 
+    networks:
+      - front-tier
+      - back-tier
+    secrets:
+      - postgres_password
+
+  payment_gateway:
+    build:
+      context: payment_gateway
+    networks:
+      - payment
+    secrets:
+      - payment_token
+
+networks:
+  front-tier:
+  back-tier:
+  payment:
+    driver: overlay
+
+secrets:
+  postgres_password:
+    file: ./devsecrets/postgres_password
+  payment_token:
+    file: ./devsecrets/payment_token

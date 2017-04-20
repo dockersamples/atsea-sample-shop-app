@@ -1,0 +1,23 @@
+.loginFormRow {
+    font-family: "Open Sans";
+}
+
+.loginFormHeader {
+    font-size: 18px;
+    font-family: "Open Sans";
+    padding-bottom: 30px;
+}
+
+.loginFormButton {
+    padding-top: 30px;
+}
+
+.loginFormContent {
+    display: flex;
+    text-align: center;
+}
+
+.errorMessage {
+    font-family: "Open Sans";
+    color: red;
+}

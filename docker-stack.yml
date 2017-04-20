@@ -1,0 +1,99 @@
+version: "3.2"
+
+services:
+  reverse_proxy:
+    image: "dockersamples/atsearevprox@sha256:4e14f65adac6af818edaad104c8e4dcf3cbc837bfd4fb5060d7a5c00189915bd"
+    ports:
+      - "80:80"
+      - "443:443"
+    secrets:
+      - source: revprox_cert
+        target: revprox_cert
+      - source: revprox_key
+        target: revprox_key
+    networks:
+      - front-tier
+
+  database:
+    image: dockersamples/atseadb
+    environment:
+      POSTGRES_USER: gordonuser
+      POSTGRES_DB_PASSWORD_FILE: /run/secrets/postgres_password
+      POSTGRES_DB: atsea
+    networks:
+      - back-tier
+    secrets:
+      - postgres_password
+    deploy:
+      placement:
+        constraints:
+          - 'node.role == worker'
+
+  appserver:
+    image: dockersamples/atseaapp
+    networks:
+      - front-tier
+      - back-tier
+      - payment
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 2
+        failure_action: rollback
+      placement:
+        constraints:
+          - 'node.role == worker'
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    secrets:
+      - postgres_password
+
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - "8001:8080"
+    stop_grace_period: 1m30s
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      update_config:
+        failure_action: rollback
+      placement:
+        constraints:
+          - 'node.role == manager'
+
+  payment_gateway:
+    image: dockersamples/atseapayment
+    secrets:
+      - source: staging_token
+        target: payment_token
+    networks:
+      - payment
+    deploy:
+      update_config:
+        failure_action: rollback
+      placement:
+        constraints:
+          - 'node.role == worker'
+          - 'node.labels.pcidss == yes'
+
+networks:
+  front-tier:
+  back-tier:
+  payment:
+    driver: overlay
+    driver_opts:
+      encrypted: 'yes'
+
+secrets:
+  postgres_password:
+    external: true
+  staging_token:
+    external: true
+  revprox_key:
+    external: true
+  revprox_cert:
+    external: true

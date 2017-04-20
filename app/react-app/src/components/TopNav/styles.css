@@ -1,0 +1,36 @@
+.navLogo {
+    float: left;
+}
+
+.navHeader {
+   height: 80px;
+   width: 100%; 
+}
+
+.navUser {
+    float: right;
+    width: 300px;
+    height: 60px;
+}
+
+.containerSection {
+    text-align: right;
+    width: 200px;
+    color: #ffffff;
+    font-family: "Open Sans";
+    font-size: 12px;
+}
+
+.formContainer {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcomeMessage {
+    padding-right: 12px;
+    color: #ffffff;
+    font-family: "Open Sans";
+    font-size: 14px;
+}

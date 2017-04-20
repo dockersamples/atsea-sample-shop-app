@@ -1,0 +1,65 @@
+[
+  {
+    "productId": 1,
+    "name": "Unusable Security",
+    "price": 25.0,
+    "description": "Unusuable security is not security",
+    "image": "/images/1.png"
+  },
+  {
+    "productId": 2,
+    "name": "Valentine's Day",
+    "price": 25.0,
+    "description": "Love is meant to be shared",
+    "image": "/images/2.png"
+  },
+  {
+    "productId": 3,
+    "name": "Docker Tooling",
+    "price": 25.0,
+    "description": "Docker provides a whole suite of tools",
+    "image": "/images/3.png"
+  },
+  {
+    "productId": 4,
+    "name": "Docker Presents",
+    "price": 25.0,
+    "description": "Giving gifts every day",
+    "image": "/images/4.png"
+  },
+  {
+    "productId": 5,
+    "name": "Valentine's Day",
+    "price": 25.0,
+    "description": "Love is in the air",
+    "image": "/images/5.png"
+  },
+  {
+    "productId": 6,
+    "name": "Docker Babies",
+    "price": 25.0,
+    "description": "For those with a cute little whale",
+    "image": "/images/6.png"
+  },
+  {
+    "productId": 7,
+    "name": "Experimental",
+    "price": 25.0,
+    "description": "Trying the latest",
+    "image": "/images/7.png"
+  },
+  {
+    "productId": 8,
+    "name": "Docker for Developers",
+    "price": 25.0,
+    "description": "Escape the App Dependency Matrix",
+    "image": "/images/8.png"
+  },
+  {
+    "productId": 9,
+    "name": "DockerCon Copenhagen",
+    "price": 25.0,
+    "description": "DockerCon returns to Europe",
+    "image": "/images/9.png"
+  }
+]

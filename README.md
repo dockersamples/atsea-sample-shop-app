@@ -1,3 +1,4 @@
+![](atsea_store.png)
 #  AtSea Shop Demonstration Application
 
 The AtSea Shop is a demonstration application comprised of: 

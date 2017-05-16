@@ -21,10 +21,18 @@ datasource:
 ---
 spring:
   profiles: postgres
+  devtools:
+    remote:
+      secret: secretkey
+    restart:
+      enabled: true
+    livereload:
+      enabled: true
 datasource:
   atsea:
     url: jdbc:postgresql://database:5432/atsea
     username: gordonuser
+    password: gordonpass
     driverClassName: org.postgresql.Driver
     defaultSchema:
     maxConnections: 300

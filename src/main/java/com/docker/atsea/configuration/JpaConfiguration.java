@@ -63,7 +63,7 @@ public class JpaConfiguration {
 		} catch (IOException e) {
 			System.err.println("Could not successfully load DB password file");
 		}
-
+		
 		return dataSourceProperties;
 	}
 

@@ -45,6 +45,15 @@ docker swarm init
 docker stack deploy -c docker-stack.yml atsea
 ```
 
+## A simplified development environment
+This compose file creates a simplified development environment consisting of only the application server and the database.
+
+```
+docker-compose --file docker-compose-dev.yml up --build
+```
+
+
+
 ## The AtSea Shop 
 
 The URL for the content is `http://localhost:8080/`

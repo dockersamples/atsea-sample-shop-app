@@ -28,7 +28,7 @@ docker secret create revprox_key certs/domain.key
 To create a secret for staging the payment gateway:
 
 ```
-echo staging | docker secret create staging_token 
+echo staging | docker secret create staging_token - 
 ```
 
 ## Run as an application

@@ -9,6 +9,10 @@ The AtSea Shop is a demonstration application comprised of:
 * a NGINX reverse proxy implementing https,
 * a payment gateway to simulate certificate management
 
+# Requirements
+
+This example uses features in Docker 17.05 CE Edge. Install this version to run the example.
+
 # Building and Running the AtSea Shop
 
 ## Secrets

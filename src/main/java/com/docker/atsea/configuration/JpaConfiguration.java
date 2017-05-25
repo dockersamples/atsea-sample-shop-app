@@ -48,7 +48,6 @@ public class JpaConfiguration {
 	public DataSourceProperties dataSourceProperties() {
 		DataSourceProperties dataSourceProperties = new DataSourceProperties();
 
-		// From http://stackoverflow.com/questions/4716503/reading-a-plain-text-file-in-java
 		// Set password to connect to postgres using Docker secrets.
 		try(BufferedReader br = new BufferedReader(new FileReader("/run/secrets/postgres_password"))) {
 			StringBuilder sb = new StringBuilder();

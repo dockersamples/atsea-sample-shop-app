@@ -1,0 +1,85 @@
+---
+server:
+  port: 8080
+  contextPath: /
+---
+spring:
+  profiles: local, default
+datasource:
+  atsea:
+    url: jdbc:h2:~/test
+    username: SA
+    password:
+    driverClassName: org.h2.Driver
+    defaultSchema:
+    maxPoolSize: 10
+    hibernate:
+      hbm2ddl.method: create-drop
+      show_sql: true
+      format_sql: true
+      dialect: org.hibernate.dialect.H2Dialect
+---
+spring:
+  profiles: postgres
+  devtools:
+    remote:
+      secret: secretkey
+    restart:
+      enabled: true
+    livereload:
+      enabled: true
+datasource:
+  atsea:
+    url: jdbc:postgresql://database:5432/atsea
+    username: gordonuser
+    password: gordonpass
+    driverClassName: org.postgresql.Driver
+    defaultSchema:
+    maxConnections: 300
+    initialConnections: 20
+    maxAge: 30000
+    testOnBorrow: true
+    testWhileIdle:  true
+    timeBetweenEvictionRunsMillis: 60000
+    validationQuery: SELECT 1
+    minPoolSize: 6
+    maxPoolSize: 15
+    hibernate:
+      hbm2ddl.method: update
+      show_sql: true
+      format_sql: true
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+---
+spring:
+  profiles: mysql
+datasource:
+  atsea:
+    url: jdbc:mysql://database:3306/atsea
+    username: gordonuser
+    password: gordonpassword
+    driverClassName: com.mysql.jdbc.Driver
+    defaultSchema:
+    maxPoolSize: 20
+    hibernate:
+      hbm2ddl.method: update
+      show_sql: true
+      format_sql: true
+      dialect: org.hibernate.dialect.MySQLDialect
+---
+spring:
+  profiles: sqlserver
+datasource:
+  atsea:
+    url: jdbc:sqlserver://database:1433;databaseName=atsea
+    username: gordonuser
+    password: gordonpassword
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    defaultSchema:
+    maxPoolSize: 20
+    hibernate:
+      hbm2ddl.method: create-drop
+      show_sql: true
+      format_sql: true
+      dialect: org.hibernate.dialect.SQLServerDialect      
+      
+      

@@ -1,8 +1,8 @@
 FROM node:latest
 WORKDIR /usr/src/atsea/app/react-app
-COPY app/react-app/package.json .
+COPY react-app/package.json .
 RUN npm install
-COPY . /usr/src/atsea
+COPY . /usr/src/atsea/app
 RUN npm run build
 
 FROM maven:latest

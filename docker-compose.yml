@@ -21,8 +21,8 @@ services:
 
   appserver:
     build:
-       context: .
-       dockerfile: app/Dockerfile
+       context: app
+       dockerfile: Dockerfile
     image: atsea_app
     ports:
       - "8080:8080" 

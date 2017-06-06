@@ -1,5 +1,3 @@
-#THIS IS A TEST
-
 ![](atsea_store.png)
 #  AtSea Shop Demonstration Application
 

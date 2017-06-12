@@ -3,11 +3,13 @@ version: "3.1"
 services:
   reverse_proxy:
     build: ./reverse_proxy
+    user: nginx
 
   database:
     build: 
        context: ./database
     image: atsea_db
+    user: postgres
     environment:
       POSTGRES_USER: gordonuser
       POSTGRES_DB_PASSWORD_FILE: /run/secrets/postgres_password
@@ -24,6 +26,7 @@ services:
        context: app
        dockerfile: Dockerfile
     image: atsea_app
+    user: gordon
     ports:
       - "8080:8080" 
       - "5005:5005"

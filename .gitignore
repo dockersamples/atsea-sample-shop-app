@@ -18,6 +18,7 @@ site.conf
 *.bat
 *.json
 *.bak
+linux.md
 
 ###################
 *.com

@@ -19,6 +19,7 @@ site.conf
 *.json
 *.bak
 linux.md
+src/
 
 ###################
 *.com

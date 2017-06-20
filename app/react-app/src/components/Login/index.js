@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
 import Modal from 'react-modal'
-import './Login.css'
+import './styles.css'
 
 const customStyles = {
   overlay : {

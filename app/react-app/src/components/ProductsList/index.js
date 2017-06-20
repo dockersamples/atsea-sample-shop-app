@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
-import ProductItem from '../components/ProductItem'
+import ProductItem from '../../components/ProductItem'
 
-import './ProductsList.css'
+import './styles.css'
 
 export default class ProductsList extends Component {
 

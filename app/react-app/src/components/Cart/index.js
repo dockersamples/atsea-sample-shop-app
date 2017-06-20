@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
-import CartIcon from './CartIcon'
-import './Cart.css'
+import CartIcon from '../../components/CartIcon'
+import './styles.css'
 
 const Cart = ({ total }) => {
   // const successMessage = `Added to your cart`;

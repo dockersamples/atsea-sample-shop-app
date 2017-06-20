@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import Cart from '../Cart'
+import Cart from '../../components/Cart'
 import FlatButton from 'material-ui/FlatButton'
 import { Link } from 'react-router'
 

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
-import Product from './Product'
-import CustomerInfoForm from './CustomerInfoForm'
-import './Checkout.css'
+import Product from '../../components/Product'
+import CustomerInfoForm from '../../components/CustomerInfoForm'
+import './styles.css'
 
 class Checkout extends Component {
 

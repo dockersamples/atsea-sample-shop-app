@@ -25,6 +25,7 @@ class CheckoutContainer extends Component {
       this.setState({ orderComplete: true })
     }
 
+    // eslint-disable-next-line
     handleSubmit = (values) => {
       const {
         customerId,
@@ -35,10 +36,12 @@ class CheckoutContainer extends Component {
 
       // This data will be used for create order endpoint
       const date = moment().format()
+      // eslint-disable-next-line
       const {
         firstName,
         lastName,
       } = values
+      // eslint-disable-next-line
       const submitData = {
         customerId,
         name: firstName,

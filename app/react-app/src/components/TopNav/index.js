@@ -152,6 +152,7 @@ class TopNav extends Component {
         isOpen={this.state.isCreateModalOpen}
         onRequestClose={this.toggleCreateModal}
         style={customStyles}
+        contentLabel={''}
       >
         <div className="formContainer">
         {content}
@@ -166,6 +167,7 @@ class TopNav extends Component {
         isOpen={this.state.isLoginModalOpen}
         onRequestClose={this.toggleLoginModal}
         style={customStyles}
+        contentLabel={''}
       >
         <div className="formContainer">
           <LoginForm onSubmit={this.handleLogin} />

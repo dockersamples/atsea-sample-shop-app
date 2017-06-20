@@ -35,7 +35,7 @@ const Title = ({ totalProducts }) => (
 )
 
 Title.propTypes = {
-    totalProducts: PropTypes.string,
+    totalProducts: PropTypes.number,
 }
 
 export default Title

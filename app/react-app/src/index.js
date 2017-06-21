@@ -16,7 +16,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import CheckoutContainer from './containers/CheckoutContainer'
 
 
-const middleware = [ 
+const middleware = [
   thunkMiddleware,
   promiseMiddleware({
     promiseTypeSuffixes: ['REQ', 'ACK', 'ERR'],
@@ -44,7 +44,7 @@ render(
   <Provider store={store}>
     <MuiThemeProvider muiTheme={muiTheme}>
       <Router history={hashHistory}>
-        <Route path="/" component={App}/>
+        <Route path="/" component={App} />
         <Route path="checkout" component={CheckoutContainer} />
       </Router>
     </MuiThemeProvider>

@@ -17,7 +17,7 @@ const addedIds = (state = initialState.addedIds, action) => {
       if (state.indexOf(action.productId) !== -1) {
         return state
       }
-      return [ ...state, action.productId ]
+      return [...state, action.productId]
     default:
       return state
   }
@@ -27,7 +27,8 @@ const quantityById = (state = initialState.quantityById, action) => {
   switch (action.type) {
     case ADD_TO_CART:
       const { productId } = action
-      return { ...state,
+      return {
+        ...state,
         [productId]: (state[productId] || 0) + 1
       }
     default:

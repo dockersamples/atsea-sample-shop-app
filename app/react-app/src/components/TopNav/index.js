@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import {
   createCustomer,
   loginCustomer,
@@ -53,21 +53,21 @@ class TopNav extends Component {
     this.state = {
       isCreateModalOpen: false,
       isLoginModalOpen: false,
-      authenticated: (getJwtToken() !== null) ,
+      authenticated: (getJwtToken() !== null),
       loginSuccessful: false,
       createUserSuccessful: false,
     };
   }
 
-  handleLoginSuccess = ({value: {token}}, username) => {
+  handleLoginSuccess = ({ value: { token } }, username) => {
     setJwtToken(token);
-    this.setState({authenticated: true});
-    this.setState({loginSuccessful: true});
+    this.setState({ authenticated: true });
+    this.setState({ loginSuccessful: true });
   };
 
   handleCreateUserSuccess(username, password) {
-    const {loginCustomer} = this.props;
-    this.setState({createUserSuccessful: true});
+    const { loginCustomer } = this.props;
+    this.setState({ createUserSuccessful: true });
 
     // temporary sleep so that login will work
     var start = new Date().getTime();
@@ -82,7 +82,7 @@ class TopNav extends Component {
         this.handleLoginSuccess(response, username)
       })
       .catch(err => {
-          throw new SubmissionError({_error: "Error logging in."})
+        throw new SubmissionError({ _error: "Error logging in." })
       });
   }
 
@@ -91,13 +91,13 @@ class TopNav extends Component {
       username,
       password,
     } = values;
-    const {createCustomer} = this.props;
+    const { createCustomer } = this.props;
     return createCustomer(username, password)
       .then((response) => {
         this.handleCreateUserSuccess(username, password)
       })
       .catch(err => {
-          throw new SubmissionError({username: "Username already exists"})
+        throw new SubmissionError({ username: "Username already exists" })
       });
   };
 
@@ -106,14 +106,14 @@ class TopNav extends Component {
       username,
       password,
     } = values;
-    const {loginCustomer} = this.props;
+    const { loginCustomer } = this.props;
     return loginCustomer(username, password)
       .then((response) => {
         this.handleLoginSuccess(response, username)
         this.toggleLoginModal();
       })
       .catch(err => {
-        throw new SubmissionError({_error: "Error logging in."})
+        throw new SubmissionError({ _error: "Error logging in." })
       });
   };
 
@@ -142,10 +142,10 @@ class TopNav extends Component {
     const successMessage = 'Congratulations! Your account has been created!';
     const content = this.state.createUserSuccessful
       ? <SuccessMessage
-          message={successMessage}
-          label={'Continue Shopping'}
-          handleClick={this.toggleCreateModal}
-        />
+        message={successMessage}
+        label={'Continue Shopping'}
+        handleClick={this.toggleCreateModal}
+      />
       : <CreateUserForm onSubmit={this.handleCreateUser} onSubmitFail={this.handleSubmitFail} />;
     return (
       <Modal
@@ -155,7 +155,7 @@ class TopNav extends Component {
         contentLabel={''}
       >
         <div className="formContainer">
-        {content}
+          {content}
         </div>
       </Modal>
     );
@@ -206,7 +206,7 @@ class TopNav extends Component {
 
   renderAuthenticated() {
     const styles = {
-        color: '#fff'
+      color: '#fff'
     };
     const labelStyles = {
       textTransform: 'none',

@@ -8,9 +8,9 @@ const Cart = ({ total }) => {
   return (
     <div className="checkoutSection">
       <div className="cartRow">
-      <div className="checkoutMessage">
-        { filler } 
-      </div>
+        <div className="checkoutMessage">
+          {filler}
+        </div>
         <div className="cartQuantity">
           <CartIcon />
           <div className="cartDigit">

@@ -16,9 +16,9 @@ const products = (state, action) => {
   }
 }
 
-const byId = ( state = {}, action ) => {
+const byId = (state = {}, action) => {
   switch (action.type) {
-    case `${ITEMS_REQUEST}_ACK`: 
+    case `${ITEMS_REQUEST}_ACK`:
       return {
         ...state,
         ...action.payload.reduce((obj, product) => {

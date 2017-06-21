@@ -1,14 +1,14 @@
 .userTitle {
-    font-family: 'Open Sans';
-    font-size: 24px;
-    text-align: left;
-    color: '#101e26';
+  font-family: 'Open Sans';
+  font-size: 24px;
+  text-align: left;
+  color: '#101e26';
 }
 
 .userForm {
-    position: absolute;
+  position: absolute;
 }
 
 .userInput {
-    display: block;
+  display: block;
 }

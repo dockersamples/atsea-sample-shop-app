@@ -14,20 +14,20 @@ class CreateUserForm extends Component {
         <div className='createFormHeader'>
           {header}
         </div>
-          <div className='createFormRow'>
-            <Field 
-              name="username"
-              component={username=>
-                <Input field={username} hintText={"Choose a user ID"} /> 
-              }
+        <div className='createFormRow'>
+          <Field
+            name="username"
+            component={username =>
+              <Input field={username} hintText={"Choose a user ID"} />
+            }
           />
-            <Field 
-              name="password"
-              component={password=>
-                <Input type={"password"} field={password} hintText={"Choose a password"} /> 
-              }
+          <Field
+            name="password"
+            component={password =>
+              <Input type={"password"} field={password} hintText={"Choose a password"} />
+            }
           />
-         </div>
+        </div>
       </div>
     );
   }
@@ -44,7 +44,7 @@ class CreateUserForm extends Component {
       backgroundColor: '#099CEC',
     };
 
-    return(
+    return (
       <div className='createFormButton'>
         <FlatButton
           label="Sign up"
@@ -57,7 +57,7 @@ class CreateUserForm extends Component {
   }
 
   render() {
-    const { 
+    const {
       handleSubmit,
     } = this.props;
 

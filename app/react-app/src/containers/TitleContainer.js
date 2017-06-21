@@ -8,7 +8,7 @@ const TitleContainer = ({ products, total, totalProducts }) => (
     products={products}
     total={total}
     totalProducts={totalProducts}
-   />
+  />
 )
 
 TitleContainer.propTypes = {

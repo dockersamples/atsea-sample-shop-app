@@ -7,8 +7,8 @@ class Checkout extends Component {
 
   renderForm() {
     const { handleSubmit } = this.props;
-    return(
-      <CustomerInfoForm onSubmit={handleSubmit}/>
+    return (
+      <CustomerInfoForm onSubmit={handleSubmit} />
     );
   }
 
@@ -26,13 +26,13 @@ class Checkout extends Component {
         />
       )
     ) : (
-      //TODO: Ask Josh for formatting
-      <span className='emptyMessage'>Please add some products to the cart.</span>
-    )
+        //TODO: Ask Josh for formatting
+        <span className='emptyMessage'>Please add some products to the cart.</span>
+      )
     return (
-        <div className='productSection'>
-          {nodes}
-        </div>
+      <div className='productSection'>
+        {nodes}
+      </div>
     );
   }
 

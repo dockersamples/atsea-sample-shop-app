@@ -5,7 +5,6 @@ import customer, * as fromCustomer from './customer'
 import container from './container'
 import { reducer as formReducer } from 'redux-form'
 
-
 export default combineReducers({
   cart,
   products,
@@ -20,10 +19,10 @@ const getProduct = (state, id) => fromProducts.getProduct(state.products, id)
 
 // TODO: rename selectors?
 export const isActive = state => fromCustomer.isActive(state.customer)
-export const getContainerId = state => { 
+export const getContainerId = state => {
   return state.container.containerId
 }
-export const getHost = state => { 
+export const getHost = state => {
   return state.container.host
 }
 export const getCustomerId = state => {
@@ -41,7 +40,7 @@ export const getTotal = state =>
   getAddedIds(state)
     .reduce((total, id) =>
       total + getProduct(state, id).price * getQuantity(state, id),
-      0
+    0
     )
     .toFixed(2)
 
@@ -49,7 +48,7 @@ export const getTotalProducts = state =>
   getAddedIds(state)
     .reduce((total, id) =>
       total + getQuantity(state, id),
-      0
+    0
     )
 
 export const getCartProducts = state =>

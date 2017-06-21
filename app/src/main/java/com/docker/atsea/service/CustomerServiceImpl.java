@@ -22,7 +22,7 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	public Customer findByUserName(String name) {
-		return customerRepository.findByUserName(name);
+		return customerRepository.findByUsername(name);
 	}
 
 	public Customer findByName(String name) {
@@ -53,7 +53,7 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	public boolean customerExist(Customer customer) {
 		System.out.println(customer.getUsername());
-		return customerRepository.findByUserName(customer.getUsername()) != null;
+		return customerRepository.findByUsername(customer.getUsername()) != null;
 	}
 
 	public void deleteCustomerById(Long customerId) {

@@ -7,8 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.docker.atsea.model.Order;
 
 @Repository
-@Transactional
 public interface OrderRepository extends JpaRepository<Order, Long> {
-
 
 }

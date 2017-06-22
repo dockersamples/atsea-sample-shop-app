@@ -5,6 +5,7 @@
 
 .infoHeader {
   padding-top: 30px;
+  padding-bottom: 20px;
   font-size: 16px;
   font-family: "Open Sans";
 }
@@ -19,4 +20,8 @@
   font-size: 14px;
   font-family: "Open Sans";
   color: red;
+}
+
+.infoSection {
+  display: flex;
 }

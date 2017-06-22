@@ -6,15 +6,14 @@
 
 .checkoutTitle {
   height: 60px;
+  text-align: center;
   font-family: "Open Sans";
   font-size: 20px;
-  padding: 20px;
-  align-items: center;
+  padding-top: 20px;
 }
 
 .panel {
   width: 100%;
-  /*margin-top: 30px;*/
   display: flex;
   justify-content: space-around;
   padding-bottom: 30px;
@@ -28,7 +27,7 @@
 
 .cartSection {
   width: 350px;
-  float: left;
+  margin-top: 30px;
   border-right: 1px solid #e3e3e3;
   border-left: 1px solid #e3e3e3;
   min-width: 300px;
@@ -71,4 +70,8 @@
   margin-right: 30%;
 }
 
-.emptyMessage {}
+.emptyMessage {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+}

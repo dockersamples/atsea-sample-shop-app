@@ -87,10 +87,6 @@ class CheckoutContainer extends Component {
     );
   }
 
-  handleClick = () => {
-    //  this.toggleModal
-  }
-
   render() {
     return (
       <div>

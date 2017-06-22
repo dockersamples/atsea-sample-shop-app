@@ -38,6 +38,8 @@ class CustomerInfoForm extends Component {
               <Input field={cvv} hintText={"CVV"} />
             }
           />
+        </div>
+        <div className='infoRow'>
           <Field
             name="expirationDate"
             component={date =>
@@ -122,7 +124,7 @@ class CustomerInfoForm extends Component {
     const err = error ? <span className='loginErrorMessage'>{error}</span> : null
 
     return (
-      <div>
+      <div className="infoSection">
         <form onSubmit={handleSubmit}>
           {this.renderCredit()}
           {this.renderBilling()}

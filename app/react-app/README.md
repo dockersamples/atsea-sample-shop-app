@@ -1,4 +1,4 @@
-# Redux Shopping Cart Example
+# Atsea Shopping Cart
 
 This project template was built with [Create React App](https://github.com/facebookincubator/create-react-app), which provides a simple way to start React projects with no build configuration needed.
 
@@ -6,7 +6,7 @@ Projects built with Create-React-App include support for ES6 syntax, as well as 
 
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory, react-app, you can run:
 
 ### `npm start`
 

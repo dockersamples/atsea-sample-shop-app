@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react'
-import './styles.css'
+import './Product.css'
 
 class Product extends Component {
+        // {name} - &#36;{price}{quantity ? ` x ${quantity}` : null}
   render() {
     const { price, quantity, name, image } = this.props;
     const image2 = (

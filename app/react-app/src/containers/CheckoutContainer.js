@@ -14,58 +14,55 @@ import { SubmissionError } from 'redux-form'
 
 
 class CheckoutContainer extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      orderComplete: false,
+    constructor(props){
+      super(props)
+      this.state = {
+        orderComplete: false,
+      }
     }
-  }
 
-  handleSuccess = () => {
-    this.setState({ orderComplete: true })
-  }
+    handleSuccess = () => {
+      this.setState({ orderComplete: true })
+    }
 
-  // eslint-disable-next-line
-  handleSubmit = (values) => {
-    const {
+    handleSubmit = (values) => {
+      const {
         customerId,
-      purchaseOrder,
-      totalProducts,
-      quantityById
+        purchaseOrder,
+        totalProducts,
+        quantityById
       } = this.props
 
-    // This data will be used for create order endpoint
-    const date = moment().format()
-    // eslint-disable-next-line
-    const {
+      // This data will be used for create order endpoint
+      const date = moment().format()
+      const {
         firstName,
-      lastName,
+        lastName,
       } = values
-    // eslint-disable-next-line
-    const submitData = {
-      customerId,
-      name: firstName,
-      orderDate: date,
-      lastName,
-      quantityById
-    }
+      const submitData = {
+        customerId,
+        name: firstName,
+        orderDate: date,
+        lastName,
+        quantityById
+      }
 
-    if (totalProducts === 0) {
-      throw new SubmissionError({ _error: "Please add to cart first..." })
-    }
+      if (totalProducts === 0) {
+        throw new SubmissionError({ _error: "Please add to cart first..."})
+      }
 
-    // TODO: Create Order
-    return purchaseOrder()
-      .then(this.handleSuccess)
-      // error: status 404
-      .catch((err) => {
-        throw new SubmissionError({ _error: "Please login before completing order..." })
-      })
-  }
+      // TODO: Create Order
+      return purchaseOrder()
+        .then(this.handleSuccess)
+        // error: status 404
+        .catch((err) => {
+          throw new SubmissionError({ _error: "Please login before completing order..."})
+        })
+   }
 
-  renderCheckout() {
+   renderCheckout() {
     const { products, total, totalProducts, checkout } = this.props
-    return (
+     return (
       <Checkout
         products={products}
         total={total}
@@ -73,21 +70,25 @@ class CheckoutContainer extends Component {
         onCheckoutClicked={() => checkout(products)}
         handleSubmit={this.handleSubmit}
       />
-    );
-  }
+     );
+   }
 
-  renderSuccess() {
-    const successMessage = "You have successfully placed an order!"
-    return (
-      <SuccessMessage
-        message={successMessage}
-        label="Continue Shopping"
-        containerElement={<Link to="/" />}
-      />
-    );
-  }
+   renderSuccess() {
+     const successMessage = "You have successfully placed an order!"
+      return (
+        <SuccessMessage
+          message={successMessage}
+          label="Continue Shopping"
+          containerElement={<Link to="/" />}
+        />
+      );
+   }
 
-  render() {
+   handleClick = () => {
+    //  this.toggleModal
+   }
+
+  render () {
     return (
       <div>
         {this.state.orderComplete ?

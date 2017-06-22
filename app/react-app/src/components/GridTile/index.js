@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+
 import FlatButton from 'material-ui/FlatButton'
 import AddIcon from './AddIcon'
 import './styles.css'
@@ -35,7 +36,7 @@ export default class GridTile extends Component {
           <div className="tileAdd">
             <FlatButton
               onClick={this.addToCart}
-              labelStyle={{ color: "#099CEC" }}
+              labelStyle={{color: "#099CEC"}}
               label="Add"
               labelPosition="before"
               icon={<AddIcon />}
@@ -55,3 +56,4 @@ GridTile.propTypes = {
   image: PropTypes.string,
   onAddToCartClicked: PropTypes.func.isRequired
 }
+

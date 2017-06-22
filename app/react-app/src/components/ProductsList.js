@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react'
-import ProductItem from '../../components/ProductItem'
+import ProductItem from '../components/ProductItem'
 
-import './styles.css'
+import './ProductsList.css'
 
 export default class ProductsList extends Component {
 
   render() {
     const { products, addToCart } = this.props
-    return (
+    return(
       <div>
         <div className="productListWrapper">
           {products.map(product => (

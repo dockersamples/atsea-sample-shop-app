@@ -1,14 +1,15 @@
 import React, { PropTypes } from 'react'
-import CartIcon from '../../components/CartIcon'
-import CartNotification from '../../components/CartNotification'
-import './styles.css'
+import CartIcon from './CartIcon'
+import './Cart.css'
 
-const Cart = ({ total, showItemAdded }) => {
+const Cart = ({ total }) => {
+  // const successMessage = `Added to your cart`;
+  const filler = ' ';
   return (
     <div className="checkoutSection">
       <div className="cartRow">
       <div className="checkoutMessage">
-      <CartNotification showItemAdded={showItemAdded} />
+        { filler } 
       </div>
         <div className="cartQuantity">
           <CartIcon />
@@ -23,7 +24,6 @@ const Cart = ({ total, showItemAdded }) => {
 
 Cart.propTypes = {
   total: PropTypes.number,
-  showItemAdded: PropTypes.bool,
 }
 
 export default Cart

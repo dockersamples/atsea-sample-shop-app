@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { combineReducers } from 'redux'
 import {
   ITEMS_REQUEST,
@@ -16,9 +15,9 @@ const products = (state, action) => {
   }
 }
 
-const byId = (state = {}, action) => {
+const byId = ( state = {}, action ) => {
   switch (action.type) {
-    case `${ITEMS_REQUEST}_ACK`:
+    case `${ITEMS_REQUEST}_ACK`: 
       return {
         ...state,
         ...action.payload.reduce((obj, product) => {

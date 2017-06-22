@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import GridTile from '../../components/GridTile'
+import GridTile from './GridTile'
 
 const ProductItem = ({ product, onAddToCartClicked }) => (
   <div style={{ marginBottom: 20 }}>

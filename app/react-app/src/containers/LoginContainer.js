@@ -5,12 +5,12 @@ import { isActive } from '../reducers'
 import Login from '../components/Login'
 
 class LoginContainer extends Component {
-    render() {
-        const { getCustomer, logoutCustomer, isActive } = this.props
-        return (
-            <Login loginCustomer={getCustomer} logoutCustomer={logoutCustomer} isActive={isActive} />
-         )
-    }
+  render() {
+    const { getCustomer, logoutCustomer, isActive } = this.props
+    return (
+      <Login loginCustomer={getCustomer} logoutCustomer={logoutCustomer} isActive={isActive} />
+    )
+  }
 }
 
 LoginContainer.propTypes = {
@@ -20,7 +20,7 @@ LoginContainer.propTypes = {
 }
 
 const mapStateToProps = state => ({
-    isActive: isActive(state)
+  isActive: isActive(state)
 })
 
 export default connect(

@@ -1,11 +1,11 @@
-import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import {
   createCustomer,
   loginCustomer,
 } from '../../actions';
 import {
-  getContainerId,
+  getIP,
   getHost,
 } from '../../reducers';
 import LoginForm from '../LoginForm';
@@ -22,7 +22,6 @@ import {
   setJwtToken,
 } from '../../actions/storage';
 import { SubmissionError } from 'redux-form'
-
 
 const customStyles = {
   overlay: {
@@ -53,21 +52,21 @@ class TopNav extends Component {
     this.state = {
       isCreateModalOpen: false,
       isLoginModalOpen: false,
-      authenticated: (getJwtToken() !== null) ,
+      authenticated: (getJwtToken() !== null),
       loginSuccessful: false,
       createUserSuccessful: false,
     };
   }
 
-  handleLoginSuccess = ({value: {token}}, username) => {
+  handleLoginSuccess = ({ value: { token } }, username) => {
     setJwtToken(token);
-    this.setState({authenticated: true});
-    this.setState({loginSuccessful: true});
+    this.setState({ authenticated: true });
+    this.setState({ loginSuccessful: true });
   };
 
   handleCreateUserSuccess(username, password) {
-    const {loginCustomer} = this.props;
-    this.setState({createUserSuccessful: true});
+    const { loginCustomer } = this.props;
+    this.setState({ createUserSuccessful: true });
 
     // temporary sleep so that login will work
     var start = new Date().getTime();
@@ -82,7 +81,7 @@ class TopNav extends Component {
         this.handleLoginSuccess(response, username)
       })
       .catch(err => {
-          throw new SubmissionError({_error: "Error logging in."})
+        throw new SubmissionError({ _error: "Error logging in." })
       });
   }
 
@@ -91,13 +90,13 @@ class TopNav extends Component {
       username,
       password,
     } = values;
-    const {createCustomer} = this.props;
+    const { createCustomer } = this.props;
     return createCustomer(username, password)
       .then((response) => {
         this.handleCreateUserSuccess(username, password)
       })
       .catch(err => {
-          throw new SubmissionError({username: "Username already exists"})
+        throw new SubmissionError({ username: "Username already exists" })
       });
   };
 
@@ -106,22 +105,22 @@ class TopNav extends Component {
       username,
       password,
     } = values;
-    const {loginCustomer} = this.props;
+    const { loginCustomer } = this.props;
     return loginCustomer(username, password)
       .then((response) => {
         this.handleLoginSuccess(response, username)
         this.toggleLoginModal();
       })
       .catch(err => {
-        throw new SubmissionError({_error: "Error logging in."})
+        throw new SubmissionError({ _error: "Error logging in." })
       });
   };
 
   renderContainerId() {
-    // const {containerId, host} = this.props;
+    const {ip, host} = this.props;
     return (
       <div className="containerSection">
-        {'IP: 10.0.2.3 HOST: fa8f41f55e98'}
+        {`IP: ${ip} HOST: ${host}`}
       </div>
     );
   }
@@ -142,19 +141,20 @@ class TopNav extends Component {
     const successMessage = 'Congratulations! Your account has been created!';
     const content = this.state.createUserSuccessful
       ? <SuccessMessage
-          message={successMessage}
-          label={'Continue Shopping'}
-          handleClick={this.toggleCreateModal}
-        />
+        message={successMessage}
+        label={'Continue Shopping'}
+        handleClick={this.toggleCreateModal}
+      />
       : <CreateUserForm onSubmit={this.handleCreateUser} onSubmitFail={this.handleSubmitFail} />;
     return (
       <Modal
         isOpen={this.state.isCreateModalOpen}
         onRequestClose={this.toggleCreateModal}
         style={customStyles}
+        contentLabel={''}
       >
         <div className="formContainer">
-        {content}
+          {content}
         </div>
       </Modal>
     );
@@ -166,6 +166,7 @@ class TopNav extends Component {
         isOpen={this.state.isLoginModalOpen}
         onRequestClose={this.toggleLoginModal}
         style={customStyles}
+        contentLabel={''}
       >
         <div className="formContainer">
           <LoginForm onSubmit={this.handleLogin} />
@@ -204,7 +205,7 @@ class TopNav extends Component {
 
   renderAuthenticated() {
     const styles = {
-        color: '#fff'
+      color: '#fff'
     };
     const labelStyles = {
       textTransform: 'none',
@@ -247,9 +248,11 @@ class TopNav extends Component {
           </div>
           <div className="navUser">
             {this.renderContainerId()}
-            {this.state.authenticated
-              ? this.renderAuthenticated()
-              : this.renderUnauthenticated()}
+            <div className="buttonSection">
+              {this.state.authenticated
+                ? this.renderAuthenticated()
+                : this.renderUnauthenticated()}
+            </div>
             {this.renderCreateModal()}
             {this.renderLoginModal()}
           </div>
@@ -260,14 +263,14 @@ class TopNav extends Component {
 }
 
 TopNav.propTypes = {
-  containerId: PropTypes.string.isRequired,
+  ip: PropTypes.string.isRequired,
   host: PropTypes.string.isRequired,
   createCustomer: PropTypes.func.isRequired,
   loginCustomer: PropTypes.func.isRequired,
-}
+};
 
 const mapStateToProps = state => ({
-  containerId: getContainerId(state),
+  ip: getIP(state),
   host: getHost(state),
 });
 

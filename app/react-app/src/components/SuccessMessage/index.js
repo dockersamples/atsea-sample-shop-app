@@ -8,14 +8,14 @@ const SuccessMessage = ({ message, label, handleClick, containerElement }) => {
     backgroundColor: "#099CEC",
   }
   const labelStyles = {
-      textTransform: 'none',
-      fontFamily: 'Open Sans',
-      fontWeight: 600,
+    textTransform: 'none',
+    fontFamily: 'Open Sans',
+    fontWeight: 600,
   }
   return (
     <div className="successContainer">
       <div className="successMessage">
-        { message } 
+        {message}
       </div>
       <div className="successButton">
         <FlatButton

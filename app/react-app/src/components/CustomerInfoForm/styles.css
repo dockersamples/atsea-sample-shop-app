@@ -1,0 +1,27 @@
+.infoRow {
+  display: flex;
+  font-family: "Open Sans";
+}
+
+.infoHeader {
+  padding-top: 30px;
+  padding-bottom: 20px;
+  font-size: 16px;
+  font-family: "Open Sans";
+}
+
+.infoButton {
+  padding-top: 50px;
+  float: right;
+  display: inline-flex;
+}
+
+.loginErrorMessage {
+  font-size: 14px;
+  font-family: "Open Sans";
+  color: red;
+}
+
+.infoSection {
+  display: flex;
+}

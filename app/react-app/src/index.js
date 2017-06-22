@@ -9,6 +9,7 @@ import promiseMiddleware from 'redux-promise-middleware'
 import reducer from './reducers'
 import {
   fetchAllDummyItems,
+  fetchContainerId,
 } from './actions'
 import App from './containers/App'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
@@ -16,7 +17,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import CheckoutContainer from './containers/CheckoutContainer'
 
 
-const middleware = [ 
+const middleware = [
   thunkMiddleware,
   promiseMiddleware({
     promiseTypeSuffixes: ['REQ', 'ACK', 'ERR'],
@@ -39,12 +40,13 @@ const muiTheme = getMuiTheme({
 })
 
 store.dispatch(fetchAllDummyItems())
+store.dispatch(fetchContainerId())
 
 render(
   <Provider store={store}>
     <MuiThemeProvider muiTheme={muiTheme}>
       <Router history={hashHistory}>
-        <Route path="/" component={App}/>
+        <Route path="/" component={App} />
         <Route path="checkout" component={CheckoutContainer} />
       </Router>
     </MuiThemeProvider>

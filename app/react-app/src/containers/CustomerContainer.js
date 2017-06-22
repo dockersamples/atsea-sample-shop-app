@@ -5,12 +5,12 @@ import { isActive } from '../reducers'
 import CreateCustomer from '../components/CreateCustomer'
 
 class CustomerContainer extends Component {
-    render() {
-        const { createCustomer, isActive } = this.props
-        return (
-            <CreateCustomer createCustomer={createCustomer} isActive={isActive} />
-         )
-    }
+  render() {
+    const { createCustomer, isActive } = this.props
+    return (
+      <CreateCustomer createCustomer={createCustomer} isActive={isActive} />
+    )
+  }
 }
 
 CustomerContainer.propTypes = {
@@ -19,7 +19,7 @@ CustomerContainer.propTypes = {
 }
 
 const mapStateToProps = state => ({
-    isActive: isActive(state)
+  isActive: isActive(state)
 })
 
 export default connect(

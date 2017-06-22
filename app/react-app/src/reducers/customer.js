@@ -7,45 +7,45 @@ import {
 
 
 const initialState = {
-    customerId: '',
-    username: '',
-    details: {}
+  customerId: '',
+  username: '',
+  details: {}
 }
 
 const customer = (state = initialState, action) => {
   switch (action.type) {
     case `${ADD_USER}`:
-        return {
-            ...state,
-            username: action.username
-        }
+      return {
+        ...state,
+        username: action.username
+      }
     case `${CREATE_CUSTOMER}_ACK`:
       return {
-            ...state,
-            ...action.payload
-        }
+        ...state,
+        ...action.payload
+      }
     case `${CREATE_CUSTOMER}_ERR`:
-        return {
-            ...state,
-            customerId: ''
-        }
+      return {
+        ...state,
+        customerId: ''
+      }
     case `${LOGIN_CUSTOMER}_ACK`:
-        return {
-            ...state,
-            customerId: action.payload.customerId,
-            details: action.payload
-        }
+      return {
+        ...state,
+        customerId: action.payload.customerId,
+        details: action.payload
+      }
     case `${LOGIN_CUSTOMER}_ERR`:
-        return {
-            ...state,
-            customerId: ''
-    }
+      return {
+        ...state,
+        customerId: ''
+      }
     case `${LOGOUT_CUSTOMER}`:
-        return {
-            ...state,
-            customerId: '',
-            details: {}
-        }
+      return {
+        ...state,
+        customerId: '',
+        details: {}
+      }
     default:
       return state
   }

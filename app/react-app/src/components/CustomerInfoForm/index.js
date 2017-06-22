@@ -2,8 +2,8 @@ import React, { PropTypes, Component } from 'react';
 import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form';
 import { FlatButton } from 'material-ui';
-import Input from './Input';
-import './CustomerInfoForm.css';
+import Input from '../../components/Input';
+import './styles.css';
 
 class CustomerInfoForm extends Component {
 
@@ -11,39 +11,41 @@ class CustomerInfoForm extends Component {
     return (
       <div>
         <div className='infoHeader'>Credit Card Information</div>
-          <div className='infoRow'>
-          <Field 
+        <div className='infoRow'>
+          <Field
             name="firstName"
-            component={firstName=>
-              <Input field={firstName} hintText={"First Name"} /> 
+            component={firstName =>
+              <Input field={firstName} hintText={"First Name"} />
             }
-         />
-          <Field 
+          />
+          <Field
             name="lastName"
-            component={lastName=>
-              <Input field={lastName} hintText={"Last Name"} /> 
+            component={lastName =>
+              <Input field={lastName} hintText={"Last Name"} />
             }
-         />
-         </div>
-          <div className='infoRow'>
-          <Field 
+          />
+        </div>
+        <div className='infoRow'>
+          <Field
             name="cardNumber"
-            component={cardNumber=>
-              <Input field={cardNumber} hintText={"Card Number"} /> 
+            component={cardNumber =>
+              <Input field={cardNumber} hintText={"Card Number"} />
             }
-         />
-          <Field 
+          />
+          <Field
             name="cvv"
-            component={cvv=> 
-              <Input field={cvv} hintText={"CVV"} /> 
+            component={cvv =>
+              <Input field={cvv} hintText={"CVV"} />
             }
-         />
-          <Field 
+          />
+        </div>
+        <div className='infoRow'>
+          <Field
             name="expirationDate"
-            component={date=> 
-              <Input field={date} hintText={"MM/YY"} /> 
+            component={date =>
+              <Input field={date} hintText={"MM/YY"} />
             }
-         />
+          />
         </div>
       </div>
     );
@@ -54,30 +56,30 @@ class CustomerInfoForm extends Component {
       <div>
         <div className='infoHeader'>Billing Information</div>
         <div className='infoRow'>
-        <Field 
-          name="company"
-          component={company=> 
-            <Input field={company} hintText={"Company"} /> 
-          }
-        />
-      <Field 
-        name="title"
-        component={title=> 
-            <Input field={title} hintText={"Title"} /> 
-        }
-      />
-      </div>
-        <div className='infoRow'>
-          <Field 
-            name="address"
-            component={address=> 
-              <Input field={address} hintText={"Address"} /> 
+          <Field
+            name="company"
+            component={company =>
+              <Input field={company} hintText={"Company"} />
             }
           />
-          <Field 
+          <Field
+            name="title"
+            component={title =>
+              <Input field={title} hintText={"Title"} />
+            }
+          />
+        </div>
+        <div className='infoRow'>
+          <Field
+            name="address"
+            component={address =>
+              <Input field={address} hintText={"Address"} />
+            }
+          />
+          <Field
             name="city"
-            component={city=> 
-              <Input field={city} hintText={"City"} /> 
+            component={city =>
+              <Input field={city} hintText={"City"} />
             }
           />
         </div>
@@ -91,13 +93,13 @@ class CustomerInfoForm extends Component {
       fontFamily: 'Open Sans',
       fontWeight: 600,
     };
-    return(
+    return (
       <div className='infoButton'>
         <FlatButton
           label="Continue Shopping"
           containerElement={<Link to="/" />}
           style={{
-              color: '#099CEC',
+            color: '#099CEC',
           }}
           labelStyle={labelStyles}
         />
@@ -105,8 +107,8 @@ class CustomerInfoForm extends Component {
           label="Complete Order"
           type="submit"
           style={{
-              color: '#fff',
-              backgroundColor: '#099CEC',
+            color: '#fff',
+            backgroundColor: '#099CEC',
           }}
           labelStyle={labelStyles}
         />
@@ -115,14 +117,14 @@ class CustomerInfoForm extends Component {
   }
 
   render() {
-    const { 
+    const {
       handleSubmit,
       error,
     } = this.props;
     const err = error ? <span className='loginErrorMessage'>{error}</span> : null
 
     return (
-      <div>
+      <div className="infoSection">
         <form onSubmit={handleSubmit}>
           {this.renderCredit()}
           {this.renderBilling()}

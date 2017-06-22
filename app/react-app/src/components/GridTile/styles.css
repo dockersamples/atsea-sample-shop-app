@@ -1,4 +1,4 @@
-  .tileTitle {
+.tileTitle {
   margin-top: 5px;
   height: 24px;
   font-family: "Open Sans";
@@ -35,7 +35,7 @@
   padding: 20px 0 10px 0;
 }
 
-.tileImage > img {
+.tileImage>img {
   height: 100%;
 }
 

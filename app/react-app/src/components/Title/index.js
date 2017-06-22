@@ -35,7 +35,7 @@ const Title = ({ totalProducts, showItemAdded }) => (
 )
 
 Title.propTypes = {
-  totalProducts: PropTypes.string,
+  totalProducts: PropTypes.number,
   showItemAdded: PropTypes.bool,
 }
 

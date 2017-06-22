@@ -17,4 +17,8 @@ CartNotification.propTypes = {
   showItemAdded: PropTypes.bool.isRequired,
 };
 
+CartNotification.defaultProps = {
+  showItemAdded: false,
+};
+
 export default CartNotification;

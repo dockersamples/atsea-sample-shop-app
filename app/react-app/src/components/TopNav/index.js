@@ -5,7 +5,7 @@ import {
   loginCustomer,
 } from '../../actions';
 import {
-  getContainerId,
+  getIP,
   getHost,
 } from '../../reducers';
 import LoginForm from '../LoginForm';
@@ -22,7 +22,6 @@ import {
   setJwtToken,
 } from '../../actions/storage';
 import { SubmissionError } from 'redux-form'
-
 
 const customStyles = {
   overlay: {
@@ -118,10 +117,10 @@ class TopNav extends Component {
   };
 
   renderContainerId() {
-    // const {containerId, host} = this.props;
+    const {ip, host} = this.props;
     return (
       <div className="containerSection">
-        {'IP: 10.0.2.3 HOST: fa8f41f55e98'}
+        {`IP: ${ip} HOST: ${host}`}
       </div>
     );
   }
@@ -262,14 +261,19 @@ class TopNav extends Component {
 }
 
 TopNav.propTypes = {
-  containerId: PropTypes.string.isRequired,
+  ip: PropTypes.string.isRequired,
   host: PropTypes.string.isRequired,
   createCustomer: PropTypes.func.isRequired,
   loginCustomer: PropTypes.func.isRequired,
-}
+};
+
+TopNav.defaultProps = {
+  ip: '10.0.2.3',
+  host: 'fa8f41f55e98',
+};
 
 const mapStateToProps = state => ({
-  containerId: getContainerId(state),
+  ip: getIP(state),
   host: getHost(state),
 });
 

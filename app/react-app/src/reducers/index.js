@@ -19,8 +19,8 @@ const getProduct = (state, id) => fromProducts.getProduct(state.products, id)
 
 // TODO: rename selectors?
 export const isActive = state => fromCustomer.isActive(state.customer)
-export const getContainerId = state => {
-  return state.container.containerId
+export const getIP = state => {
+  return state.container.ip
 }
 export const getHost = state => {
   return state.container.host

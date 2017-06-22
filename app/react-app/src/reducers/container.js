@@ -3,7 +3,7 @@ import {
 } from '../constants/ActionTypes'
 
 const initialState = {
-  containerId: '',
+  ip: '',
   host: '',
 }
 const container = (state = initialState, action) => {
@@ -11,13 +11,13 @@ const container = (state = initialState, action) => {
     case `${FETCH_CONTAINER_ID}_ACK`:
       return {
         ...state,
-        containerId: action.payload.ip,
+        ip: action.payload.ip,
         host: action.payload.host,
       }
     case `${FETCH_CONTAINER_ID}_ERR`:
       return {
         ...state,
-        containerId: ''
+        ip: ''
       }
     default:
       return state

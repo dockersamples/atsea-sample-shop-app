@@ -1,4 +1,4 @@
-FROM node:latest AS storefront
+FROM node:latest
 WORKDIR /usr/src/atsea/app/react-app
 COPY react-app .
 RUN npm install

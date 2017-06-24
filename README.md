@@ -27,6 +27,8 @@ openssl req -newkey rsa:4096 -nodes -sha256 -keyout certs/domain.key -x509 -days
 docker secret create revprox_cert certs/domain.crt
 
 docker secret create revprox_key certs/domain.key
+
+docker secret create postgres_password certs/domain.key
 ```
 
 To create a secret for staging the payment gateway:

@@ -2,7 +2,7 @@ version: "3.2"
 
 services:
   reverse_proxy:
-    image: "dockersamples/atsearevprox@sha256:4e14f65adac6af818edaad104c8e4dcf3cbc837bfd4fb5060d7a5c00189915bd"
+    image: dockersamples/atseasampleshopapp_reverse_proxy
     ports:
       - "80:80"
       - "443:443"
@@ -15,7 +15,7 @@ services:
       - front-tier
 
   database:
-    image: dockersamples/atseadb
+    image: dockersamples/atsea_db
     environment:
       POSTGRES_USER: gordonuser
       POSTGRES_DB_PASSWORD_FILE: /run/secrets/postgres_password
@@ -30,7 +30,7 @@ services:
           - 'node.role == worker'
 
   appserver:
-    image: dockersamples/atseaapp
+    image: dockersamples/atsea_app
     networks:
       - front-tier
       - back-tier
@@ -66,7 +66,7 @@ services:
           - 'node.role == manager'
 
   payment_gateway:
-    image: dockersamples/atseapayment
+    image: dockersamples/atseasampleshopapp_payment_gateway
     secrets:
       - source: staging_token
         target: payment_token

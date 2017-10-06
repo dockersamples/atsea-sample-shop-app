@@ -12,7 +12,7 @@ services:
     user: postgres
     environment:
       POSTGRES_USER: gordonuser
-      POSTGRES_DB_PASSWORD_FILE: /run/secrets/postgres_password
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
       POSTGRES_DB: atsea
     ports:
       - "5432:5432" 

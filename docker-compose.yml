@@ -1,6 +1,23 @@
 version: "3.1"
 
 services:
+  ddagent:
+    image: datadog/agent
+    container_name: datadog-agent
+    environment:
+      - DD_APM_ENABLED=true
+      - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true
+      - DD_BIND_HOST=0.0.0.0
+      - DD_API_KEY=<api key>
+      - DD_TAGS=env:none
+      - DD_SERVICE_NAME=Atsea
+    ports:
+      - "8126:8126"
+      - "8125:8125"
+    networks:
+      - front-tier
+      - back-tier
+
   reverse_proxy:
     build: ./reverse_proxy
     user: nginx

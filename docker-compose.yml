@@ -10,7 +10,6 @@ services:
       - DD_BIND_HOST=0.0.0.0
       - DD_API_KEY=<api key>
       - DD_TAGS=env:none
-      - DD_SERVICE_NAME=Atsea
     ports:
       - "8126:8126"
       - "8125:8125"
@@ -43,6 +42,8 @@ services:
        context: app
        dockerfile: Dockerfile
     image: atsea_app
+    environment:
+      - DD_SERVICE_NAME=atsea
     user: gordon
     ports:
       - "8080:8080" 

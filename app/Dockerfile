@@ -1,10 +1,10 @@
-FROM node:latest AS storefront
+FROM node:17 AS storefront
 WORKDIR /usr/src/atsea/app/react-app
 COPY react-app .
-RUN npm install
-RUN npm run build
+RUN npm install; \
+    npm run build
 
-FROM maven:latest AS appserver
+FROM maven:3.8.4 AS appserver
 WORKDIR /usr/src/atsea
 COPY pom.xml .
 RUN mvn -B -f pom.xml -s /usr/share/maven/ref/settings-docker.xml dependency:resolve

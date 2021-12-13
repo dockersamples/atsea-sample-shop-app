@@ -1,3 +1,4 @@
+certs/
 target/
 logs/*
 !.gitkeep
@@ -45,8 +46,6 @@ src/
 # Logs and databases #
 ######################
 *.log
-*.sql
-*.sqlite
 
 # OS generated files #
 ######################
